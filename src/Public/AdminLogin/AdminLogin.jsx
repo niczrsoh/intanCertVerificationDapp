@@ -123,20 +123,21 @@ function AdminLogin() {
             </label>
 
             <div>
-              Sila log masuk dengan salah satu algorand wallet untuk dapatkan
-              algorand akaun
+              {/* Sila log masuk dengan salah satu algorand wallet untuk dapatkan
+              algorand akaun */}
+              Sila log masuk dengan metamask wallet anda untuk dapatkan akaun
             </div>
             <br></br>
-            <div>
+            {/* <div>
               <SimpleButton
                 title="Connect to Pera Algo Wallet"
-                onClick={connectPeraAlgoWallet}
+                onClick={connectPeraAlgoWallet}g 
               ></SimpleButton>
               <SimpleButton
                 title="Connect to MyAlgo Wallet"
                 onClick={connectMyAlgoWallet}
               ></SimpleButton>
-            </div>
+            </div> */}
             <SimpleButton
               title="Connect to MetaMask Wallet"
               onClick={connectEthWallet}
