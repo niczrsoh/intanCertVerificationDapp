@@ -54,6 +54,7 @@ jobs:
       
       - name: unzip artifact for deployment
         run: Expand-Archive release.zip
+        shell: powershell
         
       - name: Login to Azure
         uses: azure/login@v1
