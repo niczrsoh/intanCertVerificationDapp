@@ -53,4 +53,4 @@ jobs:
           app-name: 'cert-verification-dapp'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F74D0825E72540789B67AE60135A5BE2 }}
-          package: ./build/
+          package: ./build
