@@ -43,7 +43,8 @@ function InformasiSijil() {
             startDate && endDate
               ? `${startDate} - ${endDate}`
               : "TARIKH KURSUS",
-          explorer: `https://bchainexplorer.azurewebsites.net/#/blockchain/transactionList/transactionDetail/${transId.transId}`,
+            explorer: `http://172.26.112.1:4000/#/blockchain/transactionList/transactionDetail/${transId.transId}`,
+      //    explorer: `https://bchainexplorer.azurewebsites.net/#/blockchain/transactionList/transactionDetail/${transId.transId}`,
           isEther: true,
         };
       } else {
