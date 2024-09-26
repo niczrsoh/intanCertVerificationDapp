@@ -114,7 +114,7 @@ function InformasiSijil() {
             change the QRcode to become the URL of the transaction
             */
       const newQrCodeDataUrl = await getQrCodeDataUrl(
-        `https://intan-dapps.azurewebsites.net/maklumat-penyemak/${transId.transId}`
+        `https://intan-cert-verification-dapp.azurewebsites.net/informasi-sijil/${transId.transId}`
       );
       setQrCodeDataUrl(newQrCodeDataUrl);
 
