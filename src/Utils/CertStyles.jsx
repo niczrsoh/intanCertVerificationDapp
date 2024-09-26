@@ -64,7 +64,7 @@ export const styles = StyleSheet.create({
         position: 'absolute',
         top: 70,
         right: 75,
-        width: 80,
-        height: 80,
+        width: 50,
+        height: 50,
       },
   });

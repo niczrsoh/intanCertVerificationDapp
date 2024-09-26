@@ -5,13 +5,14 @@ import '../Constant/ALGOkey';
 import { ALGOD_PORT, ALGOD_TESTNET_URL, ALGOkey,indexerClient,systemAccount } from '../Constant/ALGOkey';
 import {styles} from './CertStyles';
 import QrCode from "qrcode";
-
+import { QRCodeCanvas  } from 'qrcode.react'; 
+//use state 
+const { useState } = React;
 
 const QRCODE_OPTIONS = {
     errorCorrectionLevel: 'H',
     type: 'image/jpeg',
 }
-
 /**
 
 Certificate component that renders the certificate on a PDF page.
@@ -33,8 +34,10 @@ export const Certificate = ({ participantName, participantMykad, courseName, cou
   <Page size="A4" style={styles.page}>
   <View>
   <Image src={templateSrc} style={styles.template} />
-  </View>
-  {qrCodeImage && <Image src={qrCodeImage} style={styles.qrCode} />}
+  </View> 
+  {qrCodeImage && (
+              <Image src={qrCodeImage} style={styles.qrCode} size={100} />
+            )}
   <View style={styles.container}>
     <Text style={styles.appId}>{appId === '' ? 'xxxx-xx-xxxx' : appId}</Text>
   <Text style={styles.title}>{courseName === '' ? 'Course Title' : courseName}</Text>

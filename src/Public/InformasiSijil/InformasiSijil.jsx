@@ -11,7 +11,7 @@ import ErrorBoundary from "../../Utils/ErrorBoundary";
 import { isMobile } from "react-device-detect";
 import { Button } from "@mui/material";
 import { checkTransactionAndFetchData } from "../../Utils/ethUtils";
-
+import QRCode from 'qrcode';
 function InformasiSijil() {
   const transId = useParams();
   const navigate = useNavigate();
@@ -19,7 +19,6 @@ function InformasiSijil() {
   const [qrCodeDataUrl, setQrCodeDataUrl] = useState(null);
   const [fileUrl, setFileUrl] = useState(null);
   // console.log(transId.transId);
-
   //  fetch all the data from blockchain first when entering this page
   useEffect(() => {
     async function fetchData() {
@@ -53,6 +52,17 @@ function InformasiSijil() {
       setFormData(data);
     }
     fetchData();
+    const generateQRCode = async () => {
+      try {
+        const url = `https://bchainexplorer.azurewebsites.net/#/blockchain/transactionList/transactionDetail/${transId.transId}`; // Replace with your QR code URL
+        const qrDataUrl = await QRCode.toDataURL(url); // Generate QR code as Data URL
+        setQrCodeDataUrl(qrDataUrl); // Store the generated QR code image
+      } catch (err) {
+        console.error('Failed to generate QR code', err);
+      }
+    };
+
+    generateQRCode();
   }, []);
 
   async function fetchformDataFromBlockchain() {
@@ -107,14 +117,16 @@ function InformasiSijil() {
         explorer: `https://testnet.algoscan.app/tx/${transId.transId}`,
         appId: dappID ? dappID : "APP ID",
         isEther: false,
+        qrCodeImage: getQrCodeDataUrl(
+         `https://intan-cert-verification-dapp.azurewebsites.net/informasi-sijil/${transId.transId}`
+        )
       };
-
       /*
             Get all the QR code image from the database and
             change the QRcode to become the URL of the transaction
             */
       const newQrCodeDataUrl = await getQrCodeDataUrl(
-        `https://intan-cert-verification-dapp.azurewebsites.net/informasi-sijil/${transId.transId}`
+       `https://intan-cert-verification-dapp.azurewebsites.net/informasi-sijil/${transId.transId}`
       );
       setQrCodeDataUrl(newQrCodeDataUrl);
 
@@ -234,3 +246,5 @@ function InformasiSijil() {
 }
 
 export default InformasiSijil;
+
+
