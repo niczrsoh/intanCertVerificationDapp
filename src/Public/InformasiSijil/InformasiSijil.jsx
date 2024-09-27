@@ -42,6 +42,7 @@ function InformasiSijil() {
             startDate && endDate
               ? `${startDate} - ${endDate}`
               : "TARIKH KURSUS",
+              appId: contractAddress ? contractAddress : "APP ID",
         //    explorer: `http://172.26.112.1:4000/#/blockchain/transactionList/transactionDetail/${transId.transId}`,
          explorer: `https://bchainexplorer.azurewebsites.net/#/blockchain/transactionList/transactionDetail/${transId.transId}`,
           isEther: true,
@@ -106,7 +107,7 @@ function InformasiSijil() {
       const tamat = Object.values(JSON.parse(dTamat))[0];
       const nama = Object.values(JSON.parse(dNama))[0];
       const mykad = Object.values(JSON.parse(dNRIC))[0];
-      console.log(dappID);
+      console.log("Contract address in informasi sijil:"+dappID);
 
       //  Assign all the data into a constant variable named data
       const data = {
@@ -114,12 +115,12 @@ function InformasiSijil() {
         participantMykad: mykad ? mykad : "PESERTA NO. MYKAD",
         courseName: tajuk ? tajuk : "NAMA KURSUS",
         courseDate: mula && tamat ? `${mula} - ${tamat}` : "TARIKH KURSUS",
-        explorer: `https://testnet.algoscan.app/tx/${transId.transId}`,
+       // explorer: `https://testnet.algoscan.app/tx/${transId.transId}`,
         appId: dappID ? dappID : "APP ID",
-        isEther: false,
-        qrCodeImage: getQrCodeDataUrl(
-         `https://intan-cert-verification-dapp.azurewebsites.net/informasi-sijil/${transId.transId}`
-        )
+      //  isEther: false,
+        // qrCodeImage: getQrCodeDataUrl(
+        //  `https://intan-cert-verification-dapp.azurewebsites.net/informasi-sijil/${transId.transId}`
+        // )
       };
       /*
             Get all the QR code image from the database and

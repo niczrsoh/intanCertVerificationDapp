@@ -40,10 +40,10 @@ export const styles = StyleSheet.create({
   
     },
     appId: {
-      fontSize: 12,
+      fontSize: 6,
       position: 'absolute',
-      top : 60,
-      right: 85,
+      top : 125,
+      right: 50,
     },
     description: {
       fontSize: 15,

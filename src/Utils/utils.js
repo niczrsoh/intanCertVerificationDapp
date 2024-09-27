@@ -28,7 +28,7 @@ Certificate component that renders the certificate on a PDF page.
 */
 //use to design the certificate
 export const Certificate = ({ participantName, participantMykad, courseName, courseDate, appId , algorandExplorer, templateSrc, qrCodeImage }) => (
-  console.log(appId),
+  console.log("contract address:"+appId),
   <>
   <Document>
   <Page size="A4" style={styles.page}>
@@ -38,8 +38,9 @@ export const Certificate = ({ participantName, participantMykad, courseName, cou
   {qrCodeImage && (
               <Image src={qrCodeImage} style={styles.qrCode} size={100} />
             )}
+         
   <View style={styles.container}>
-    <Text style={styles.appId}>{appId === '' ? 'xxxx-xx-xxxx' : appId}</Text>
+  <Text style={styles.appId}>{appId === undefined ? 'xxxx-xx-xxxx' : appId}</Text>
   <Text style={styles.title}>{courseName === '' ? 'Course Title' : courseName}</Text>
  
   <Text style={styles.recipient}>{participantName === '' ? 'Recipient Name' : participantName}</Text>
