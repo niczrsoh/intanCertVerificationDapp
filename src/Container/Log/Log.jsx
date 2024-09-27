@@ -138,7 +138,7 @@ const Log = () => {
                     <td>{log.adminName}</td>
                     <td>{log.adminID}</td>
                     <td>{log.type}</td>
-                    <td><a href={`https://testnet.algoscan.app/tx/${log.transactionId}`}>{log.transactionId}</a></td>
+                    <td><a href={`https://bchainexplorer.azurewebsites.net/#/blockchain/transactionList/transactionDetail/${log.transactionId}`}>{log.transactionId}</a></td>
                   </tr>
                 )
               })}
@@ -150,7 +150,7 @@ const Log = () => {
                   <td>{item.adminName}</td>
                   <td>{item.adminID}</td>
                   <td>{item.type}</td>
-                  <td><a href={`https://testnet.algoscan.app/tx/${item.transactionId}`}>{item.transactionId}</a></td>
+                  <td><a href={`https://bchainexplorer.azurewebsites.net/#/blockchain/transactionList/transactionDetail/${item.transactionId}`}>{item.transactionId}</a></td>
                 </tr>
               ))}
             </tbody>

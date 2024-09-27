@@ -165,9 +165,7 @@ export const invalidateCertificate = async (contractAddress) => {
     const transaction = await contract.invalidateCertificate();
     await transaction.wait();
     console.log("Certificate invalidated successfully.");
-    return {
-        transactionHash: transaction.hash,
-    }
+    return transaction.hash;
 }
 
 // Read certificate data
