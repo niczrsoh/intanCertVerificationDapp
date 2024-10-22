@@ -136,14 +136,14 @@ const AdminList = () => {
         </div>
       </div>
       <div className='program'>
-        <table className='progtable'>
+        <table className='progtable'style={{ tableLayout: 'fixed', width: '100%' }}>
           <thead>
             <tr>
-              <th className='tarikhmasa'>Index</th>
+              <th className='tarikhmasa'style={{ width: '50px' }}>Index</th>
               <th className='namaadmin'>Nama Admin</th>
-              <th className='namaadmin'>ID Admin</th>
-              <th className='jenisTindakan'>Wallet Address</th>
-              <th className='tranid'>Padam Account</th>
+              <th className='namaadmin' style={{ width: '150px' }}>ID Admin</th>
+              <th className='jenisTindakan' style={{ width: '400px' }}>Wallet Address</th>
+              <th className='tranid' style={{ width: '50px' }}>Padam Account</th>
             </tr>
           </thead>
           {filteredValue == "" ? (
@@ -151,7 +151,7 @@ const AdminList = () => {
               {adminList.map((admin, index) => {
                 return (
                   <tr key={index} className={index % 2 === 0 ? "row2" : "row1"}>
-                    <td>{index+1}</td>
+                    <td style={{ width: '10px' }}>{index+1}</td>
                     <td>{admin.name}</td>
                     <td>{admin.id}</td>
                     <td>{admin.acc}</td>
@@ -163,7 +163,7 @@ const AdminList = () => {
             <tbody>
               {searchValue.map((item, index) => (
                 <tr key={index} className={index % 2 === 0 ? "row2" : "row1"}>
-                  <td>{index + 1}</td>
+                  <td style={{ width: '10px' }}>{index+1}</td>
                   <td>{item.name}</td>
                   <td>{item.id}</td>
                   <td>{item.acc}</td>

@@ -149,7 +149,7 @@ const EditProgram = () => {
                 <input type="text" className='inputtext' onChange={onChangeYuran} value={yuran} /></div>
             </div>
             <div className='maklumat'>
-              <label className="kik">ISI PROGRAM</label>
+              <label className="kik">KETERANGAN</label>
               <div className='textarea'>
                 <p className="kik">:</p>
                 <textarea className='inputarea' rows={9} onChange={onChangeIsiProgram} value={isiProgram} />

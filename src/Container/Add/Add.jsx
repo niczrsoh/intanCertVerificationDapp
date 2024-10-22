@@ -202,11 +202,11 @@ const Add = () => {
               {/* Input for Yuran */}
             </div>
             <div className='maklumat'>
-              <label className="kik">ISI PROGRAM</label>
+              <label className="kik">KETERANGAN</label>
               <div className='textarea'>
                 <p className="kik">:</p>
                 <textarea className='inputarea' rows={9} onChange={onChangeIsiProgram} value={isiProgram} />
-                {/* Input for Isi Program */}
+                {/* Input for KETERANGAN */}
               </div>
             </div>
           </div>

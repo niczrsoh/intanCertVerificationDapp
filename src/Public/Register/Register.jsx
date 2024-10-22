@@ -43,7 +43,7 @@ const Register = () => {
           jawatan: jawatan,
           ic: mykad,
           nama: nama,
-          imageUrl: "https://lumiere-a.akamaihd.net/v1/images/c94eed56a5e84479a2939c9172434567c0147d4f.jpeg?region=0,0,600,600&width=480",
+          imageUrl: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
           telefonPeribadi: TelefonPeribadi,
         }).then(() => {
           alert("Berjaya Daftar Account!!");
