@@ -26,14 +26,25 @@ const ProgramHome = () => {
   //define the path to the Program collection
   const userCollectionRef = collection(db, "Program")
   useEffect(() => {
+    if (isOpen) {
+      window.scrollTo({ top: 0, behavior: 'smooth' }); // Smooth scrolling to top
+    }
     const getProgram = async () => {
       //get all the document data from the Program collection
       const data = await getDocs(userCollectionRef);
       // console.log(data);
-      setPrograms(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      setPrograms(
+        data.docs
+          .map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+            formattedDate: new Date(doc.data().mula.split('/').reverse().join('-')), 
+          }))
+          .sort((a, b) => b.formattedDate - a.formattedDate)
+      );
     }
     getProgram().then(console.log(programs));
-  }, [reload])
+  }, [reload][isOpen])
 
 
   const kodfilter = () => {
@@ -41,12 +52,22 @@ const ProgramHome = () => {
       setSearchValue(sorted)}
 
   const tmfilter = () => {
-      const sorted = programs.sort((a, b) => a.mula.localeCompare(b.mula));
-      setSearchValue(sorted)}
-
-    const ttfilter = () => {
-        const sorted = programs.sort((a, b) => a.tamat.localeCompare(b.tamat));
-        setSearchValue(sorted)}
+      const sorted = programs.sort((a, b) => {
+      const dateA = new Date(a.mula.split('/').reverse().join('-')); // Convert 'DD/MM/YYYY' to 'YYYY-MM-DD'
+      const dateB = new Date(b.mula.split('/').reverse().join('-'));
+      return dateB - dateA; // Compare the two dates
+        });
+      setSearchValue(sorted);
+      };
+      
+  const ttfilter = () => {
+      const sorted = programs.sort((a, b) => {
+      const dateA = new Date(a.tamat.split('/').reverse().join('-')); // Convert 'DD/MM/YYYY' to 'YYYY-MM-DD'
+      const dateB = new Date(b.tamat.split('/').reverse().join('-'));
+      return dateB - dateA; // Compare the two dates
+        });
+      setSearchValue(sorted);
+     };
 
     const handleSelectChange = (event) => {
       const selectedOption = event.target.options[event.target.selectedIndex];
@@ -202,7 +223,7 @@ const ProgramHome = () => {
               </div>
               <div className='contentdelete'>
               <div><p>
-                  Please be careful! Your action cannot be undo after you clicked the <b>'Padam'</b> button
+              Peringatan! Langkah ini tidak boleh diundur semula selepas tekan butang <b>'Padam'</b> 
                 </p></div>
                 <div className='padamconfirmbutton'><Buttons title="Padam" onClick={() => deleteProg()}/></div>
               </div>

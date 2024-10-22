@@ -272,8 +272,7 @@ const PesertaSemak = () => {
                 <div className="contentdelete">
                   <div>
                     <p>
-                      Please be careful! Your action cannot be undo after you
-                      clicked the <b>'Padam'</b> button
+                    Peringatan! Langkah ini tidak boleh diundur semula selepas tekan butang <b>'Padam'</b> 
                     </p>
                   </div>
                   <div className="padamconfirmbutton">

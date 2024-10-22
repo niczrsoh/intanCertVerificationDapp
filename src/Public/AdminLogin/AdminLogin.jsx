@@ -139,10 +139,10 @@ function AdminLogin() {
               ></SimpleButton>
             </div> */}
             <SimpleButton
-              title="Connect to MetaMask Wallet"
+              title="Sambung ke Metamask Wallet"
               onClick={connectEthWallet}
             ></SimpleButton>
-            <div>Your Login Account: </div>
+            <div>Akaun yang anda log masuk: </div>
             <div className="displayAcc">
               <div>{account}</div>
             </div>
@@ -150,7 +150,7 @@ function AdminLogin() {
           </form>
           <div className="otherLinks">
             <NavLink className="otherlink" to="/login">
-              Log masuk sebagai user
+              Log masuk sebagai pengguna
             </NavLink>
           </div>
         </div>

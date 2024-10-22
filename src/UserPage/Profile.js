@@ -8,7 +8,7 @@ import NavbarU from "../Component/userNavbar/NavbarU";
 import Avatar from "react-avatar-edit";
 
 
-//function for updating and showing the personal information
+//function for updating and showing the Informasi personal
 const ImgUpload = ({ onChange, src }) => (
   <div className="upload-file">
     <label htmlFor="photo-upload" >
@@ -106,7 +106,7 @@ const Alamat = ({ onChange, value }) => (
   </div>
 );
 
-//A function that will show the user's personal information after the user clicks the 'Save' button
+//A function that will show the user's Informasi personal after the user clicks the 'Save' button
 
 const Profile = ({
   onSubmit,
@@ -131,7 +131,7 @@ const Profile = ({
       </div>
       <div className="frame">
         <div className="headerProfileU">
-          <p>Personal Information</p>
+          <p>Informasi personal</p>
         </div>
         <div className="rightSide">
           <div className="formleft">
@@ -172,10 +172,10 @@ export default class profile extends React.Component {
     this.state = {
       file: "",
       imagePreviewUrl:
-        "https://lumiere-a.akamaihd.net/v1/images/c94eed56a5e84479a2939c9172434567c0147d4f.jpeg?region=0,0,600,600&width=480",
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
       imageOriginalUrl: "",
       imageUrl:
-        "https://lumiere-a.akamaihd.net/v1/images/c94eed56a5e84479a2939c9172434567c0147d4f.jpeg?region=0,0,600,600&width=480",
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
       src: null,
       preview: null,
       nama: "teoh",
@@ -206,8 +206,8 @@ export default class profile extends React.Component {
           imageUrl: docSnap.data().imageUrl,
         });
       } else {
-        // docSnap.data() will be undefined in this case
-        alert("!!Something Wrong Occur!! Please try later");
+        //translate to malay
+        alert("!!Ada yang salah!! Sila cuba lagi nanti");
       }
     }
     getProfile();
@@ -304,7 +304,7 @@ export default class profile extends React.Component {
     this.updateProfile();
   };
   // When the user clicks the "Save" button, the information will be submitted and displayed.
-  // When the user clicks the "Edit Profile" button, the form becomes editable, allowing the user to update their personal information.
+  // When the user clicks the "Edit Profile" button, the form becomes editable, allowing the user to update their Informasi personal.
   async updateProfile() {
     const regex = /[0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]/;
     const mykad = this.state.myKad;
@@ -327,10 +327,10 @@ export default class profile extends React.Component {
           telefonPeribadi: this.state.telefonperibadi,
           alamat: this.state.alamat,
         }).then(() => {
-          alert("update successful!");
+          alert("berjaya dikemaskini!");
         });
       } else {
-        if (this.state.imageOriginalUrl != "https://lumiere-a.akamaihd.net/v1/images/c94eed56a5e84479a2939c9172434567c0147d4f.jpeg?region=0,0,600,600&width=480") {
+        if (this.state.imageOriginalUrl != "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png") {
           let text = this.state.imageOriginalUrl;
           let myArray = text.split("images%2F");
           let text2 = myArray[1];
@@ -339,7 +339,7 @@ export default class profile extends React.Component {
           const desertRef = ref(storage, `images/${imageName}`);
           //delete the previous uploaded profile picture
           deleteObject(desertRef).catch((error) => {
-            alert("Something error happend, please contact adminstrator!!");
+            alert("!!Ada yang salah!! Sila kontek admin");
             console.log(error);
           });
         }
@@ -356,7 +356,7 @@ export default class profile extends React.Component {
               alamat: this.state.alamat,
               imageUrl: url,
             }).then(() => {
-              alert("update successful!");
+              alert("berjaya dikemaskini!");
             });
           });
         });
@@ -406,7 +406,7 @@ export default class profile extends React.Component {
               </div>
               <div className="frame">
                 <div className="headerProfileU">
-                  <p>Personal Information</p>
+                  <p>Informasi personal</p>
                 </div>
                 <div className="rightSide">
                   <div className="formleft">

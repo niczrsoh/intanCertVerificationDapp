@@ -88,7 +88,7 @@ const EditProgram = () => {
       setMaksimumPeserta("");
       setTamat("");
       setYuran("");
-      alert("Program Updated!!");
+      alert("Program telah dikemaskini!!");
       navigate(-1);
     });
   }

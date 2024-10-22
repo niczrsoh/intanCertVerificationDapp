@@ -25,8 +25,38 @@ const Add = () => {
     setKod(e.target.value);
   }
   const onChangeMula = (e) => {
-    setMula(e.target.value);
-  }
+    let value = e.target.value;
+    if (!/^[0-9/]*$/.test(value)) {
+      alert("Peringatan! Hanya nombor dan simbol '/' sahaja yang dibenarkan untuk tarikh");
+      return;
+    }
+
+    // Automatically add leading zeros for day and month if needed
+    const parts = value.split("/");
+  
+    if (parts.length === 3) {
+      let day = parts[0].padStart(2, "0");  // Ensure 2 digits for the day
+      let month = parts[1].padStart(2, "0"); // Ensure 2 digits for the month
+      let year = parts[2];  // Keep the year as is
+  
+      value = `${day}/${month}/${year}`;
+  
+      // Set the properly formatted date in the input field
+      setMula(value);
+  
+      // Validate only if the full date is entered (i.e., length of 10 characters)
+      if (value.length === 10) {
+        const datePattern = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+  
+        // Check if the full date matches the DD/MM/YYYY format
+        if (!datePattern.test(value)) {
+          alert("Peringatan! Sila letakkan format yang betul DD/MM/YYYY (e.g., 01/01/2024)");
+        }
+      }
+    } else {
+      setMula(value);  // Update state with the current value (even partially entered)
+    }
+  };
   const onChangeNama = (e) => {
     setNama(e.target.value);
   }
@@ -40,11 +70,45 @@ const Add = () => {
     setYuran(e.target.value);
   }
   const onChangeTamat = (e) => {
-    setTamat(e.target.value);
-  }
+    let value = e.target.value;
+    if (!/^[0-9/]*$/.test(value)) {
+      alert("Peringatan! Hanya nombor dan simbol '/' sahaja yang dibenarkan untuk tarikh");
+      return;
+    }
+    // Automatically add leading zeros for day and month if needed
+    const parts = value.split("/");
+  
+    if (parts.length === 3) {
+      let day = parts[0].padStart(2, "0");  // Ensure 2 digits for the day
+      let month = parts[1].padStart(2, "0"); // Ensure 2 digits for the month
+      let year = parts[2];  // Keep the year as is
+  
+      value = `${day}/${month}/${year}`;
+  
+      // Set the properly formatted date in the input field
+      setTamat(value);
+  
+      // Validate only if the full date is entered (i.e., length of 10 characters)
+      if (value.length === 10) {
+        const datePattern = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+  
+        // Check if the full date matches the DD/MM/YYYY format
+        if (!datePattern.test(value)) {
+          alert("Peringatan! Sila letakkan format yang betul DD/MM/YYYY (e.g., 01/01/2024)");
+        }
+      }
+    } else {
+      setTamat(value);  // Update state with the current value (even partially entered)
+    }
+  };
 
   const programRegister = async (e) => {
     e.preventDefault();
+    //ensure all the fields are filled
+    if (isiProgram === "" || kod === "" || mula === "" || nama === "" || penganjur === "" || maksimumPeserta === "" || tamat === "" || yuran === "") {
+      alert("Sila isi semua ruangan");
+      return;
+    }
     //collection() will define the path to the collection
     const userCollectionRef = collection(db, "Program")
     //addDoc() is used for add new document data but with auto generated id in the firestore
@@ -72,7 +136,7 @@ const Add = () => {
       setMaksimumPeserta("");
       setTamat("");
       setYuran("");
-      alert("Program Registerd!!");
+      alert("Program berjaya didaftarkan!!");
       navigate(-1);
     });//create 2 end
   }
@@ -113,14 +177,14 @@ const Add = () => {
               <label className="kik">TARIKH MULA</label>
               <div className='textarea'>
                 <p className="kik">:</p>
-                <input type="text" className='inputtext' onChange={onChangeMula} value={mula} /></div>
+                <input type="text" className='inputtext' onChange={onChangeMula} value={mula} placeholder="DD/MM/YYYY (e.g. 01/01/2023)"/></div>
               {/* Input for Tarikh Mula */}
             </div>
             <div className='maklumat'>
               <label className="kik">TARIKH TAMAT</label>
               <div className='textarea'>
                 <p className="kik">:</p>
-                <input type="text" className='inputtext' onChange={onChangeTamat} value={tamat} /></div>
+                <input type="text" className='inputtext' onChange={onChangeTamat} value={tamat} placeholder="DD/MM/YYYY (e.g. 01/01/2023)"/></div>
               {/* Input for Tarikh Tamat */}
             </div>
             <div className='maklumat'>

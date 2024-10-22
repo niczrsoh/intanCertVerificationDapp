@@ -67,7 +67,7 @@ function SenaraiProgramSediaAda() {
             <td className="NameKursus">{item.nama}</td>
             <td className="Tarikh">{item.mula}-{item.tamat}</td>
             <td className="Aktiviti">
-              <NavLink to={`/user/Detail/${item.id}`} className="Semaklink">Semak</NavLink>
+              <NavLink to={`/user/Detail/${item.id}`} className="Semaklink">Mohon</NavLink>
             </td>
           </tr>
         )
@@ -92,7 +92,7 @@ function SenaraiProgramSediaAda() {
             <td className="NameKursus">{item.nama}</td>
             <td className="Tarikh">{item.mula}-{item.tamat}</td>
             <td className="Aktiviti">
-            <NavLink to={`/user/Detail/${item.id}`} className="Semaklink">Semak</NavLink>
+            <NavLink to={`/user/Detail/${item.id}`} className="Semaklink">Mohon</NavLink>
             </td>
           </tr>
         )

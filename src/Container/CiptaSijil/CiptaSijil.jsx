@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "../CiptaSijil/ciptasijil.css";
 import { Buttons } from "../../Component";
-
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import backicon from "../../img/arrow.png";
-import { deployContract, payContract } from "../../Utils/utils";
-import { systemAccount } from "../../Constant/ALGOkey";
-import algosdk from "algosdk";
 import { db } from "../../Backend/firebase/firebase-config";
 import {
   collection,
@@ -21,8 +17,6 @@ import { deployContract as deployEthContract } from "../../Utils/ethUtils";
 const CiptaSijil = ({ backpage }) => {
   const navigate = useNavigate();
   let { programId, key } = useParams();
-  //console.log(programId);
-  //console.log(key);
   const [tajukSijil, setTajukSijil] = useState("");
   const [tarikhMula, setTarikhMula] = useState("");
   const [tarikhTamat, setTarikhTamat] = useState("");
@@ -30,18 +24,13 @@ const CiptaSijil = ({ backpage }) => {
   const [loading, setLoading] = useState(false);
   const [NRIC, setNRIC] = useState("");
   const actionCollectionRef = collection(db, "ActionLog");
-
-  //doc() will define the path to the document data
   const programDocRef = doc(db, "Program", programId);
   const userDocRef = doc(db, "User", key);
 
-  //useEffect() will be executed once when the web is initialize
   useEffect(() => {
     const getProgramAndUser = async () => {
-      //getDoc() will get the document data based on the path of doc()
       const programData = await getDoc(programDocRef);
       const userData = await getDoc(userDocRef);
-      //console.log(programData);
       setTajukSijil(programData.data().nama);
       setTarikhMula(programData.data().mula);
       setTarikhTamat(programData.data().tamat);
@@ -51,9 +40,7 @@ const CiptaSijil = ({ backpage }) => {
 
     getProgramAndUser();
   }, []);
-  //add created cert into program, sijil and action log section in firestore
   const createSijil = async (sender, transId, appid) => {
-    //console.log(appid);
     const date = new Date();
     const formattedDate = `${date.getFullYear()}-${padNumber(
       date.getMonth() + 1
@@ -65,12 +52,10 @@ const CiptaSijil = ({ backpage }) => {
 
     const adminName = sessionStorage.getItem("adminName");
     const adminID = sessionStorage.getItem("userID");
-    //setDoc() will add the document data with the specific document id
     await setDoc(sijilCollectionRef, {
       txnId: `${transId}`,
       action: "Create",
     });
-    //addDoc() is used for add new document data but with auto generated id in the firestore
     await addDoc(actionCollectionRef, {
       admin: `${sender}`,
       adminName: adminName,
@@ -79,41 +64,23 @@ const CiptaSijil = ({ backpage }) => {
       transactionId: `${transId}`,
       type: "Create",
     });
-    //getDoc() will get the document data based on the path
     const data = await getDoc(programDocRef);
     const txnIdList = data.data().transactionId;
     const pesertaStatusList = data.data().pesertaStatus;
     txnIdList[key] = transId;
     pesertaStatusList[key] = "dicipta";
-    //updateDoc() will update the document data that stored at the specified path
     await updateDoc(programDocRef, {
       transactionId: txnIdList,
       pesertaStatus: pesertaStatusList,
     })
       .then((response) => {
-        alert("sijil was successfully added");
+        alert("sijil berjaya dicipta");
       })
       .catch((error) => {
         console.log(error.message);
       });
   };
 
-  //ask user to insert his/her mnemonic before deploy the contract
-  const handleClick = async (event) => {
-    const enteredInput = await window.prompt("Please enter wallet mnemonic");
-    if (enteredInput == null) setLoading(false);
-    return enteredInput;
-  };
-
-  const handleDeployContract = async (arr) => {
-    return await deployContract(systemAccount, arr);
-    //setDeployedAddress(Txn);
-  };
-  const payDeployContract = async (userAcc, appId, arr) => {
-    //console.log(userAcc);
-    return await payContract(userAcc, appId, arr);
-    //setDeployedAddress(Txn);
-  };
   const padNumber = (num) => {
     return num.toString().padStart(2, "0");
   };
@@ -235,15 +202,6 @@ const CiptaSijil = ({ backpage }) => {
             title="Deploy Contract"
             onClick={async () => {
               setLoading(true);
-              // const arr = [{ tajukSijil }, { tarikhMula }, { tarikhTamat }, { nama }, { NRIC }];
-              // const mnemonic = await handleClick();
-              // if (mnemonic != null) {
-              //   //   let txn;
-              //   const appid = await handleDeployContract(arr);
-              //   //console.log(mnemonic);
-              //   const userAcc = await algosdk.mnemonicToSecretKey(mnemonic)
-              //   //getting the transaction id after the admin paying the contract
-              //   const txnId = await payDeployContract(userAcc, appid, arr)
 
               deployEthContract({
                 tajukSijil,
@@ -256,7 +214,6 @@ const CiptaSijil = ({ backpage }) => {
                   const { contractAddress, transactionId, accountAddr } =
                     response;
                   createSijil(accountAddr, transactionId, contractAddress);
-                  //console.log(createSijil);
                   navigate(`/informasi-sijil/${transactionId}`);
                 })
                 .catch((error) => {

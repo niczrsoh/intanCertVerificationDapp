@@ -72,7 +72,7 @@ export const connectWallet = async () => {
         }
     } else {
         // If MetaMask is not installed, alert the user
-        alert("Please install MetaMask to use this feature!");
+        alert("Sila muat turun Metamask untuk kegunaan applikasi ini!");
         throw new Error("MetaMask not installed");
     }
 }
