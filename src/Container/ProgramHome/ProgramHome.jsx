@@ -121,7 +121,7 @@ const ProgramHome = () => {
       const docRef = doc(db,"Program",programID)
       await deleteDoc(docRef).then(()=>{
         setIsOpen(false);
-        alert("Program Deleted");
+        alert("Program Dipadam");
         setReload(reload+1);
       });
     };
