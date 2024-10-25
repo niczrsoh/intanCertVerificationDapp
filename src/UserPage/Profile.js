@@ -327,7 +327,7 @@ export default class profile extends React.Component {
           telefonPeribadi: this.state.telefonperibadi,
           alamat: this.state.alamat,
         }).then(() => {
-          alert("berjaya dikemaskini!");
+          alert("Sijil berjaya dikemaskini!");
         });
       } else {
         if (this.state.imageOriginalUrl != "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png") {
@@ -356,7 +356,7 @@ export default class profile extends React.Component {
               alamat: this.state.alamat,
               imageUrl: url,
             }).then(() => {
-              alert("berjaya dikemaskini!");
+              alert("Sijil berjaya dikemaskini!");
             });
           });
         });
