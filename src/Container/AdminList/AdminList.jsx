@@ -86,7 +86,7 @@ const AdminList = () => {
   }
 
   const onClickPadam = (id) =>{
-    if(window.confirm("Adakah anda ingin mamadamkan akaun admin ini?")){
+    if(window.confirm("Adakah anda ingin memadamkan akaun admin ini?")){
       deleteAccount(id);
     }else{
       return;
