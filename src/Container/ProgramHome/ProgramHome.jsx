@@ -28,7 +28,7 @@ const ProgramHome = () => {
   useEffect(() => {
     if (isOpen) {
       window.scrollTo({ top: 0, behavior: 'smooth' }); // Smooth scrolling to top
-    }
+    }else{
     const getProgram = async () => {
       //get all the document data from the Program collection
       const data = await getDocs(userCollectionRef);
@@ -43,8 +43,9 @@ const ProgramHome = () => {
           .sort((a, b) => b.formattedDate - a.formattedDate)
       );
     }
-    getProgram().then(console.log(programs));
-  }, [reload][isOpen])
+    getProgram();
+    console.log("Programs",programs);}
+  }, [isOpen])
 
 
   const kodfilter = () => {
