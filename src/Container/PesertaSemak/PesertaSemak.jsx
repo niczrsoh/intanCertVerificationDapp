@@ -285,7 +285,7 @@ const PesertaSemak = () => {
                           <br></br>
                           <div>
                             {" "}
-                            This cert is erasing from blockchain and database
+                            Sedang memadamkan sijil ini dalam blockchain dan pangkalan data
                             ...
                           </div>
                         </center>

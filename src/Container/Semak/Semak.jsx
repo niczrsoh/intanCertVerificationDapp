@@ -189,7 +189,7 @@ const Semak = () => {
             {Object.entries(pesertaStatus).map(([key, value], index) => {
               return (
                 <tr className="row2">
-                  <td>{index}</td>
+                  <td>{index+1}</td>
                   <td>{key}</td>
                   <td>{pesertaNama[key]}</td>
                   <td className="centerdata">80%</td>
@@ -296,7 +296,7 @@ const Semak = () => {
                           <br></br>
                           <div>
                             {" "}
-                            This cert is erasing from blockchain and database
+                            Sedang memadamkan sijil ini dalam blockchain dan pangkalan data
                             ...
                           </div>
                         </center>
