@@ -139,10 +139,10 @@ const AdminList = () => {
         <table className='progtable'style={{ tableLayout: 'fixed', width: '100%' }}>
           <thead>
             <tr>
-              <th className='tarikhmasa'style={{ width: '50px' }}>Index</th>
+              <th className='tarikhmasa'style={{ width: '50px' }}>Bil</th>
               <th className='namaadmin'>Nama Admin</th>
               <th className='namaadmin' style={{ width: '150px' }}>ID Admin</th>
-              <th className='jenisTindakan' style={{ width: '400px' }}>Wallet Address</th>
+              <th className='jenisTindakan' style={{ width: '400px' }}>Alamat Wallet</th>
               <th className='tranid' style={{ width: '50px' }}>Padam Account</th>
             </tr>
           </thead>

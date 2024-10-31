@@ -156,7 +156,7 @@ const Semak = () => {
             </p>
           </div>
           <div className="informasiprogram">
-            <label>Tempoh</label>
+            <label>Yuran (RM)</label>
             <p>:</p>
             <p className="informasicontent">{yuran}</p>
           </div>
@@ -177,7 +177,7 @@ const Semak = () => {
         <table className="progtable">
           <thead>
             <tr>
-              <th className="kehadiran">Index</th>
+              <th className="kehadiran">Bil</th>
               <th className="nomykad">No. MyKad</th>
               <th className="pesertaname">Nama Peserta</th>
               <th className="kehadiran">Kehadiran</th>
@@ -292,7 +292,7 @@ const Semak = () => {
                         <center>
                           <div className="loading-spinner"></div>
                           <br></br>
-                          <div>Kindly wait a momment...</div>
+                          <div>Sila tunggu sebentar...</div>
                           <br></br>
                           <div>
                             {" "}

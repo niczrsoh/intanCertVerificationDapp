@@ -191,15 +191,17 @@ const Add = () => {
               <label className="kik">MAKSIMUM PESERTA</label>
               <div className='textarea'>
                 <p className="kik">:</p>
-                <input type="text" className='inputtext' onChange={onChangeMaksimumPeserta} value={maksimumPeserta} /></div>
+                <input type="text" className='orangtext' onChange={onChangeMaksimumPeserta} value={maksimumPeserta} />
+                Orang 
+                </div>
               {/* Input for MAKSIMUM PESERTA */}
             </div>
             <div className='maklumat'>
-              <label className="kik">YURAN</label>
+              <label className="kik">YURAN (RM)</label>
               <div className='textarea'>
                 <p className="kik">:</p>
                 <input type="text" className='inputtext' onChange={onChangeYuran} value={yuran} /></div>
-              {/* Input for Yuran */}
+              {/* Input for Yuran (RM) */}
             </div>
             <div className='maklumat'>
               <label className="kik">KETERANGAN</label>

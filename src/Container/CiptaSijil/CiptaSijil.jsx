@@ -192,9 +192,9 @@ const CiptaSijil = ({ backpage }) => {
             <center>
               <div className="loading-spinner"></div>
               <br></br>
-              <div>Kindly wait a momment...</div>
+              <div>Sila tunggu sebentar...</div>
               <br></br>
-              <div> Your data is adding into blockchain and database ...</div>
+              <div> Data anda sedang ditambah ke dalam blockchain dan pangkalan data ...</div>
             </center>
           </div>
         ) : (

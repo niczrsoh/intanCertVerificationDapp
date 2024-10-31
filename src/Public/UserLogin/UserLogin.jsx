@@ -41,7 +41,7 @@ function UserLogin() {
         <div className='loginContainer'>
           <div className='titleLogin'>
             <h1>Daftar Masuk</h1>
-            <p>Sebagai User</p>
+            <p>Sebagai Pengguna</p>
           </div>
           {/*User login form */}
           <form className='loginForm' action="senarai-program-sedia-ada" onSubmit={userLogin}>
