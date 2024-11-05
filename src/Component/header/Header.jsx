@@ -38,13 +38,15 @@ function Header() {
   let subMenuRef = useRef();
   useEffect(() => {
     let handler = (e) => {
-      //if the user click the place other than the menu icon, the menu will close
-      if (!menuRef.current.contains(e.target)) {
-        setClick(false);
-      }
-      //if the user click the place other than the Account Pengguna, the submenu will close
-      if (!subMenuRef.current.contains(e.target)) {
-        setSubmenuClick(false);
+      if (menuRef.currentt) {
+        //if the user click the place other than the menu icon, the menu will close
+        if (!menuRef.current.contains(e.target)) {
+          setClick(false);
+        }
+        //if the user click the place other than the Account Pengguna, the submenu will close
+        if (!subMenuRef.current.contains(e.target)) {
+          setSubmenuClick(false);
+        }
       }
     };
     //attach event handler to the document
