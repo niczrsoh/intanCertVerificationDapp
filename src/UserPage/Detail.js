@@ -17,6 +17,7 @@ function SenaraiProgramSediaAda() {
   const [jumlahPeserta, setJumlahPeserta] = useState("");
   const [maksimumPeserta, setMaksimumPeserta] = useState("");
   const [tamat, setTamat] = useState("");
+  const [yuran, setYuran] = useState("");
   const navigate = useNavigate();
 
   const handleShowDaftar = () => {
@@ -40,6 +41,7 @@ function SenaraiProgramSediaAda() {
       setJumlahPeserta(data1.data().jumlahPeserta);
       setMaksimumPeserta(data1.data().maksimumPeserta);
       setTamat(data1.data().tamat);
+      setYuran(data1.data().yuran);
     }
 
     getProgram();
@@ -141,7 +143,7 @@ function SenaraiProgramSediaAda() {
           <p>{mula} - {tamat}</p>
           <p>{maksimumPeserta}</p>
           <p>{jumlahPeserta}</p>
-          <p>Percuma</p>
+          <p>{yuran}</p>
         </div>
       </div>
       <div class="blue">

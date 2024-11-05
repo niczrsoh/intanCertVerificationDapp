@@ -153,7 +153,7 @@ const Semak = () => {
             </p>
           </div>
           <div className="informasiprogram">
-            <label>Yuran</label>
+            <label>Yuran (RM)</label>
             <p>:</p>
             <p className="informasicontent">{yuran}</p>
           </div>
