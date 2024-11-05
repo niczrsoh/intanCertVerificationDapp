@@ -137,9 +137,6 @@ const PesertaSemak = () => {
           />
         </button>
         <h1 className="semakdaftaradmin">{pesertaInfo.nama}</h1>
-        <div className="smallback">
-          <NavLink to="/admin/home">LAMAN UTAMA</NavLink>/PESERTA
-        </div>
       </div>
       {/* Peserta Information */}
       <div className="informasibox">
@@ -341,8 +338,7 @@ const PesertaSemak = () => {
                 <div className="contentdelete">
                   <div>
                     <p>
-                      This cert was successfully deleted in the algorand
-                      blockchain!!
+                    Sijil ini berjaya dipadamkan dalam rangkaian blockchain
                     </p>
                   </div>
                 </div>

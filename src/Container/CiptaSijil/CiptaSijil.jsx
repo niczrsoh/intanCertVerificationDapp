@@ -96,18 +96,6 @@ const CiptaSijil = ({ backpage }) => {
           />
         </button>
         <h1 className="semakdaftaradmin">CIPTA SIJIL</h1>
-        {backpage === "/peserta-semak" && (
-          <div className="smallback">
-            <NavLink to="/admin/home">LAMAN UTAMA</NavLink>/
-            <NavLink to={backpage}>PESERTA</NavLink>/KEMASKINI SIJIL
-          </div>
-        )}
-        {backpage === "/semak" && (
-          <div className="smallback">
-            <NavLink to="/admin/home">LAMAN UTAMA</NavLink>/
-            <NavLink to={backpage}>PROGRAM</NavLink>/KEMASKINI SIJIL
-          </div>
-        )}
       </div>
 
       <div>

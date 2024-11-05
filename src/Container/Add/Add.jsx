@@ -146,7 +146,7 @@ const Add = () => {
       <div className='semakdaftarheader'>
         <button className='backbutton' onClick={() => navigate(-1)}><img src={backicon} alt='This is a back button.' className="backicon" /></button>
         <h1 className='semakdaftaradmin'>Tambah Program</h1>
-        <div className='smallback'><NavLink to="/admin/home">LAMAN UTAMA</NavLink>/TAMBAH PROGRAM</div></div>
+      </div>
       <form className='maklumatbox' onSubmit={programRegister}>
         <div>
           <div className='maklumatadminbahru'>

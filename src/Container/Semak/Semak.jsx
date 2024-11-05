@@ -135,9 +135,6 @@ const Semak = () => {
           <img src={backicon} className="backicon" alt="It is a back icon." />
         </button>
         <h1 className="semakdaftaradmin">{nama}</h1>
-        <div className="smallback">
-          <NavLink to="/admin/home">LAMAN UTAMA</NavLink>/DATABASE
-        </div>
       </div>
       {/* Program Information */}
       <div className="informasibox">
@@ -156,7 +153,7 @@ const Semak = () => {
             </p>
           </div>
           <div className="informasiprogram">
-            <label>Yuran (RM)</label>
+            <label>Yuran</label>
             <p>:</p>
             <p className="informasicontent">{yuran}</p>
           </div>
@@ -356,8 +353,7 @@ const Semak = () => {
                 <div className="contentdelete">
                   <div>
                     <p>
-                      This cert was successfully deleted in the algorand
-                      blockchain!!
+                    Sijil ini berjaya dipadamkan dalam rangkaian blockchain
                     </p>
                   </div>
                 </div>

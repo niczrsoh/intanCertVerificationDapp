@@ -166,18 +166,6 @@ const EditSijil = ({ backpage }) => {
           />
         </button>
         <h1 className="semakdaftaradmin">KEMASKINI SIJIL</h1>
-        {backpage === "/peserta-semak" && (
-          <div className="smallback">
-            <NavLink to="/admin/home">LAMAN UTAMA</NavLink>/
-            <NavLink to={backpage}>PESERTA</NavLink>/KEMASKINI SIJIL
-          </div>
-        )}
-        {backpage === "/semak" && (
-          <div className="smallback">
-            <NavLink to="/admin/home">LAMAN UTAMA</NavLink>/
-            <NavLink to={backpage}>PROGRAM</NavLink>/KEMASKINI SIJIL
-          </div>
-        )}
       </div>
 
       {/* Information input section for KEMASKINI Sijil */}
