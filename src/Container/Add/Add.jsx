@@ -17,6 +17,7 @@ const Add = () => {
   const [maksimumPeserta, setMaksimumPeserta] = useState("");
   const [yuran, setYuran] = useState("");
   const [tamat, setTamat] = useState("");
+  const [validating, setValidating] = useState(false);
 
   const onChangeIsiProgram = (e) => {
     setIsiProgram(e.target.value);
@@ -43,19 +44,45 @@ const Add = () => {
   
       // Set the properly formatted date in the input field
       setMula(value);
-  
-      // Validate only if the full date is entered (i.e., length of 10 characters)
-      if (value.length === 10) {
-        const datePattern = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
-  
-        // Check if the full date matches the DD/MM/YYYY format
-        if (!datePattern.test(value)) {
-          alert("Peringatan! Sila letakkan format yang betul DD/MM/YYYY (e.g., 01/01/2024)");
-        }
-      }
     } else {
       setMula(value);  // Update state with the current value (even partially entered)
     }
+  };
+  const onBlurMula = (e) => {
+    if (validating) return; // Skip validation if already in progress
+  
+    setValidating(true); // Set validating to true
+    let value = e.target.value;
+    // Validate only if the full date is entered (i.e., length of 10 characters)
+    if (value.length === 10) {
+      const datePattern = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+
+      // Check if the full date matches the DD/MM/YYYY format
+      if (!datePattern.test(value)) {
+        alert("Peringatan! Sila letakkan format yang betul DD/MM/YYYY dan nilai tarikh yang betul (e.g., 01/01/2024)");
+        setValidating(false); // Reset validating flag after alert
+        return;
+      }
+
+      if (isPastDate(value)) {
+        alert("Peringatan! Tarikh mula tidak boleh meletakkan sebelum tarikh hari ini");
+        setValidating(false); // Reset validating flag after alert
+        return;
+      }
+
+    } else {
+      alert("Peringatan! Sila letakkan format yang betul DD/MM/YYYY dan nilai tarikh yang betul (e.g., 01/01/2024)");
+      setValidating(false); // Reset validating flag after alert
+    }
+  };
+  const isPastDate = (dateString) => {
+    const [day, month, year] = dateString.split('/').map(num => parseInt(num, 10));
+    const inputDateObj = new Date(year, month - 1, day); // Create a Date object (month is 0-indexed)
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Set today's time to 00:00 to only compare the date part
+
+    return inputDateObj < today;
   };
   const onChangeNama = (e) => {
     setNama(e.target.value);
@@ -177,7 +204,7 @@ const Add = () => {
               <label className="kik">TARIKH MULA</label>
               <div className='textarea'>
                 <p className="kik">:</p>
-                <input type="text" className='inputtext' onChange={onChangeMula} value={mula} placeholder="DD/MM/YYYY (e.g. 01/01/2023)"/></div>
+                <input type="text" className='inputtext' onBlur={onBlurMula} onChange={onChangeMula} value={mula} placeholder="DD/MM/YYYY (e.g. 01/01/2023)"/></div>
               {/* Input for Tarikh Mula */}
             </div>
             <div className='maklumat'>
