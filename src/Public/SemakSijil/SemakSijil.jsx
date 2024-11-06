@@ -47,7 +47,7 @@ export default function SemakSijil() {
     } catch (error) {
       console.error("Error retrieving data:", error);
       // Handle the error appropriately, e.g., display an error message
-      navigate(`/errorPage/${appId}`,{state:{message:"tidak wujud dalam algorand. Sila semak semula!"}});
+      navigate(`/errorPage/${appId}`,{state:{message:"tidak wujud dalam rangkaian blockchian. Sila semak semula!"}});
     }
   };
   return (
