@@ -59,7 +59,7 @@ const ProgramEdit = () => {
           </div>
           </div>
         </form>
-        <div className='submitBtn'><Buttons title="SELESAI"/></div>
+        <div className='submitBtn'><Buttons title="Hantar"/></div>
       
     </div>
   )

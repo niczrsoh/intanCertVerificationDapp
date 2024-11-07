@@ -157,7 +157,7 @@ const EditProgram = () => {
             </div>
           </div>
         </div>
-        <div className='submitBtn'><Buttons title="SELESAI" /></div>
+        <div className='submitBtn'><Buttons title="Hantar" /></div>
       </form>
 
     </div>

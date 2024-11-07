@@ -258,7 +258,7 @@ const EditSijil = ({ backpage }) => {
           </div>
         ) : (
           <Buttons
-            title="Selesai"
+            title="Hantar"
             onClick={async () => {
               setLoading(true);
               if (!isEther) {
