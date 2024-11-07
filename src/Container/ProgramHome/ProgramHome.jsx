@@ -9,6 +9,10 @@ import closeicon from '../../img/close.png'
 import AppContext,{ AppContextProvider } from '../../Context/AppContext'
 import { db } from '../../Backend/firebase/firebase-config'
 import { collection, getDocs, deleteDoc, doc,} from 'firebase/firestore'
+import { IconButton } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 const ProgramHome = () => {
   const [selectedValue, setSelectedValue] = useState('');
@@ -185,9 +189,19 @@ const ProgramHome = () => {
             <td className='centerdata'>{item.mula}</td>
             <td className='centerdata'>{item.tamat}</td>
             <td>
-                <NavLink to={`/admin/semak/${item.id}`} className="aktivititype">Semak</NavLink>
-                <NavLink to={`/admin/edit-program/${item.id}`} className="aktivititype">Kemaskini</NavLink>
-                <button className="padambutton" onClick={(event)=>popOut(event,item.id)}>Padam</button>
+              <NavLink to={`/admin/semak/${item.id}`} className="aktivititype">                <IconButton>
+                <VisibilityIcon color="primary" />
+              </IconButton></NavLink>
+              <NavLink to={`/admin/edit-program/${item.id}`} className="aktivititype">
+                <IconButton>
+                  <EditIcon color={"primary"} />
+                </IconButton>
+              </NavLink>
+              <IconButton
+                onClick={(event) => popOut(event, item.id)}
+              >
+                <DeleteIcon color={"error"} />
+              </IconButton>
             </td>
       </tr>
         ))}
@@ -202,9 +216,19 @@ const ProgramHome = () => {
           <td className='centerdata'>{item.mula}</td>
           <td className='centerdata'>{item.tamat}</td>
           <td>
-              <NavLink to={`/admin/semak/${item.id}`} className="aktivititype">Semak</NavLink>
-              <NavLink to={`/admin/edit-program/${item.id}`} className="aktivititype">Kemaskini</NavLink>
-              <button className="padambutton" onClick={(event)=>popOut(event,item.id)}>Padam</button>
+              <NavLink to={`/admin/semak/${item.id}`} className="aktivititype">                <IconButton>
+                <VisibilityIcon color="primary" />
+              </IconButton></NavLink>
+              <NavLink to={`/admin/edit-program/${item.id}`} className="aktivititype">
+                <IconButton>
+                  <EditIcon color={"primary"} />
+                </IconButton>
+              </NavLink>
+              <IconButton
+                onClick={(event) => popOut(event, item.id)}
+              >
+                <DeleteIcon color={"error"} />
+              </IconButton>
           </td>
       </tr>
         ))}
