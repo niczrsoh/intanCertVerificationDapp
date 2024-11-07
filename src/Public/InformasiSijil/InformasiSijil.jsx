@@ -210,11 +210,10 @@ function InformasiSijil() {
                 href={`${formData.explorer}`}
                 onClick={handleClick}
               >
-                Check In {formData.isEther ? "ETHEREUM" : "AlgoScan"}
+                Semak sijil dalam {formData.isEther ? "ETHEREUM" : "AlgoScan"}
               </a>
             </div>
           </div>
-          Display sijil pdf
           <div className="viewPdf">
             <ErrorBoundary>
               {isMobile ? (
