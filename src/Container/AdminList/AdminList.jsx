@@ -4,7 +4,9 @@ import filterpic from '../../img/filter.png'
 import searchpic from '../../img/search.png'
 import '../AdminList/adminList.css'
 import { db } from '../../Backend/firebase/firebase-config'
-import { collection, getDocs, orderBy, query, doc, deleteDoc} from 'firebase/firestore'
+import { collection, getDocs, orderBy, query, doc, deleteDoc } from 'firebase/firestore'
+import { IconButton } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const AdminList = () => {
   const [selectedValue, setSelectedValue] = useState('');
@@ -12,7 +14,7 @@ const AdminList = () => {
   const [filteredValue, setFilteredValue] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [adminList, setAdminList] = useState([])
-  const [reload,setReload] = useState(0);
+  const [reload, setReload] = useState(0);
 
   //document path of the ActionLog collection
   const userCollectionRef = collection(db, "Admin")
@@ -22,7 +24,13 @@ const AdminList = () => {
       //get all the document data in the ActionLog collection
       const data = await getDocs(userCollectionRef);
       console.log(data);
-      setAdminList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      // Map through the documents and include doc.id, then sort by the "name" field
+      const sortedAdminList = data.docs
+        .map((doc) => ({ ...doc.data(), id: doc.id }))
+        .sort((a, b) => a.name.localeCompare(b.name));  // Sort by "name" field in ascending order
+
+      // Set the sorted admin list
+      setAdminList(sortedAdminList);
     }
 
     getAdminList().then(console.log(adminList));
@@ -85,19 +93,19 @@ const AdminList = () => {
     // }
   }
 
-  const onClickPadam = (id) =>{
-    if(window.confirm("Adakah anda ingin memadamkan akaun admin ini?")){
+  const onClickPadam = (id) => {
+    if (window.confirm("Adakah anda ingin memadamkan akaun admin ini?")) {
       deleteAccount(id);
-    }else{
+    } else {
       return;
     }
   }
 
-  const deleteAccount = async (id) =>{
+  const deleteAccount = async (id) => {
     const accRef = doc(db, "Admin", id.toString());
-    await deleteDoc(accRef).then(()=>{
+    await deleteDoc(accRef).then(() => {
       alert("Akaun Admin telah dipadam!!");
-      setReload(reload+1);
+      setReload(reload + 1);
     });
   }
 
@@ -125,7 +133,7 @@ const AdminList = () => {
           </form> */}
           <form className='search'>
             <div className='searchbox'>
-              <input value={filteredValue} type="text" placeholder="Nama Admin" className='searchtype' onChange={(e) => { setFilteredValue(e.target.value);handleSubmit() } } />
+              <input value={filteredValue} type="text" placeholder="Nama Admin" className='searchtype' onChange={(e) => { setFilteredValue(e.target.value); handleSubmit() }} />
             </div>
             <div className='filtericon'>
               <button className="searchbutton" onClick={handleSubmit} disabled={isSearching}>
@@ -136,14 +144,14 @@ const AdminList = () => {
         </div>
       </div>
       <div className='program'>
-        <table className='progtable'style={{ tableLayout: 'fixed', width: '100%' }}>
+        <table className='progtable' style={{ tableLayout: 'fixed', width: '100%' }}>
           <thead>
             <tr>
-              <th className='tarikhmasa'style={{ width: '50px' }}>Bil</th>
+              <th className='tarikhmasa' style={{ width: '50px' }}>Bil</th>
               <th className='namaadmin'>Nama Admin</th>
               <th className='namaadmin' style={{ width: '150px' }}>ID Admin</th>
               <th className='jenisTindakan' style={{ width: '400px' }}>Alamat Wallet</th>
-              <th className='tranid' style={{ width: '50px' }}>Padam Account</th>
+              <th className='tranid' style={{ width: '50px' }}>Aktiviti</th>
             </tr>
           </thead>
           {filteredValue == "" ? (
@@ -151,11 +159,15 @@ const AdminList = () => {
               {adminList.map((admin, index) => {
                 return (
                   <tr key={index} className={index % 2 === 0 ? "row2" : "row1"}>
-                    <td style={{ width: '10px' }}>{index+1}</td>
+                    <td style={{ width: '10px' }}>{index + 1}</td>
                     <td>{admin.name}</td>
                     <td>{admin.id}</td>
-                    <td>{admin.acc}</td>
-                    <td><button onClick={(e) => onClickPadam(admin.id)}>Padam</button></td>
+                    <td className="alamat-wallet">{admin.acc}</td>
+                    <td><IconButton
+                  onClick={(e) => onClickPadam(admin.id)}
+                  >
+                  <DeleteIcon color={"error"} />
+                  </IconButton></td>
                   </tr>
                 )
               })}
@@ -163,11 +175,15 @@ const AdminList = () => {
             <tbody>
               {searchValue.map((item, index) => (
                 <tr key={index} className={index % 2 === 0 ? "row2" : "row1"}>
-                  <td style={{ width: '10px' }}>{index+1}</td>
+                  <td style={{ width: '10px' }}>{index + 1}</td>
                   <td>{item.name}</td>
                   <td>{item.id}</td>
                   <td>{item.acc}</td>
-                  <td><button onClick={(e)=>onClickPadam(item.id)}>Padam</button></td>
+                  <td><IconButton
+                    onClick={(e) => onClickPadam(item.id)}
+                  >
+                    <DeleteIcon color={"error"} />
+                  </IconButton></td>
                 </tr>
               ))}
             </tbody>

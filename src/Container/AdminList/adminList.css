@@ -10,8 +10,13 @@
     width: 15%;
 }
 
+/* Admin name column should shrink properly */
 .namaadmin {
-    width: 11%;
+    width: 150px;
+    /* This value can be adjusted as needed */
+    max-width: 20%;
+    /* Optionally set a max-width to limit column expansion */
+    white-space: nowrap;
 }
 
 .logbutton {
@@ -20,4 +25,23 @@
     font-size: 14px;
     padding: 0px;
     cursor: pointer;
+}
+
+.alamat-wallet {
+    white-space: nowrap;
+    /* Prevents text from wrapping to the next line */
+    overflow: hidden;
+    /* Hides the overflowing content */
+    text-overflow: ellipsis;
+    /* Adds the ellipsis (...) when content overflows */
+    max-width: 400px;
+    /* Optional: Ensure this matches the table column width */
+}
+
+.centered-button {
+    display: flex;
+    justify-content: center;
+    /* Centers horizontally */
+    align-items: center;
+    /* Centers vertically */
 }
