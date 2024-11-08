@@ -5,7 +5,7 @@ import { db } from '../../Backend/firebase/firebase-config';
 import { getDoc, doc } from 'firebase/firestore';
 import method1 from '../../img/method1.png';
 import method2 from '../../img/method2.png';
-
+import { Buttons } from '../../Component';
 export default function SemakSijil() {
   const navigate = useNavigate();
   const params = useParams();
@@ -69,11 +69,8 @@ export default function SemakSijil() {
             setappId(e.target.value);
             }}
           />
-          <button type="Submit">
-            <i className="bi bi-search"></i>Semak
-          </button>
         </form>
-        <br/>
+        <div className='submitBtn'><Buttons title="🔍 Semak" onClick={handleFormSubmit}/></div>
         <p>Untuk menyemak pensijilan, terdapat dua kaedah</p>
         <div className="table-container">
           <div className="row">

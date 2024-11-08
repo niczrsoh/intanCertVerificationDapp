@@ -240,9 +240,9 @@ const Add = () => {
             </div>
           </div>
         </div>
-        <div className='submitBtn'><Buttons title="TAMBAH" /></div>
+       
       </form>
-
+      <div className='submitBtn'><Buttons title="TAMBAH" onClick={programRegister}/></div>
     </div>
   )
 }

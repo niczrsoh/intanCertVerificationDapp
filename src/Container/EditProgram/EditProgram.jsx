@@ -157,9 +157,9 @@ const EditProgram = () => {
             </div>
           </div>
         </div>
-        <div className='submitBtn'><Buttons title="Hantar" /></div>
+       
       </form>
-
+      <div className='submitBtn' ><Buttons title="Hantar" onClick={editProgram}/></div>
     </div>
   )
 }

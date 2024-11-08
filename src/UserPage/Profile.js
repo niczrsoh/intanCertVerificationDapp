@@ -6,7 +6,7 @@ import { ref, uploadBytes, listAll, getDownloadURL, deleteObject } from 'firebas
 import { v4 } from 'uuid';
 import NavbarU from "../Component/userNavbar/NavbarU";
 import Avatar from "react-avatar-edit";
-
+import { Buttons } from "../Component";
 
 //function for updating and showing the Informasi personal
 const ImgUpload = ({ onChange, src }) => (
@@ -124,10 +124,10 @@ const Profile = ({
         <div className="img-wrap">
           <img for="photo-upload" src={src} alt="profile" className="profile-pic" />
         </div>
-
-        <button type="submit" className="editbutton">
+        <div className='submitBtn'><Buttons title="KEMASKINI PROFIL" onClick={onSubmit}/></div>
+        {/* <button type="submit" className="editbutton">
           KEMASKINI PROFIL{" "}
-        </button>
+        </button> */}
       </div>
       <div className="frame">
         <div className="headerProfileU">
@@ -400,9 +400,7 @@ export default class profile extends React.Component {
                   />
                 )} */}
                  <ImgUpload onChange={this.photoUpload} src={imageUrl} />
-                <button type="submit" className="savebutton">
-                  Save{" "}
-                </button>
+                <div className='submitBtn'><Buttons title="SIMPAN" onClick={this.handleSubmit}/></div>
               </div>
               <div className="frame">
                 <div className="headerProfileU">

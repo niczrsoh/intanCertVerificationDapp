@@ -48,7 +48,7 @@ const ProgramHome = () => {
       );
     }
     getProgram();
-    console.log("Programs",programs);}
+  }
   }, [isOpen])
 
 

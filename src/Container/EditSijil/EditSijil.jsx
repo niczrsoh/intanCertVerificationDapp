@@ -29,7 +29,7 @@ const EditSijil = ({ backpage }) => {
   const [isEther, setIsEther] = useState(false);
   const { account, setAccount } = useContext(AppContext);
   const actionRef = collection(db, "ActionLog");
-
+  const [prevName, setPrevName] = useState("");
   //sijil collection document path
   const programDocRef = doc(db, "Program", programId);
 
@@ -59,6 +59,7 @@ const EditSijil = ({ backpage }) => {
         setTarikhMula(startDate);
         setTarikhTamat(endDate);
         setNama(recipientName);
+        setPrevName(recipientName);
         setNRIC(recipientIC);
         setAppId(contractAddress);
         setIsEther(true);
@@ -107,7 +108,7 @@ const EditSijil = ({ backpage }) => {
     //console.log(formattedDate.toLocaleString());
     //console.log(appId.toString());
     const sijilCollectionRef = doc(db, "Sijil", appId.toString());
-
+    const programCollectionRef = doc(db, "Program", programId);
     const adminName = sessionStorage.getItem("adminName");
     const adminID = sessionStorage.getItem("userID");
 
@@ -120,7 +121,19 @@ const EditSijil = ({ backpage }) => {
       transactionId: `${transId}`,
       type: "Update",
     });
-
+    //update the user name if the user name was changed
+    if(prevName !== nama){
+      const userCollectionRef = collection(db, "User");
+      const userDocRef = doc(userCollectionRef, NRIC);
+      await updateDoc(userDocRef, {
+        nama: nama,
+      });
+      await updateDoc(programCollectionRef, {
+        pesertaNama: {
+          [key]: nama,
+        },
+      });
+    }
     //update the sijil in sijil section
     await updateDoc(sijilCollectionRef, {
       txnId: `${transId}`,

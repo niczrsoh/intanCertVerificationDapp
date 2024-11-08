@@ -47,7 +47,7 @@ const CiptaSijil = ({ backpage }) => {
     )}-${padNumber(date.getDate())} ${padNumber(date.getHours())}:${padNumber(
       date.getMinutes()
     )}:${padNumber(date.getSeconds())}`;
-    const sijilCollectionRef = doc(db, "Sijil", appid.toString());
+    const sijilCollectionRef = doc(db, "Sijil", appid.toString().toLowerCase());
     console.log(formattedDate.toLocaleString());
 
     const adminName = sessionStorage.getItem("adminName");
