@@ -3,6 +3,8 @@ import './SemakSijil.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { db } from '../../Backend/firebase/firebase-config';
 import { getDoc, doc } from 'firebase/firestore';
+import method1 from '../../img/method1.png';
+import method2 from '../../img/method2.png';
 
 export default function SemakSijil() {
   const navigate = useNavigate();
@@ -71,6 +73,41 @@ export default function SemakSijil() {
             <i className="bi bi-search"></i>Semak
           </button>
         </form>
+        <br/>
+        <p>Untuk menyemak pensijilan, terdapat dua kaedah</p>
+        <div className="table-container">
+          <div className="row">
+            {/* First Row, First Column */}
+            <div className="cell">
+              <div className="circle">
+                <span className="circle-number">1</span>
+              </div>
+              <div className="instruction">
+                <p>Salin id pensijilan dan tampal dalam bar carian untuk carian</p>
+              </div>
+            </div>
+
+            {/* First Row, Second Column */}
+            <div className="cell">
+              <div className="circle">
+                <span className="circle-number">2</span>
+              </div>
+              <div className="instruction">
+                <p>Imbas kod qr untuk menyemak pensijilan</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Second Row */}
+          <div className="row">
+            <div className="image-cell">
+              <img src={method1} alt="Method 1" />
+            </div>
+            <div className="image-cell">
+              <img src={method2}  alt="Method 2" />
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

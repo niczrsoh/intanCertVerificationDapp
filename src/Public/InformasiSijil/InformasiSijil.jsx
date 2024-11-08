@@ -146,7 +146,7 @@ function InformasiSijil() {
     return data;
   }
 
-  if (!formData) return <div>Loading...</div>;
+  if (!formData) return <div>Memuatkan...</div>;
   const handleClick = (event) => {
     event.preventDefault();
     const newWindow = window.open(
