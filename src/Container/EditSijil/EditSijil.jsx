@@ -223,9 +223,9 @@ const EditSijil = ({ backpage }) => {
                 <input
                   type="text"
                   id="nama"
-                  className="inputtext"
+                  className="readOnlyText"
                   value={nama}
-                  onChange={(e) => setNama(e.target.value)}
+                  readonly
                 />
               </div>
             </div>
@@ -236,9 +236,9 @@ const EditSijil = ({ backpage }) => {
                 <input
                   type="text"
                   id="NRIC"
-                  className="inputtext"
+                  className="readOnlyText"
                   value={NRIC}
-                  onChange={(e) => setNRIC(e.target.value)}
+                  readonly
                 />
               </div>
             </div>

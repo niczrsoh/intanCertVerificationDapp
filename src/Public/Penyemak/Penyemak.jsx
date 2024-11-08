@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import './Penyemak.css';
 import { collection, addDoc} from 'firebase/firestore'
 import { db } from '../../Backend/firebase/firebase-config'
-
+import { Buttons } from '../../Component'
 export default function Penyemak() {
   const [mykad, setMykad] = useState("");
   const [nama, setNama] = useState("");
@@ -65,11 +65,12 @@ export default function Penyemak() {
                 setOrganisasi(event.target.value)
               }} />
             </label>
-
-            <button type='Submit'>Masuk</button>
-
+            <br></br>
+            <br></br>
           </form>
+          <div className='submitBtn'><Buttons title="Masuk" onClick={handleSubmit}/></div>
         </div>
+        
       </div>
     </>
   )

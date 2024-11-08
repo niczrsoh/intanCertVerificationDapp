@@ -25,9 +25,17 @@ function SenaraiProgramSediaAda() {
     const getProgram = async () => {
       const data = await getDocs(userCollectionRef);
       console.log(data);
-      setPrograms(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      setPrograms(
+        data.docs
+          .map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+            formattedDate: new Date(doc.data().mula.split('/').reverse().join('-')), 
+          }))
+          .sort((a, b) => b.formattedDate - a.formattedDate)
+      );
     }
-    getProgram().then(console.log(programs));
+    getProgram();
   }, [])
 //If there is a search value, show the filtered data array. Otherwise, show the whole data array
   return (

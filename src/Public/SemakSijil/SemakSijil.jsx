@@ -3,7 +3,7 @@ import './SemakSijil.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { db } from '../../Backend/firebase/firebase-config';
 import { getDoc, doc } from 'firebase/firestore';
-
+import { Buttons } from '../../Component';
 export default function SemakSijil() {
   const navigate = useNavigate();
   const params = useParams();
@@ -67,10 +67,9 @@ export default function SemakSijil() {
             setappId(e.target.value);
             }}
           />
-          <button type="Submit">
-            <i className="bi bi-search"></i>Semak
-          </button>
+         
         </form>
+          <div className='submitBtn'><Buttons title="🔍 Semak" onClick={handleFormSubmit}/></div>
       </div>
     </>
   );

@@ -3,7 +3,7 @@ import { Menuheader } from '../../Component'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { db } from '../../Backend/firebase/firebase-config'
 import '../Admin/admin.css'
-
+import { Buttons } from '../../Component'
 const Admin = () => {
   const [mykad, setMykad] = useState("");
   const [name, setName] = useState("");
@@ -119,8 +119,8 @@ const Admin = () => {
             </div>
             {/* Input for ADMIN ROLE */}
           </div>
-          <div className="submitBtn"><button className='register' type='Submit'>Daftar Akaun</button></div>
         </form>
+        <div className='submitBtn' ><Buttons title="Daftar Akaun" onClick={adminRegister}/></div>
       </div >
 
 
