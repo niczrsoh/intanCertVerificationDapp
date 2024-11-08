@@ -46,7 +46,69 @@ button[type = "Submit"]:hover{
     cursor: pointer;
 }
 
-
-
-
-
+/* Container to hold the "table" */
+.table-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  /* Each row */
+  .row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px; /* Space between rows */
+  }
+  
+  /* Each cell */
+  .cell {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 48%; /* Adjust the width of each column */
+  }
+  
+  /* Circle styling */
+  .circle {
+    width: 50px;
+    height: 50px;
+    background-color: #3498db; /* Blue circle */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .circle-number {
+    font-size: 24px;
+    color: white;
+    font-weight: bold;
+  }
+  
+  /* Instruction text */
+  .instruction {
+    text-align: right;
+    justify-content: flex-end;
+    font-size: 16px;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+    width: 100%;
+  }
+  
+  /* Image cell for second row */
+  .image-cell {
+    width: 48%; /* Adjust width of image cells */
+  }
+  
+  .image-cell img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
