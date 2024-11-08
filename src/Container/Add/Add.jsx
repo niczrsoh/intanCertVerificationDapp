@@ -17,7 +17,7 @@ const Add = () => {
   const [maksimumPeserta, setMaksimumPeserta] = useState("");
   const [yuran, setYuran] = useState("");
   const [tamat, setTamat] = useState("");
-  const [validating, setValidating] = useState(false);
+  const [timeValidating, setTimeValidating] = useState(false);
 
   const onChangeIsiProgram = (e) => {
     setIsiProgram(e.target.value);
@@ -31,10 +31,46 @@ const Add = () => {
       alert("Peringatan! Hanya nombor dan simbol '/' sahaja yang dibenarkan untuk tarikh");
       return;
     }
-
-    // Automatically add leading zeros for day and month if needed
-    const parts = value.split("/");
+    setMula(value);
+  };
+  const onBlurMula = (e) => {
+        let value = e.target.value;
+        const parts = value.split("/");
   
+        if (parts.length === 3) {
+          let day = parts[0].padStart(2, "0");  // Ensure 2 digits for the day
+          let month = parts[1].padStart(2, "0"); // Ensure 2 digits for the month
+          let year = parts[2];  // Keep the year as is
+      
+          value = `${day}/${month}/${year}`;
+      
+          // Set the properly formatted date in the input field
+          setMula(value);
+        } else {
+          setMula(value);  // Update state with the current value (even partially entered)
+        }
+
+    if (value.length === 10) {
+      const datePattern = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+
+      // Check if the full date matches the DD/MM/YYYY format
+      if (!datePattern.test(value)) {
+        alert("Peringatan! Sila letakkan format yang betul DD/MM/YYYY dan nilai tarikh yang betul (e.g., 01/01/2024)");
+        setTimeValidating(false); // Reset validating flag after alert
+        return;
+      }else if (isPastDate(value)) {
+        alert("Peringatan! Tarikh mula tidak boleh meletakkan sebelum tarikh hari ini");
+        setTimeValidating(false); // Reset validating flag after alert
+        return;
+      }else{
+        setTimeValidating(true);
+      }
+    } 
+  };
+  const onBlurTamat = (e) => {
+    let value = e.target.value;
+    const parts = value.split("/");
+
     if (parts.length === 3) {
       let day = parts[0].padStart(2, "0");  // Ensure 2 digits for the day
       let month = parts[1].padStart(2, "0"); // Ensure 2 digits for the month
@@ -43,38 +79,41 @@ const Add = () => {
       value = `${day}/${month}/${year}`;
   
       // Set the properly formatted date in the input field
-      setMula(value);
+      setTamat(value);
     } else {
-      setMula(value);  // Update state with the current value (even partially entered)
+      setTamat(value);  // Update state with the current value (even partially entered)
     }
-  };
-  const onBlurMula = (e) => {
-    if (validating) return; // Skip validation if already in progress
-  
-    setValidating(true); // Set validating to true
-    let value = e.target.value;
-    // Validate only if the full date is entered (i.e., length of 10 characters)
-    if (value.length === 10) {
-      const datePattern = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
 
-      // Check if the full date matches the DD/MM/YYYY format
-      if (!datePattern.test(value)) {
-        alert("Peringatan! Sila letakkan format yang betul DD/MM/YYYY dan nilai tarikh yang betul (e.g., 01/01/2024)");
-        setValidating(false); // Reset validating flag after alert
-        return;
-      }
+if (value.length === 10) {
+  const datePattern = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+  // Check if the full date matches the DD/MM/YYYY format
+  if (!datePattern.test(value)) {
+    alert("Peringatan! Sila letakkan format yang betul DD/MM/YYYY dan nilai tarikh yang betul (e.g., 01/01/2024)");
+    setTimeValidating(false); // Reset validating flag after alert
+    return;
+  }else if (isPastDate(value)) {
+    alert("Peringatan! Tarikh tamat tidak boleh meletakkan sebelum tarikh hari ini");
+    setTimeValidating(false); // Reset validating flag after alert
+    return;
+  }else if (!compareDate(mula,value)) {
+    alert("Peringatan! Tarikh tamat tidak boleh meletakkan sebelum tarikh mula");
+    setTimeValidating(false); // Reset validating flag after alert
+    return;
+  }else{
+    setTimeValidating(true);
+  }
+  //compare the date with the start date
+} 
+};
+const compareDate = (mula,tamat) => {
+  const [mday, mmonth, myear] = mula.split('/').map(num => parseInt(num, 10));
+  const mulaDateObj = new Date(myear, mmonth - 1, mday); // Create a Date object (month is 0-indexed)
+  const [day, month, year] = tamat.split('/').map(num => parseInt(num, 10));
+  const tamatDateObj = new Date(year, month - 1, day); // Create a Date object (month is 0-indexed)
 
-      if (isPastDate(value)) {
-        alert("Peringatan! Tarikh mula tidak boleh meletakkan sebelum tarikh hari ini");
-        setValidating(false); // Reset validating flag after alert
-        return;
-      }
 
-    } else {
-      alert("Peringatan! Sila letakkan format yang betul DD/MM/YYYY dan nilai tarikh yang betul (e.g., 01/01/2024)");
-      setValidating(false); // Reset validating flag after alert
-    }
-  };
+  return mulaDateObj < tamatDateObj;
+};
   const isPastDate = (dateString) => {
     const [day, month, year] = dateString.split('/').map(num => parseInt(num, 10));
     const inputDateObj = new Date(year, month - 1, day); // Create a Date object (month is 0-indexed)
@@ -102,35 +141,15 @@ const Add = () => {
       alert("Peringatan! Hanya nombor dan simbol '/' sahaja yang dibenarkan untuk tarikh");
       return;
     }
-    // Automatically add leading zeros for day and month if needed
-    const parts = value.split("/");
-  
-    if (parts.length === 3) {
-      let day = parts[0].padStart(2, "0");  // Ensure 2 digits for the day
-      let month = parts[1].padStart(2, "0"); // Ensure 2 digits for the month
-      let year = parts[2];  // Keep the year as is
-  
-      value = `${day}/${month}/${year}`;
-  
-      // Set the properly formatted date in the input field
-      setTamat(value);
-  
-      // Validate only if the full date is entered (i.e., length of 10 characters)
-      if (value.length === 10) {
-        const datePattern = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
-  
-        // Check if the full date matches the DD/MM/YYYY format
-        if (!datePattern.test(value)) {
-          alert("Peringatan! Sila letakkan format yang betul DD/MM/YYYY (e.g., 01/01/2024)");
-        }
-      }
-    } else {
-      setTamat(value);  // Update state with the current value (even partially entered)
-    }
+    setTamat(value);
   };
 
   const programRegister = async (e) => {
     e.preventDefault();
+    if(!timeValidating){
+      alert("Sila semak tarikh mula dan tamat!! Sila pastikan tarikh mula dan tamat tidak meletakkan sebelum tarikh hari ini dan format tarikh adalah betul (e.g., 01/01/2024)");
+      return;
+    }
     //ensure all the fields are filled
     if (isiProgram === "" || kod === "" || mula === "" || nama === "" || penganjur === "" || maksimumPeserta === "" || tamat === "" || yuran === "") {
       alert("Sila isi semua ruangan");
@@ -211,7 +230,7 @@ const Add = () => {
               <label className="kik">TARIKH TAMAT</label>
               <div className='textarea'>
                 <p className="kik">:</p>
-                <input type="text" className='inputtext' onChange={onChangeTamat} value={tamat} placeholder="DD/MM/YYYY (e.g. 01/01/2023)"/></div>
+                <input type="text" className='inputtext' onBlur={onBlurTamat} onChange={onChangeTamat} value={tamat} placeholder="DD/MM/YYYY (e.g. 01/01/2023)"/></div>
               {/* Input for Tarikh Tamat */}
             </div>
             <div className='maklumat'>
