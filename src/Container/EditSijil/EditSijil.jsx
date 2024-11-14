@@ -129,9 +129,7 @@ const EditSijil = ({ backpage }) => {
         nama: nama,
       });
       await updateDoc(programCollectionRef, {
-        pesertaNama: {
-          [key]: nama,
-        },
+        [`pesertaNama.${key}`]: nama,
       });
     }
     //update the sijil in sijil section
