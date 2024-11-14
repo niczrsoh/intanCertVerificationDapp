@@ -174,7 +174,7 @@ const Semak = () => {
         <table className="progtable">
           <thead>
             <tr>
-              <th className="kehadiran">Bil</th>
+              <th className="kehadiran" style={{ width: '50px' }}>Bil</th>
               <th className="nomykad">No. MyKad</th>
               <th className="pesertaname">Nama Peserta</th>
               <th className="kehadiran">Kehadiran</th>

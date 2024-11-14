@@ -264,7 +264,7 @@ const EditSijil = ({ backpage }) => {
               <br></br>
               <div>Sila tunggu sebentar...</div>
               <br></br>
-              <div> Your data is updating into blockchain and database ...</div>
+              <div> Your data telah dikemasKini dalam blockchain dan pangkalan data ...</div>
             </center>
           </div>
         ) : (
