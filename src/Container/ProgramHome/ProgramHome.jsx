@@ -172,6 +172,7 @@ const ProgramHome = () => {
             <tr>
               <th className='programkod'>Kod</th>
               <th className='programname'>Nama Kursus</th>
+              <th className='penyelaras'>Penyelaras</th>
               <th className='tarikh'>Tarikh Mula</th>
               <th className='tarikh'>Tarikh Tamat</th>
               <th className='programaktiviti'>Aktiviti</th>
@@ -185,6 +186,7 @@ const ProgramHome = () => {
           <tr key={index} className={index % 2 === 0 ? "row2" : "row1"}>
             <td>{item.kod}</td>
             <td>{item.nama}</td>
+            <td>{item.penyelaras}</td>
             <td className='centerdata'>{item.mula}</td>
             <td className='centerdata'>{item.tamat}</td>
             <td>

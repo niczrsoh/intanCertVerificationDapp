@@ -35,6 +35,7 @@ const Semak = () => {
   const [nama, setNama] = useState("");
   const [loading, setLoading] = useState(false);
   const [penganjur, setPenganjur] = useState("");
+  const [penyelaras, setPenyelaras] = useState("");
   const [maksimumPeserta, setMaksimumPeserta] = useState("");
   const [jumlahPeserta, setJumlahPeserta] = useState("");
   const [tamat, setTamat] = useState("");
@@ -118,6 +119,7 @@ const Semak = () => {
       setMula(detail.data().mula);
       setNama(detail.data().nama);
       setPenganjur(detail.data().penganjur);
+      setPenyelaras(detail.data().penyelaras);
       setMaksimumPeserta(detail.data().maksimumPeserta);
       setJumlahPeserta(detail.data().jumlahPeserta);
       setTamat(detail.data().tamat);
@@ -144,6 +146,11 @@ const Semak = () => {
             <label>Nama Penganjur</label>
             <p>:</p>
             <p className="informasicontent">{penganjur}</p>
+          </div>
+          <div className="informasiprogram">
+            <label>Nama Penyelaras</label>
+            <p>:</p>
+            <p className="informasicontent">{penyelaras}</p>
           </div>
           <div className="informasiprogram">
             <label>Tempoh</label>
