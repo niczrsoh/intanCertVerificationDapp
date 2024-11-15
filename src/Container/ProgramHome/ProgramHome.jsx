@@ -1,6 +1,6 @@
 import React, { useState,useContext,useEffect } from 'react'
 import { NavLink, redirect,useNavigate } from 'react-router-dom'
-import { Menuheader, Buttons } from '../../Component'
+import { Buttons } from '../../Component'
 import './ProgramHome.css'
 import filterpic from '../../img/filter.png'
 import searchpic from '../../img/search.png'
@@ -134,7 +134,6 @@ const ProgramHome = () => {
   return (
     
     <div className='app_box'>
-      <Menuheader/>
       <NavLink to='/admin/add-course'><button className='addbutton'><img src={addicon} alt="This is an add icon." className='addicon'/></button></NavLink>
       <div className='programsec'>
         <h1 className='title'>

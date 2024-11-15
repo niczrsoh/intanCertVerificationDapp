@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Menuheader } from '../../Component'
 import filterpic from '../../img/filter.png'
 import searchpic from '../../img/search.png'
 import '../AdminList/adminList.css'
@@ -111,7 +110,6 @@ const AdminList = () => {
 
   return (
     <div className='app_box'>
-      <Menuheader />
       <div className='programsec'>
         <h1 className='title'>
           Senarai Admin
