@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Navigate, Outlet } from "react-router-dom";
+import { Menuheader } from '../Component';
 
 const useAuth = () => {
 	//get user from sessionStorage, if there exist user means the user had logged in
@@ -30,6 +31,7 @@ const AdminRoutes = () => {
 	if (auth) {
 		return role === "ADMIN" ? (
 			<>
+				<Menuheader />
 				<Outlet />
 			</>
 		) : (
