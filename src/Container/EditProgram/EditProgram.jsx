@@ -14,6 +14,7 @@ const EditProgram = () => {
   const [mula, setMula] = useState("");
   const [nama, setNama] = useState("");
   const [penganjur, setPenganjur] = useState("");
+  const [penyelaras, setPenyelaras] = useState("");
   const [maksimumPeserta, setMaksimumPeserta] = useState("");
   const [yuran, setYuran] = useState("");
   const [tamat, setTamat] = useState("");
@@ -32,6 +33,9 @@ const EditProgram = () => {
   }
   const onChangePenganjur = (e) => {
     setPenganjur(e.target.value);
+  }
+  const onChangePenyelaras = (e) => {
+    setPenyelaras(e.target.value);
   }
   const onChangeMaksimumPeserta = (e) => {
     setMaksimumPeserta(e.target.value);
@@ -57,6 +61,7 @@ const EditProgram = () => {
       setMula(data1.data().mula);
       setNama(data1.data().nama);
       setPenganjur(data1.data().penganjur);
+      setPenyelaras(data1.data().penyelaras);
       setMaksimumPeserta(data1.data().maksimumPeserta);
       setYuran(data1.data().yuran);
       setTamat(data1.data().tamat);
@@ -76,6 +81,7 @@ const EditProgram = () => {
       mula: mula,
       nama: nama,
       penganjur: penganjur,
+      penyelaras: penyelaras,
       maksimumPeserta: maksimumPeserta,
       yuran: yuran,
       tamat: tamat,
@@ -85,6 +91,7 @@ const EditProgram = () => {
       setMula("");
       setNama("");
       setPenganjur("");
+      setPenyelaras("");
       setMaksimumPeserta("");
       setTamat("");
       setYuran("");
@@ -125,6 +132,12 @@ const EditProgram = () => {
                 <input type="text" className='inputtext' onChange={onChangePenganjur} value={penganjur} /></div>
             </div>
             <div className='maklumat'>
+              <label className="kik">NAMA PENYELARAS</label>
+              <div className='textarea'>
+                <p className="kik">:</p>
+                <input type="text" className='inputtext' onChange={onChangePenyelaras} value={penyelaras} /></div>
+            </div>
+            <div className='maklumat'>
               <label className="kik">TARIKH MULA</label>
               <div className='textarea'>
                 <p className="kik">:</p>
@@ -146,6 +159,7 @@ const EditProgram = () => {
               <label className="kik">YURAN (RM)</label>
               <div className='textarea'>
                 <p className="kik">:</p>
+                <span className="currency-symbol">RM</span>
                 <input type="text" className='inputtext' onChange={onChangeYuran} value={yuran} /></div>
             </div>
             <div className='maklumat'>

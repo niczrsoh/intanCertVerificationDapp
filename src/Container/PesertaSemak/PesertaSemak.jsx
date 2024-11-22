@@ -269,7 +269,7 @@ const PesertaSemak = () => {
                 <div className="contentdelete">
                   <div>
                     <p>
-                    Peringatan! Langkah ini tidak boleh diundur semula selepas tekan butang <b>'Padam'</b> 
+                    Peringatan! Adakah anda pasti untuk memadam program ini? <b>'Padam'</b> 
                     </p>
                   </div>
                   <div className="padamconfirmbutton">

@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Menuheader } from '../../Component'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { db } from '../../Backend/firebase/firebase-config'
 import '../Admin/admin.css'
@@ -71,7 +70,6 @@ const Admin = () => {
 
   return (
     <div className='app_box'>
-      <Menuheader />
       <h1 className='admintitle'>DAFTAR ADMIN</h1>
       <div>
         <div className='maklumatadminbahru'>

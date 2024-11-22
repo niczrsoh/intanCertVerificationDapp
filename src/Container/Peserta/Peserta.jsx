@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { Menuheader } from '../../Component'
 import './peserta.css'
 import filterpic from '../../img/filter.png'
 import searchpic from '../../img/search.png'
@@ -80,7 +79,6 @@ const Peserta = () => {
   
   return (
     <div className='app_box'>
-      <Menuheader/>
     <div className='programsec'>
         <h1 className='title'>
         SENARAI PESERTA

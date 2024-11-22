@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Menuheader } from '../../Component'
 import filterpic from '../../img/filter.png'
 import searchpic from '../../img/search.png'
 import '../AdminList/adminList.css'
@@ -111,7 +110,6 @@ const AdminList = () => {
 
   return (
     <div className='app_box'>
-      <Menuheader />
       <div className='programsec'>
         <h1 className='title'>
           Senarai Admin
@@ -147,7 +145,7 @@ const AdminList = () => {
         <table className='progtable' style={{ tableLayout: 'fixed', width: '100%' }}>
           <thead>
             <tr>
-              <th className='tarikhmasa' style={{ width: '50px' }}>Bil</th>
+              <th className='tarikhmasa' style={{ width: '20px' }}>Bil</th>
               <th className='namaadmin'>Nama Admin</th>
               <th className='namaadmin' style={{ width: '150px' }}>ID Admin</th>
               <th className='jenisTindakan' style={{ width: '400px' }}>Alamat Wallet</th>
