@@ -15,7 +15,7 @@ const Add = () => {
   const [nama, setNama] = useState("");
   const [penganjur, setPenganjur] = useState("");
   const [maksimumPeserta, setMaksimumPeserta] = useState("");
-  const [yuran, setYuran] = useState("");
+  const [yuran, setYuran] = useState('0.00');
   const [tamat, setTamat] = useState("");
   const [timeValidating, setTimeValidating] = useState(false);
 
@@ -130,11 +130,20 @@ const compareDate = (mula,tamat) => {
     setPenganjur(e.target.value);
   }
   const onChangeMaksimumPeserta = (e) => {
-    setMaksimumPeserta(e.target.value);
+    let value = e.target.value;
+    value = value.replace(/[^0-9]/g, '');
+    setMaksimumPeserta(value);
   }
   const onChangeYuran = (e) => {
-    setYuran(e.target.value);
-  }
+    let value = e.target.value;
+    value = value.replace(/[^0-9]/g, '');
+    if (value === '') {
+      setYuran('0.00');
+      return;
+    }
+    let formattedValue = (parseInt(value, 10) / 100).toFixed(2);
+    setYuran(formattedValue);
+  };
   const onChangeTamat = (e) => {
     let value = e.target.value;
     if (!/^[0-9/]*$/.test(value)) {
@@ -243,9 +252,10 @@ const compareDate = (mula,tamat) => {
               {/* Input for MAKSIMUM PESERTA */}
             </div>
             <div className='maklumat'>
-              <label className="kik">YURAN (RM)</label>
+              <label className="kik">YURAN</label>
               <div className='textarea'>
                 <p className="kik">:</p>
+                <span className="currency-symbol">RM</span>
                 <input type="text" className='inputtext' onChange={onChangeYuran} value={yuran} /></div>
               {/* Input for Yuran (RM) */}
             </div>
