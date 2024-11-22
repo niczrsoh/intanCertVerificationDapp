@@ -14,6 +14,7 @@ const Add = () => {
   const [mula, setMula] = useState("");
   const [nama, setNama] = useState("");
   const [penganjur, setPenganjur] = useState("");
+  const [penyelaras, setPenyelaras] = useState("");
   const [maksimumPeserta, setMaksimumPeserta] = useState("");
   const [yuran, setYuran] = useState("");
   const [tamat, setTamat] = useState("");
@@ -129,6 +130,9 @@ const compareDate = (mula,tamat) => {
   const onChangePenganjur = (e) => {
     setPenganjur(e.target.value);
   }
+  const onChangePenyelaras = (e) => {
+    setPenyelaras(e.target.value);
+  }
   const onChangeMaksimumPeserta = (e) => {
     setMaksimumPeserta(e.target.value);
   }
@@ -151,7 +155,7 @@ const compareDate = (mula,tamat) => {
       return;
     }
     //ensure all the fields are filled
-    if (isiProgram === "" || kod === "" || mula === "" || nama === "" || penganjur === "" || maksimumPeserta === "" || tamat === "" || yuran === "") {
+    if (isiProgram === "" || kod === "" || mula === "" || nama === "" || penganjur === "" || penyelaras === "" || maksimumPeserta === "" || tamat === "" || yuran === "") {
       alert("Sila isi semua ruangan");
       return;
     }
@@ -165,6 +169,7 @@ const compareDate = (mula,tamat) => {
       mula: mula,
       nama: nama,
       penganjur: penganjur,
+      penyelaras: penyelaras,
       maksimumPeserta: maksimumPeserta,
       jumlahPeserta: "0",
       pesertaStatus: {},
@@ -179,6 +184,7 @@ const compareDate = (mula,tamat) => {
       setMula("");
       setNama("");
       setPenganjur("");
+      setPenyelaras("");
       setMaksimumPeserta("");
       setTamat("");
       setYuran("");
@@ -218,6 +224,12 @@ const compareDate = (mula,tamat) => {
               <div className='textarea'>
                 <p className="kik">:</p>
                 <input type="text" className='inputtext' onChange={onChangePenganjur} value={penganjur} /></div>
+            </div>
+            <div className='maklumat'>
+              <label className="kik">NAMA PENYELARAS</label>
+              <div className='textarea'>
+                <p className="kik">:</p>
+                <input type="text" className='inputtext' onChange={onChangePenyelaras} value={penyelaras} /></div>
             </div>
             <div className='maklumat'>
               <label className="kik">TARIKH MULA</label>

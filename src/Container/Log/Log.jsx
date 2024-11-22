@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Menuheader } from '../../Component'
 import filterpic from '../../img/filter.png'
 import searchpic from '../../img/search.png'
 import '../Log/log.css'
@@ -86,7 +85,6 @@ const Log = () => {
 
   return (
     <div className='app_box'>
-      <Menuheader />
       <div className='programsec'>
         <h1 className='title'>
           LOG AKTIVITI

@@ -14,6 +14,7 @@ function SenaraiProgramSediaAda() {
   const [mula, setMula] = useState("");
   const [nama, setNama] = useState("");
   const [penganjur, setPenganjur] = useState("");
+  const [penyelaras, setPenyelaras] = useState("");
   const [jumlahPeserta, setJumlahPeserta] = useState("");
   const [maksimumPeserta, setMaksimumPeserta] = useState("");
   const [tamat, setTamat] = useState("");
@@ -38,6 +39,7 @@ function SenaraiProgramSediaAda() {
       setMula(data1.data().mula);
       setNama(data1.data().nama);
       setPenganjur(data1.data().penganjur);
+      setPenyelaras(data1.data().penyelaras);
       setJumlahPeserta(data1.data().jumlahPeserta);
       setMaksimumPeserta(data1.data().maksimumPeserta);
       setTamat(data1.data().tamat);
@@ -140,6 +142,7 @@ function SenaraiProgramSediaAda() {
         </div>
         <div class="info3">
           <p>{penganjur}</p>
+          <p>{penyelaras}</p>
           <p>{mula} - {tamat}</p>
           <p>{maksimumPeserta}</p>
           <p>{jumlahPeserta}</p>
