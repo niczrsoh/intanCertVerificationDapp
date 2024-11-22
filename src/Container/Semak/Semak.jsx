@@ -155,12 +155,12 @@ const Semak = () => {
           <div className="informasiprogram">
             <label>Yuran (RM)</label>
             <p>:</p>
-            <p className="informasicontent">{yuran}</p>
+            <p className="informasicontent">RM {yuran}</p>
           </div>
           <div className="informasiprogram">
             <label>Maksimum Peserta</label>
             <p>:</p>
-            <p className="informasicontent">{maksimumPeserta}</p>
+            <p className="informasicontent">{maksimumPeserta} orang</p>
           </div>
           <div className="informasiprogram">
             <label>Jumlah Peserta</label>
