@@ -129,9 +129,7 @@ const EditSijil = ({ backpage }) => {
         nama: nama,
       });
       await updateDoc(programCollectionRef, {
-        pesertaNama: {
-          [key]: nama,
-        },
+        [`pesertaNama.${key}`]: nama,
       });
     }
     //update the sijil in sijil section
@@ -266,7 +264,7 @@ const EditSijil = ({ backpage }) => {
               <br></br>
               <div>Sila tunggu sebentar...</div>
               <br></br>
-              <div> Your data is updating into blockchain and database ...</div>
+              <div> Data anda telah dikemasKini dalam blockchain dan pangkalan data ...</div>
             </center>
           </div>
         ) : (

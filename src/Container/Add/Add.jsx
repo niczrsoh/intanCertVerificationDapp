@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useRef} from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import backicon from '../../img/arrow.png'
 import { Buttons } from '../../Component'
 import '../Add/add.css'
 import { db } from '../../Backend/firebase/firebase-config'
 import { collection, addDoc } from 'firebase/firestore'
+import Calendar from "react-date-picker"; // Make sure you've installed react-date-picker
+import "react-date-picker/dist/DatePicker.css";
+import "react-calendar/dist/Calendar.css";
 
 
 const Add = () => {
@@ -16,10 +19,10 @@ const Add = () => {
   const [penganjur, setPenganjur] = useState("");
   const [penyelaras, setPenyelaras] = useState("");
   const [maksimumPeserta, setMaksimumPeserta] = useState("");
-  const [yuran, setYuran] = useState("");
+  const [yuran, setYuran] = useState('0.00');
   const [tamat, setTamat] = useState("");
-  const [validating, setValidating] = useState(false);
-
+  const [timeValidating, setTimeValidating] = useState(false);
+  const calendarRef = useRef(null);
   const onChangeIsiProgram = (e) => {
     setIsiProgram(e.target.value);
   }
@@ -27,15 +30,19 @@ const Add = () => {
     setKod(e.target.value);
   }
   const onChangeMula = (e) => {
+    setMula(e);
+  };
+  const formatDate = (date) => {
+    if (!date) return "";
+    const year = date.getFullYear();
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    return `${day}/${month}/${year}`;
+  };
+  const onBlurTamat = (e) => {
     let value = e.target.value;
-    if (!/^[0-9/]*$/.test(value)) {
-      alert("Peringatan! Hanya nombor dan simbol '/' sahaja yang dibenarkan untuk tarikh");
-      return;
-    }
-
-    // Automatically add leading zeros for day and month if needed
     const parts = value.split("/");
-  
+
     if (parts.length === 3) {
       let day = parts[0].padStart(2, "0");  // Ensure 2 digits for the day
       let month = parts[1].padStart(2, "0"); // Ensure 2 digits for the month
@@ -44,38 +51,42 @@ const Add = () => {
       value = `${day}/${month}/${year}`;
   
       // Set the properly formatted date in the input field
-      setMula(value);
+      setTamat(value);
     } else {
-      setMula(value);  // Update state with the current value (even partially entered)
+      setTamat(value);  // Update state with the current value (even partially entered)
     }
-  };
-  const onBlurMula = (e) => {
-    if (validating) return; // Skip validation if already in progress
-  
-    setValidating(true); // Set validating to true
-    let value = e.target.value;
-    // Validate only if the full date is entered (i.e., length of 10 characters)
-    if (value.length === 10) {
-      const datePattern = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
 
-      // Check if the full date matches the DD/MM/YYYY format
-      if (!datePattern.test(value)) {
-        alert("Peringatan! Sila letakkan format yang betul DD/MM/YYYY dan nilai tarikh yang betul (e.g., 01/01/2024)");
-        setValidating(false); // Reset validating flag after alert
-        return;
-      }
+if (value.length === 10) {
+  const datePattern = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+  // Check if the full date matches the DD/MM/YYYY format
+  if (!datePattern.test(value)) {
+    alert("Peringatan! Sila letakkan format yang betul DD/MM/YYYY dan nilai tarikh yang betul (e.g., 01/01/2024)");
+    setTimeValidating(false); // Reset validating flag after alert
+    return;
+  }else if (isPastDate(value)) {
+    alert("Peringatan! Tarikh tamat tidak boleh meletakkan sebelum tarikh hari ini");
+    setTimeValidating(false); // Reset validating flag after alert
+    return;
+  }else if (!compareDate(mula,value)) {
+    alert("Peringatan! Tarikh tamat tidak boleh meletakkan sebelum tarikh mula");
+    setTimeValidating(false); // Reset validating flag after alert
+    return;
+  }else{
+    setTimeValidating(true);
+  }
+  //compare the date with the start date
+} 
+};
+const compareDate = (mula,tamat) => {
+  const [mday, mmonth, myear] = mula.split('/').map(num => parseInt(num, 10));
+  const mulaDateObj = new Date(myear, mmonth - 1, mday); // Create a Date object (month is 0-indexed)
+  const [day, month, year] = tamat.split('/').map(num => parseInt(num, 10));
+  const tamatDateObj = new Date(year, month - 1, day); // Create a Date object (month is 0-indexed)
 
-      if (isPastDate(value)) {
-        alert("Peringatan! Tarikh mula tidak boleh meletakkan sebelum tarikh hari ini");
-        setValidating(false); // Reset validating flag after alert
-        return;
-      }
 
-    } else {
-      alert("Peringatan! Sila letakkan format yang betul DD/MM/YYYY dan nilai tarikh yang betul (e.g., 01/01/2024)");
-      setValidating(false); // Reset validating flag after alert
-    }
-  };
+  return mulaDateObj < tamatDateObj;
+};
+
   const isPastDate = (dateString) => {
     const [day, month, year] = dateString.split('/').map(num => parseInt(num, 10));
     const inputDateObj = new Date(year, month - 1, day); // Create a Date object (month is 0-indexed)
@@ -95,46 +106,30 @@ const Add = () => {
     setPenyelaras(e.target.value);
   }
   const onChangeMaksimumPeserta = (e) => {
-    setMaksimumPeserta(e.target.value);
+    let value = e.target.value;
+    value = value.replace(/[^0-9]/g, '');
+    setMaksimumPeserta(value);
   }
   const onChangeYuran = (e) => {
-    setYuran(e.target.value);
-  }
-  const onChangeTamat = (e) => {
     let value = e.target.value;
-    if (!/^[0-9/]*$/.test(value)) {
-      alert("Peringatan! Hanya nombor dan simbol '/' sahaja yang dibenarkan untuk tarikh");
+    value = value.replace(/[^0-9]/g, '');
+    if (value === '') {
+      setYuran('0.00');
       return;
     }
-    // Automatically add leading zeros for day and month if needed
-    const parts = value.split("/");
-  
-    if (parts.length === 3) {
-      let day = parts[0].padStart(2, "0");  // Ensure 2 digits for the day
-      let month = parts[1].padStart(2, "0"); // Ensure 2 digits for the month
-      let year = parts[2];  // Keep the year as is
-  
-      value = `${day}/${month}/${year}`;
-  
-      // Set the properly formatted date in the input field
-      setTamat(value);
-  
-      // Validate only if the full date is entered (i.e., length of 10 characters)
-      if (value.length === 10) {
-        const datePattern = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
-  
-        // Check if the full date matches the DD/MM/YYYY format
-        if (!datePattern.test(value)) {
-          alert("Peringatan! Sila letakkan format yang betul DD/MM/YYYY (e.g., 01/01/2024)");
-        }
-      }
-    } else {
-      setTamat(value);  // Update state with the current value (even partially entered)
-    }
+    let formattedValue = (parseInt(value, 10) / 100).toFixed(2);
+    setYuran(formattedValue);
+  };
+  const onChangeTamat = (e) => {
+    setTamat(e);
   };
 
   const programRegister = async (e) => {
     e.preventDefault();
+    // if(!timeValidating){
+    //   alert("Sila semak tarikh mula dan tamat!! Sila pastikan tarikh mula dan tamat tidak meletakkan sebelum tarikh hari ini dan format tarikh adalah betul (e.g., 01/01/2024)");
+    //   return;
+    // }
     //ensure all the fields are filled
     if (isiProgram === "" || kod === "" || mula === "" || nama === "" || penganjur === "" || penyelaras === "" || maksimumPeserta === "" || tamat === "" || yuran === "") {
       alert("Sila isi semua ruangan");
@@ -147,7 +142,7 @@ const Add = () => {
     await addDoc(userCollectionRef, {
       isiProgram: isiProgram,
       kod: kod,
-      mula: mula,
+      mula: formatDate(mula),
       nama: nama,
       penganjur: penganjur,
       penyelaras: penyelaras,
@@ -157,7 +152,7 @@ const Add = () => {
       pesertaList: [],
       transactionId: {},
       pesertaNama: {},
-      tamat: tamat,
+      tamat: formatDate(tamat),
       yuran: yuran,
     }).then(() => {
       setIsiProgram("");
@@ -216,15 +211,25 @@ const Add = () => {
               <label className="kik">TARIKH MULA</label>
               <div className='textarea'>
                 <p className="kik">:</p>
-                <input type="text" className='inputtext' onBlur={onBlurMula} onChange={onChangeMula} value={mula} placeholder="DD/MM/YYYY (e.g. 01/01/2023)"/></div>
+              <div>
+         <Calendar
+         className='date-field'
+          onChange={onChangeMula}
+          value={mula}// Optionally close on blur
+        />
+      </div>
+      </div>
               {/* Input for Tarikh Mula */}
             </div>
             <div className='maklumat'>
               <label className="kik">TARIKH TAMAT</label>
               <div className='textarea'>
                 <p className="kik">:</p>
-                <input type="text" className='inputtext' onChange={onChangeTamat} value={tamat} placeholder="DD/MM/YYYY (e.g. 01/01/2023)"/></div>
-              {/* Input for Tarikh Tamat */}
+                <Calendar
+         className='date-field'
+          onChange={onChangeTamat}
+          value={tamat}// Optionally close on blur
+        /></div>
             </div>
             <div className='maklumat'>
               <label className="kik">MAKSIMUM PESERTA</label>
@@ -236,9 +241,10 @@ const Add = () => {
               {/* Input for MAKSIMUM PESERTA */}
             </div>
             <div className='maklumat'>
-              <label className="kik">YURAN (RM)</label>
+              <label className="kik">YURAN</label>
               <div className='textarea'>
                 <p className="kik">:</p>
+                <span className="currency-symbol">RM</span>
                 <input type="text" className='inputtext' onChange={onChangeYuran} value={yuran} /></div>
               {/* Input for Yuran (RM) */}
             </div>

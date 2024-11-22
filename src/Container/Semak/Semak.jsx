@@ -162,12 +162,12 @@ const Semak = () => {
           <div className="informasiprogram">
             <label>Yuran (RM)</label>
             <p>:</p>
-            <p className="informasicontent">{yuran}</p>
+            <p className="informasicontent">RM {yuran}</p>
           </div>
           <div className="informasiprogram">
             <label>Maksimum Peserta</label>
             <p>:</p>
-            <p className="informasicontent">{maksimumPeserta}</p>
+            <p className="informasicontent">{maksimumPeserta} orang</p>
           </div>
           <div className="informasiprogram">
             <label>Jumlah Peserta</label>
@@ -181,7 +181,7 @@ const Semak = () => {
         <table className="progtable">
           <thead>
             <tr>
-              <th className="kehadiran">Bil</th>
+              <th className="kehadiran" style={{ width: '50px' }}>Bil</th>
               <th className="nomykad">No. MyKad</th>
               <th className="pesertaname">Nama Peserta</th>
               <th className="kehadiran">Kehadiran</th>

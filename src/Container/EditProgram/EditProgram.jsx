@@ -159,6 +159,7 @@ const EditProgram = () => {
               <label className="kik">YURAN (RM)</label>
               <div className='textarea'>
                 <p className="kik">:</p>
+                <span className="currency-symbol">RM</span>
                 <input type="text" className='inputtext' onChange={onChangeYuran} value={yuran} /></div>
             </div>
             <div className='maklumat'>

@@ -132,9 +132,10 @@ function SenaraiProgramSediaAda() {
           <p>Tempoh</p>
           <p>Maksimum peserta</p>
           <p>Jumlah peserta</p>
-          <p>Yuran (RM)</p>
+          <p>Yuran</p>
         </div>
         <div class="info2">
+          <p>:</p>
           <p>:</p>
           <p>:</p>
           <p>:</p>
@@ -146,7 +147,7 @@ function SenaraiProgramSediaAda() {
           <p>{mula} - {tamat}</p>
           <p>{maksimumPeserta}</p>
           <p>{jumlahPeserta}</p>
-          <p>{yuran}</p>
+          <p>RM {yuran}</p>
         </div>
       </div>
       <div class="blue">
