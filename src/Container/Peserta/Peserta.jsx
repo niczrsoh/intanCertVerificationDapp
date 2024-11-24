@@ -5,6 +5,8 @@ import filterpic from '../../img/filter.png'
 import searchpic from '../../img/search.png'
 import { db } from '../../Backend/firebase/firebase-config'
 import { collection, getDocs, deleteDoc, doc, } from 'firebase/firestore'
+import { IconButton } from "@mui/material";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 const Peserta = () => {
   const [selectedValue, setSelectedValue] = useState('');
@@ -126,7 +128,11 @@ const Peserta = () => {
             <td>{item.ic}</td>
             <td>{item.nama}</td>
             <td>
-              <NavLink to={`/admin/peserta-semak/${item.ic}`} className='aktiviti'>Semak</NavLink>
+              <NavLink to={`/admin/peserta-semak/${item.ic}`} className='aktiviti'>
+                <IconButton>
+                  <VisibilityIcon color="primary" />
+                </IconButton>
+              </NavLink>
             </td>
       </tr>
         ))}
@@ -138,7 +144,11 @@ const Peserta = () => {
           <td>{item.ic}</td>
           <td>{item.nama}</td>
           <td>
-            <NavLink to={`/admin/peserta-semak/${item.ic}`} className='aktiviti'>Semak</NavLink>
+              <NavLink to={`/admin/peserta-semak/${item.ic}`} className='aktiviti'>
+                <IconButton>
+                  <VisibilityIcon color="primary" />
+                </IconButton>
+              </NavLink>
           </td>
       </tr>
         ))}

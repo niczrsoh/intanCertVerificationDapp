@@ -190,9 +190,11 @@ const ProgramHome = () => {
             <td className='centerdata'>{item.mula}</td>
             <td className='centerdata'>{item.tamat}</td>
             <td>
-              <NavLink to={`/admin/semak/${item.id}`} className="aktivititype">                <IconButton>
-                <VisibilityIcon color="primary" />
-              </IconButton></NavLink>
+              <NavLink to={`/admin/semak/${item.id}`} className="aktivititype">
+                <IconButton>
+                  <VisibilityIcon color="primary" />
+                </IconButton>
+              </NavLink>
               <NavLink to={`/admin/edit-program/${item.id}`} className="aktivititype">
                 <IconButton>
                   <EditIcon color={"primary"} />
@@ -217,9 +219,11 @@ const ProgramHome = () => {
           <td className='centerdata'>{item.mula}</td>
           <td className='centerdata'>{item.tamat}</td>
           <td>
-              <NavLink to={`/admin/semak/${item.id}`} className="aktivititype">                <IconButton>
-                <VisibilityIcon color="primary" />
-              </IconButton></NavLink>
+              <NavLink to={`/admin/semak/${item.id}`} className="aktivititype">
+                <IconButton>
+                  <VisibilityIcon color="primary" />
+                </IconButton>
+              </NavLink>
               <NavLink to={`/admin/edit-program/${item.id}`} className="aktivititype">
                 <IconButton>
                   <EditIcon color={"primary"} />
