@@ -216,6 +216,7 @@ const compareDate = (mula,tamat) => {
          className='date-field'
           onChange={onChangeMula}
           value={mula}// Optionally close on blur
+          minDate={new Date()} 
         />
       </div>
       </div>
@@ -229,6 +230,7 @@ const compareDate = (mula,tamat) => {
          className='date-field'
           onChange={onChangeTamat}
           value={tamat}// Optionally close on blur
+          minDate={mula} 
         /></div>
             </div>
             <div className='maklumat'>

@@ -17,37 +17,39 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 const ProgramHome = () => {
   const [selectedValue, setSelectedValue] = useState('');
   const [searchValue, setSearchValue] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
   const [filteredValue, setFilteredValue] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [isOpen,setIsOpen]= useState(false);
   const { account, setAccount } = useContext(AppContext);
+  const [totalPages, setTotalPages] = useState(0);
   // console.log(account);
-
+  const ITEMS_PER_PAGE = 10;
   const [programs,setPrograms] = useState([]);
   const [programID,setProgramID] = useState("");
   const [reload,setReload] = useState(0);
-
-  //define the path to the Program collection
-  const userCollectionRef = collection(db, "Program")
+      // Fetch total item count to calculate total pages
+      const fetchAllData = async () => {
+        const ref = collection(db, "Program");
+        const snapshot = await getDocs(ref);
+    
+        // Transform data and sort by formattedDate
+        const fetchedItems = snapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+          formattedDate: new Date(doc.data().mula.split("/").reverse().join("-")), // Format mula to Date
+        }));
+        const sortedItems = fetchedItems.sort((a, b) => b.formattedDate - a.formattedDate); // Sort in descending order
+    
+        setPrograms(sortedItems);
+        setTotalPages(Math.ceil(sortedItems.length / ITEMS_PER_PAGE));
+      };
+ 
   useEffect(() => {
     if (isOpen) {
       window.scrollTo({ top: 0, behavior: 'smooth' }); // Smooth scrolling to top
     }else{
-    const getProgram = async () => {
-      //get all the document data from the Program collection
-      const data = await getDocs(userCollectionRef);
-      // console.log(data);
-      setPrograms(
-        data.docs
-          .map((doc) => ({
-            ...doc.data(),
-            id: doc.id,
-            formattedDate: new Date(doc.data().mula.split('/').reverse().join('-')), 
-          }))
-          .sort((a, b) => b.formattedDate - a.formattedDate)
-      );
-    }
-    getProgram();
+      fetchAllData();
   }
   }, [isOpen])
 
@@ -120,7 +122,6 @@ const ProgramHome = () => {
       setProgramID(id);
       setIsOpen(true);
     }
-
     //delete the document data
     const deleteProg = async () => {
       const docRef = doc(db,"Program",programID)
@@ -130,7 +131,14 @@ const ProgramHome = () => {
         setReload(reload+1);
       });
     };
-  
+    const getCurrentPageItems = () => {
+      const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+      const endIndex = startIndex + ITEMS_PER_PAGE;
+      return programs.slice(startIndex, endIndex).map((program, index) => ({
+        ...program, // Include the program data
+        programIndex: startIndex + index, // Calculate the absolute index
+      }));
+    };
   return (
     
     <div className='app_box'>
@@ -181,7 +189,7 @@ const ProgramHome = () => {
         {/* if no search value, it will display all data, else it will display search value */}
         {searchValue===""?(
         <tbody>
-        {programs.map((item,index)=>(
+        {getCurrentPageItems().map((item,index)=>(
           // console.log("Before Search", item),
           <tr key={index} className={index % 2 === 0 ? "row2" : "row1"}>
             <td>{item.kod}</td>
@@ -234,9 +242,28 @@ const ProgramHome = () => {
       </tr>
         ))}
         </tbody>
-      )}
-               
+      )}          
       </table>
+
+      <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button
+                key={index + 1}
+                onClick={() => setCurrentPage(index + 1)}
+                style={{
+                  margin: "0 5px",
+                  padding: "10px",
+                  borderRadius: "50%",
+                  background: index + 1 === currentPage ? "blue" : "gray",
+                  color: "white",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </div>
     </div>
     {/* Padam program */}
     {isOpen && (
