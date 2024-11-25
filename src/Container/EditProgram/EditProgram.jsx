@@ -135,7 +135,7 @@ const EditProgram = () => {
               <label className="kik">NAMA PENYELARAS</label>
               <div className='textarea'>
                 <p className="kik">:</p>
-                <input type="text" className='inputtext' onChange={onChangePenyelaras} value={penyelaras} /></div>
+                <input type="text" className='inputtext' onChange={onChangePenyelaras} value={penyelaras} disabled/></div>
             </div>
             <div className='maklumat'>
               <label className="kik">TARIKH MULA</label>

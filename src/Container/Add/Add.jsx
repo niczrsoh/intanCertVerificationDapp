@@ -17,7 +17,8 @@ const Add = () => {
   const [mula, setMula] = useState("");
   const [nama, setNama] = useState("");
   const [penganjur, setPenganjur] = useState("");
-  const [penyelaras, setPenyelaras] = useState("");
+  const adminName = sessionStorage.getItem("adminName");
+  const [penyelaras, setPenyelaras] = useState(adminName);
   const [maksimumPeserta, setMaksimumPeserta] = useState("");
   const [yuran, setYuran] = useState('0.00');
   const [tamat, setTamat] = useState("");
@@ -205,7 +206,7 @@ const compareDate = (mula,tamat) => {
               <label className="kik">NAMA PENYELARAS</label>
               <div className='textarea'>
                 <p className="kik">:</p>
-                <input type="text" className='inputtext' onChange={onChangePenyelaras} value={penyelaras} /></div>
+                <input type="text" className='inputtext' onChange={onChangePenyelaras} value={penyelaras} disabled/></div>
             </div>
             <div className='maklumat'>
               <label className="kik">TARIKH MULA</label>
