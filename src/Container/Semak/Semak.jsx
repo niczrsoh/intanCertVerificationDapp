@@ -172,7 +172,7 @@ const Semak = () => {
           <div className="informasiprogram">
             <label>Jumlah Peserta</label>
             <p>:</p>
-            <p className="informasicontent">{jumlahPeserta}</p>
+            <p className="informasicontent">{jumlahPeserta} orang</p>
           </div>
         </div>
       </div>
