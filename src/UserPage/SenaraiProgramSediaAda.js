@@ -10,8 +10,10 @@ function SenaraiProgramSediaAda() {
   //state for showing the pop out page
   const [searchValue, setSearchValue] = useState("");
   const [programs,setPrograms] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 10;
   const [tableKey, setTableKey] = useState(Date.now()); // State for forcing re-render of table
-
+  const [totalPages, setTotalPages] = useState(0);
   //Filter the data array based on the nama or kod value entered by the user.
   const filteredData = programs.filter(
     (item) =>
@@ -20,24 +22,35 @@ function SenaraiProgramSediaAda() {
   );
   
   const userCollectionRef = collection(db, "Program")
-
+      // Fetch total item count to calculate total pages
+      const fetchAllData = async () => {
+        const ref = collection(db, "Program");
+        const snapshot = await getDocs(ref);
+    
+        // Transform data and sort by formattedDate
+        const fetchedItems = snapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+          formattedDate: new Date(doc.data().mula.split("/").reverse().join("-")), // Format mula to Date
+        }));
+        const sortedItems = fetchedItems.sort((a, b) => b.formattedDate - a.formattedDate); // Sort in descending order
+    
+        setPrograms(sortedItems);
+        setTotalPages(Math.ceil(sortedItems.length / ITEMS_PER_PAGE));
+      };
+ 
   //fetch all the document data in the Program collections
   useEffect(() => {
-    const getProgram = async () => {
-      const data = await getDocs(userCollectionRef);
-      console.log(data);
-      setPrograms(
-        data.docs
-          .map((doc) => ({
-            ...doc.data(),
-            id: doc.id,
-            formattedDate: new Date(doc.data().mula.split('/').reverse().join('-')), 
-          }))
-          .sort((a, b) => b.formattedDate - a.formattedDate)
-      );
-    }
-    getProgram();
+    fetchAllData();
   }, [])
+  const getCurrentPageItems = () => {
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    return programs.slice(startIndex, endIndex).map((program, index) => ({
+      ...program, // Include the program data
+      programIndex: startIndex + index, // Calculate the absolute index
+    }));
+  };
 //If there is a search value, show the filtered data array. Otherwise, show the whole data array
   return (
     <>
@@ -60,7 +73,7 @@ function SenaraiProgramSediaAda() {
           <>
             <ItemTableWidget
               key={tableKey}
-              itemList={programs}
+              itemList={getCurrentPageItems()}
             />
           </>
         ) : (
@@ -71,7 +84,27 @@ function SenaraiProgramSediaAda() {
             />
           </>
         )}
+    
     </div>
+    <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button
+                key={index + 1}
+                onClick={() => setCurrentPage(index + 1)}
+                style={{
+                  margin: "0 5px",
+                  padding: "10px",
+                  borderRadius: "50%",
+                  background: index + 1 === currentPage ? "blue" : "gray",
+                  color: "white",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </div>
     </div>
     </>
   );

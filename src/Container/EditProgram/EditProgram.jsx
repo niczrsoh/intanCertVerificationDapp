@@ -5,7 +5,7 @@ import { Buttons } from '../../Component'
 import '../EditProgram/editprogram.css'
 import { db } from '../../Backend/firebase/firebase-config'
 import { getDoc, updateDoc, doc } from 'firebase/firestore'
-
+import Calendar from "react-date-picker"; 
 
 const EditProgram = () => {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ const EditProgram = () => {
     setKod(e.target.value);
   }
   const onChangeMula = (e) => {
-    setMula(e.target.value);
+    setMula(e);
   }
   const onChangeNama = (e) => {
     setNama(e.target.value);
@@ -44,11 +44,21 @@ const EditProgram = () => {
     setYuran(e.target.value);
   }
   const onChangeTamat = (e) => {
-    setTamat(e.target.value);
+    setTamat(e);
   }
-
+  const formatDate = (date) => {
+    if (!date) return "";
+    const year = date.getFullYear();
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    return `${day}/${month}/${year}`;
+  };
   let { programID } = useParams();
-
+  const parseDate = (dateString) => {
+    if (!dateString) return null; // Handle empty or invalid input
+    const [day, month, year] = dateString.split("/").map(Number); // Split and convert to numbers
+    return new Date(year, month - 1, day); // Create and return the Date object
+  };
   //useEffect() will be executed once when the web is initialize  
   useEffect(() => {
     const getProgram = async () => {
@@ -56,15 +66,16 @@ const EditProgram = () => {
       const docRef = doc(db, "Program", programID.toString());
       //getDoc() will get the document data based on the path 
       const data1 = await getDoc(docRef);
+      console.log(data1.data());
       setIsiProgram(data1.data().isiProgram);
       setKod(data1.data().kod);
-      setMula(data1.data().mula);
+      setMula(parseDate(data1.data().mula));
       setNama(data1.data().nama);
       setPenganjur(data1.data().penganjur);
       setPenyelaras(data1.data().penyelaras);
       setMaksimumPeserta(data1.data().maksimumPeserta);
       setYuran(data1.data().yuran);
-      setTamat(data1.data().tamat);
+      setTamat(parseDate(data1.data().tamat));
     }
 
     getProgram();
@@ -78,13 +89,13 @@ const EditProgram = () => {
     await updateDoc(userCollectionRef, {
       isiProgram: isiProgram,
       kod: kod,
-      mula: mula,
+      mula: formatDate(mula),
       nama: nama,
       penganjur: penganjur,
       penyelaras: penyelaras,
       maksimumPeserta: maksimumPeserta,
       yuran: yuran,
-      tamat: tamat,
+      tamat: formatDate(tamat),
     }).then(() => {
       setIsiProgram("");
       setKod("");
@@ -141,13 +152,23 @@ const EditProgram = () => {
               <label className="kik">TARIKH MULA</label>
               <div className='textarea'>
                 <p className="kik">:</p>
-                <input type="text" className='inputtext' onChange={onChangeMula} value={mula} /></div>
+                <Calendar
+         className='date-field'
+          onChange={onChangeMula}
+          value={mula}// Optionally close on blur
+          minDate={new Date()} 
+        /></div>
             </div>
             <div className='maklumat'>
               <label className="kik">TARIKH TAMAT</label>
               <div className='textarea'>
                 <p className="kik">:</p>
-                <input type="text" className='inputtext' onChange={onChangeTamat} value={tamat} /></div>
+                <Calendar
+         className='date-field'
+          onChange={onChangeTamat}
+          value={tamat}// Optionally close on blur
+          minDate={mula} 
+        /></div>
             </div>
             <div className='maklumat'>
               <label className="kik">MAKSIMUM PESERTA</label>
