@@ -3,7 +3,6 @@ import { useNavigate, } from 'react-router-dom'
 import "./styles/rekodpermohonan.css"
 import Intan from "../intan.png"
 import Modal from './Modal'
-import NavbarU from "../Component/userNavbar/NavbarU";
 import { db } from '../Backend/firebase/firebase-config'
 import { collection, getDoc, deleteDoc, doc, getDocs, query, where, updateDoc, } from 'firebase/firestore'
 
@@ -98,9 +97,6 @@ function RekodPermohonan() {
     //If there is a search value, show the filtered data array. Otherwise, show the whole data array
     return (
         <div>
-            <div className="navbarU">
-                <NavbarU />
-            </div>
             <div className="tableRekod">
                 <div style={{ backgroundImage: `url(${Intan})` }}>
                     <div>

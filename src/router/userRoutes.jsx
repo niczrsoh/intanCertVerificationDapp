@@ -1,7 +1,7 @@
 import React from "react"
 
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { Menuheader } from '../Component';
+import NavbarU from "../Component/userNavbar/NavbarU";
 
 const useAuth = () => {
 	//get user from sessionStorage, if there exist user means the user had logged in
@@ -33,7 +33,7 @@ const UserRoutes = () => {
 		if (role === "USER") {
 			return (
 				<>
-					<Menuheader />
+					<NavbarU />
 					<Outlet /> 
 				</>
 			)

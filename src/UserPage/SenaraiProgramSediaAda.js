@@ -2,7 +2,6 @@ import React,{useState,useEffect} from 'react'
 import "./styles/SenaraiProgram.css"
 import Intan from "../intan.png"
 import { NavLink } from "react-router-dom";
-import NavbarU from "../Component/userNavbar/NavbarU";
 import { db } from '../Backend/firebase/firebase-config'
 import { collection, getDocs, deleteDoc, doc,} from 'firebase/firestore'
 
@@ -40,9 +39,6 @@ function SenaraiProgramSediaAda() {
 //If there is a search value, show the filtered data array. Otherwise, show the whole data array
   return (
     <>
-    <div className="navbarU">
-    <NavbarU/>
-    </div>
     <div className="tableSenarai">
       <div style={{ backgroundImage: `url(${Intan})`}}>
       <div>

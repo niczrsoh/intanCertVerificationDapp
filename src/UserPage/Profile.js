@@ -4,7 +4,6 @@ import { db, storage } from '../Backend/firebase/firebase-config'
 import { getDoc, doc, updateDoc } from 'firebase/firestore'
 import { ref, uploadBytes, listAll, getDownloadURL, deleteObject } from 'firebase/storage';
 import { v4 } from 'uuid';
-import NavbarU from "../Component/userNavbar/NavbarU";
 import Avatar from "react-avatar-edit";
 import { Buttons } from "../Component";
 
@@ -380,7 +379,6 @@ export default class profile extends React.Component {
     } = this.state;
     return (
       <div>
-        <NavbarU />
         {active === "edit" ? (
           <div className="card">
             <form onSubmit={this.handleSubmit} className="profileform">
