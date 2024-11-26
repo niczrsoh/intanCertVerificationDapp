@@ -13,6 +13,7 @@ import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import ItemTableWidget from './AdminProgramTableWidget';
 
 const ProgramHome = () => {
   const [selectedValue, setSelectedValue] = useState('');
@@ -27,6 +28,7 @@ const ProgramHome = () => {
   const ITEMS_PER_PAGE = 10;
   const [programs,setPrograms] = useState([]);
   const [programID,setProgramID] = useState("");
+  const [tableKey, setTableKey] = useState(Date.now()); // State for forcing re-render of table
   const [reload,setReload] = useState(0);
       // Fetch total item count to calculate total pages
       const fetchAllData = async () => {
@@ -175,79 +177,23 @@ const ProgramHome = () => {
         </div>
     </div>
     <div className='program'>
-      <table className='progtable'>
-        <thead>
-            <tr>
-              <th className='programkod'>Kod</th>
-              <th className='programname'>Nama Kursus</th>
-              <th className='penyelaras'>Penyelaras</th>
-              <th className='tarikh'>Tarikh Mula</th>
-              <th className='tarikh'>Tarikh Tamat</th>
-              <th className='programaktiviti'>Aktiviti</th>
-            </tr>
-        </thead>
-        {/* if no search value, it will display all data, else it will display search value */}
-        {searchValue===""?(
-        <tbody>
-        {getCurrentPageItems().map((item,index)=>(
-          // console.log("Before Search", item),
-          <tr key={index} className={index % 2 === 0 ? "row2" : "row1"}>
-            <td>{item.kod}</td>
-            <td>{item.nama}</td>
-            <td>{item.penyelaras}</td>
-            <td className='centerdata'>{item.mula}</td>
-            <td className='centerdata'>{item.tamat}</td>
-            <td>
-              <NavLink to={`/admin/semak/${item.id}`} className="aktivititype">
-                <IconButton>
-                  <VisibilityIcon color="primary" />
-                </IconButton>
-              </NavLink>
-              <NavLink to={`/admin/edit-program/${item.id}`} className="aktivititype">
-                <IconButton>
-                  <EditIcon color={"primary"} />
-                </IconButton>
-              </NavLink>
-              <IconButton
-                onClick={(event) => popOut(event, item.id)}
-              >
-                <DeleteIcon color={"error"} />
-              </IconButton>
-            </td>
-      </tr>
-        ))}
-        </tbody>
-      ):(
-        <tbody>
-        {searchValue.map((item,index)=>(
-          // console.log("After Search", item),
-          <tr key={index} className={index % 2 === 0 ? "row2" : "row1"}>
-          <td>{item.kod}</td>
-          <td>{item.nama}</td>
-          <td className='centerdata'>{item.mula}</td>
-          <td className='centerdata'>{item.tamat}</td>
-          <td>
-              <NavLink to={`/admin/semak/${item.id}`} className="aktivititype">
-                <IconButton>
-                  <VisibilityIcon color="primary" />
-                </IconButton>
-              </NavLink>
-              <NavLink to={`/admin/edit-program/${item.id}`} className="aktivititype">
-                <IconButton>
-                  <EditIcon color={"primary"} />
-                </IconButton>
-              </NavLink>
-              <IconButton
-                onClick={(event) => popOut(event, item.id)}
-              >
-                <DeleteIcon color={"error"} />
-              </IconButton>
-          </td>
-      </tr>
-        ))}
-        </tbody>
-      )}          
-      </table>
+        {searchValue === "" ? (
+          <>
+            <ItemTableWidget
+              key={tableKey}
+              itemList={getCurrentPageItems()}
+              popOut={popOut}
+            />
+          </>
+        ) : (
+          <>
+            <ItemTableWidget
+              key={tableKey}
+              itemList={searchValue}
+              popOut={popOut}
+            />
+          </>
+        )}
 
       <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
             {Array.from({ length: totalPages }, (_, index) => (

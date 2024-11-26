@@ -6,6 +6,7 @@ import { db } from '../../Backend/firebase/firebase-config'
 import { collection, getDocs, orderBy, query, doc, deleteDoc } from 'firebase/firestore'
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ItemTableWidget from './AdminListTableWidget';
 
 const AdminList = () => {
   const [selectedValue, setSelectedValue] = useState('');
@@ -14,6 +15,7 @@ const AdminList = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [adminList, setAdminList] = useState([])
   const [reload, setReload] = useState(0);
+  const [tableKey, setTableKey] = useState(Date.now()); // State for forcing re-render of table
 
   //document path of the ActionLog collection
   const userCollectionRef = collection(db, "Admin")
@@ -26,8 +28,11 @@ const AdminList = () => {
       // Map through the documents and include doc.id, then sort by the "name" field
       const sortedAdminList = data.docs
         .map((doc) => ({ ...doc.data(), id: doc.id }))
-        .sort((a, b) => a.name.localeCompare(b.name));  // Sort by "name" field in ascending order
-
+        .sort((a, b) => a.name.localeCompare(b.name))  // Sort by "name" field in ascending order
+        .map((doc, index) => ({
+          ...doc,         // Spread the existing data
+          bil: index + 1, // Add the index based on the sorted order
+        }));
       // Set the sorted admin list
       setAdminList(sortedAdminList);
     }
@@ -38,33 +43,20 @@ const AdminList = () => {
 
   // sort by using tarikh
   const tarikhfilter = () => {
-    const sorted = adminList.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    const sorted = adminList
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .map((item, index) => ({ ...item, bil: index + 1 }));
     setSearchValue(sorted)
   }
 
   // sort by using name
   const namefilter = () => {
     console.log(adminList);
-    const sorted = adminList.sort((a, b) => new String(a.name).localeCompare(new String(b.name)));
+    const sorted = adminList
+    .sort((a, b) => new String(a.name).localeCompare(new String(b.name)))
+    .map((item, index) => ({ ...item, bil: index + 1 }));
     setSearchValue(sorted)
   }
-
-  const handleSelectChange = (event) => {
-    const selectedOption = event.target.options[event.target.selectedIndex];
-    const displayValue = selectedOption.getAttribute('data-display-value');
-    selectedOption.textContent = displayValue;
-    // By default the display value should be Susunan to indicate this is for the susunan filter function
-    // There don't have any "Susunan" in the list instead of "None" to indicate that they are filtering nothing
-    if (selectedOption.value === "None") {
-      selectedOption.value = "Susunan";
-    }
-    setSelectedValue(selectedOption.value);
-    if (selectedOption.value === "Tarikh&Masa") { tarikhfilter(); }
-    else if (selectedOption.value === "NamaAdmin") { namefilter(); }
-    else if (selectedOption.value === "Susunan") { setSearchValue(adminList) }
-
-
-  };
 
   const handleSubmit = async () => {
     if (isSearching) {
@@ -73,11 +65,13 @@ const AdminList = () => {
     setIsSearching(true);
     //    try {
     // Search by using the value that they input
-    const filtered = adminList.filter(obj =>
+    const filtered = adminList
+    .filter(obj =>
       Object.values(obj).some(value =>
         new String(value).toLowerCase().includes(new String(filteredValue.toLowerCase())) || new String(value).toLowerCase() === new String(filteredValue.toLowerCase())
       )
-    );
+    )
+    .map((item, index) => ({ ...item, bil: index + 1 }));
     // const filtered = adminList.find((item) => new String(item.name).toLowerCase().includes(new String(filteredValue.toLowerCase())));
     console.log(filtered);
     setSearchValue(filtered);
@@ -142,51 +136,23 @@ const AdminList = () => {
         </div>
       </div>
       <div className='program'>
-        <table className='progtable' style={{ tableLayout: 'fixed', width: '100%' }}>
-          <thead>
-            <tr>
-              <th className='tarikhmasa' style={{ width: '20px' }}>Bil</th>
-              <th className='namaadmin'>Nama Admin</th>
-              <th className='namaadmin' style={{ width: '150px' }}>ID Admin</th>
-              <th className='jenisTindakan' style={{ width: '400px' }}>Alamat Wallet</th>
-              <th className='tranid' style={{ width: '50px' }}>Aktiviti</th>
-            </tr>
-          </thead>
-          {filteredValue == "" ? (
-            <tbody>
-              {adminList.map((admin, index) => {
-                return (
-                  <tr key={index} className={index % 2 === 0 ? "row2" : "row1"}>
-                    <td style={{ width: '10px' }}>{index + 1}</td>
-                    <td>{admin.name}</td>
-                    <td>{admin.id}</td>
-                    <td className="alamat-wallet">{admin.acc}</td>
-                    <td><IconButton
-                  onClick={(e) => onClickPadam(admin.id)}
-                  >
-                  <DeleteIcon color={"error"} />
-                  </IconButton></td>
-                  </tr>
-                )
-              })}
-            </tbody>) : (
-            <tbody>
-              {searchValue.map((item, index) => (
-                <tr key={index} className={index % 2 === 0 ? "row2" : "row1"}>
-                  <td style={{ width: '10px' }}>{index + 1}</td>
-                  <td>{item.name}</td>
-                  <td>{item.id}</td>
-                  <td>{item.acc}</td>
-                  <td><IconButton
-                    onClick={(e) => onClickPadam(item.id)}
-                  >
-                    <DeleteIcon color={"error"} />
-                  </IconButton></td>
-                </tr>
-              ))}
-            </tbody>
-          )}
-        </table>
+        {filteredValue == "" ? (
+          <>
+            <ItemTableWidget
+              key={tableKey}
+              itemList={adminList}
+              onClickPadam={onClickPadam}
+            />
+          </>) : (
+          <>
+            <ItemTableWidget
+              key={tableKey}
+              itemList={searchValue}
+              onClickPadam={onClickPadam}
+            />
+          </>
+        )}
+
       </div>
     </div>
   )

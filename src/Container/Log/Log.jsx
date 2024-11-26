@@ -4,6 +4,7 @@ import searchpic from '../../img/search.png'
 import '../Log/log.css'
 import { db } from '../../Backend/firebase/firebase-config'
 import { collection, getDocs, query, orderBy } from 'firebase/firestore'
+import ItemTableWidget from './AdminLogTableWidget';
 
 const Log = () => {
   const [selectedValue, setSelectedValue] = useState('');
@@ -11,6 +12,7 @@ const Log = () => {
   const [filteredValue, setFilteredValue] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [logs, setLogs] = useState([])
+  const [tableKey, setTableKey] = useState(Date.now()); // State for forcing re-render of table
 
   //document path of the ActionLog collection
   const userCollectionRef = collection(db, "ActionLog")
@@ -117,43 +119,20 @@ const Log = () => {
         </div>
       </div>
       <div className='program'>
-        <table className='progtable'>
-          <thead>
-            <tr>
-              <th className='tarikhmasa'>Tarikh & Masa</th>
-              <th className='namaadmin'>Nama Admin</th>
-              <th className='namaadmin'>ID Admin</th>
-              <th className='jenisTindakan'>Jenis</th>
-              <th className='tranid'>TransactionID</th>
-            </tr>
-          </thead>
-          {filteredValue == "" ? (
-            <tbody>
-              {logs.map((log, index) => {
-                return (
-                  <tr key={index} className={index % 2 === 0 ? "row2" : "row1"}>
-                    <td>{log.date}</td>
-                    <td>{log.adminName}</td>
-                    <td>{log.adminID}</td>
-                    <td>{log.type}</td>
-                    <td><a href={`https://bchainexplorer.azurewebsites.net/#/blockchain/transactionList/transactionDetail/${log.transactionId}`} target="_blank">{log.transactionId}</a></td>
-                  </tr>
-                )
-              })}
-            </tbody>) : (
-            <tbody>
-              {searchValue.map((item, index) => (
-                <tr key={index} className={index % 2 === 0 ? "row2" : "row1"}>
-                  <td>{item.date}</td>
-                  <td>{item.adminName}</td>
-                  <td>{item.adminID}</td>
-                  <td>{item.type}</td>
-                  <td><a href={`https://bchainexplorer.azurewebsites.net/#/blockchain/transactionList/transactionDetail/${item.transactionId}`} target="_blank">{item.transactionId}</a></td>
-                </tr>
-              ))}
-            </tbody>
-          )}
-        </table>
+        {filteredValue == "" ? (
+          <>
+            <ItemTableWidget
+              key={tableKey}
+              itemList={logs}
+            />
+          </>) : (
+          <>
+            <ItemTableWidget
+              key={tableKey}
+              itemList={searchValue}
+            />
+          </>
+        )}
       </div>
     </div>
   )

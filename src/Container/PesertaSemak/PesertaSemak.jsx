@@ -24,6 +24,7 @@ import {
   invalidateCertificate,
   readCertificate,
 } from "../../Utils/ethUtils";
+import ItemTableWidget from './AdminPesertaDetailTableWidget';
 const PesertaSemak = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -34,6 +35,7 @@ const PesertaSemak = () => {
   const [currentProgram, setCurrentProgram] = useState("");
   const { account, setAccount } = useContext(AppContext);
   const [reload, setReload] = useState(0);
+  const [tableKey, setTableKey] = useState(Date.now()); // State for forcing re-render of table
 
   let { pesertaID } = useParams();
 
@@ -157,91 +159,14 @@ const PesertaSemak = () => {
       {/* Senarai program peserta menyertai */}
       <div className="subtitle">SENARAI PROGRAM</div>
       <div className="program">
-        <table className="progtable">
-          <thead>
-            <tr>
-              <th className="tarikhmula">Tarikh</th>
-              <th className="tarikhtamat">Program Nama</th>
-              <th className="kehadiran">Kehadiran</th>
-              <th className="statussijil">Status</th>
-              <th className="sijilaktiviti">Sijil</th>
-            </tr>
-          </thead>
-          <tbody>
-            {pesertaPrograms.map((items) => (
-              <tr className="row1">
-                <td>
-                  {items.mula} - {items.tamat}
-                </td>
-                <td>{items.nama}</td>
-                <td>80%</td>
-                <td>
-                  {/* <Sejarah title="Dicipta"/> */}
-                  {items.pesertaStatus[pesertaID]}
-                </td>
-                <td className="sijill">
-                  {`${items.pesertaStatus[pesertaID]}` === "dicipta" ||
-                  `${items.pesertaStatus[pesertaID]}` === "dikemasKini" ? (
-                    <button className="semakbutton" disabled={true}>
-                      Cipta
-                    </button>
-                  ) : (
-                    <NavLink
-                      to={`/admin/cipta-sijil/${items.id}/${pesertaID}`}
-                      className="aktivititype"
-                    >
-                      Cipta
-                    </NavLink>
-                  )}
-
-                  {`${items.pesertaStatus[pesertaID]}` === "dipadam" ||
-                  `${items.pesertaStatus[pesertaID]}` === "-" ? (
-                    <>
-                      <button className="semakbutton" disabled={true}>
-                        Kemaskini
-                      </button>
-                      <button className="semakbutton" disabled={true}>
-                        Semak
-                      </button>
-                      <button className="semakbutton" disabled={true}>
-                        Padam
-                      </button>
-                    </>
-                  ) : (
-                    <>
-                      {/* kemaskini button */}
-                      <NavLink
-                        to={`/admin/edit-sijil/${items.id}/${pesertaID}`}
-                        className="aktivititype"
-                      >
-                        Kemaskini
-                      </NavLink>
-                      {/* semak button */}
-                      <button
-                        className="semakbutton"
-                        onClick={() => {
-                          semakUser(items.id);
-                        }}
-                      >
-                        Semak
-                      </button>
-                      {/* padam button */}
-                      <button
-                        className="padambutton"
-                        onClick={() => {
-                          setCurrentProgram(items.id);
-                          setIsOpen(true);
-                        }}
-                      >
-                        Padam
-                      </button>
-                    </>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <ItemTableWidget
+          key={tableKey}
+          itemList={pesertaPrograms}
+          ic={pesertaInfo.ic}
+          semakUser={semakUser}
+          setCurrentProgram={setCurrentProgram}
+          setIsOpen={setIsOpen}
+        />
       </div>
       {/* padam sijil peserta */}
       {isOpen && (

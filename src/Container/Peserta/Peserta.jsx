@@ -7,12 +7,14 @@ import { db } from '../../Backend/firebase/firebase-config'
 import { collection, getDocs, deleteDoc, doc, } from 'firebase/firestore'
 import { IconButton } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import ItemTableWidget from './AdminPesertaTableWidget';
 
 const Peserta = () => {
   const [selectedValue, setSelectedValue] = useState('');
   const [searchValue, setSearchValue] = useState("");
   const [filteredValue, setFilteredValue] = useState("");
   const [isSearching, setIsSearching] = useState(false);
+  const [tableKey, setTableKey] = useState(Date.now()); // State for forcing re-render of table
   const [users, setUsers] = useState([]);
 
   //collection path to the User collection
@@ -112,49 +114,22 @@ const Peserta = () => {
         </div>
     </div>
       <div className='program'>
-      <table className='progtable'>
-        <thead>
-            <tr>
-              <th className='nomykad'>No. MyKad</th>
-              <th className='pesertaname'>Nama</th>
-              <th className='pesertaaktiviti'>Aktiviti</th>
-            </tr>
-        </thead>
-        {/* if no search value, it will display all data, else it will display search value */}
-      {searchValue===""?(
-        <tbody>
-        {users.map((item,index)=>(
-          <tr key={index} className={index % 2 === 0 ? "row2" : "row1"}>
-            <td>{item.ic}</td>
-            <td>{item.nama}</td>
-            <td>
-              <NavLink to={`/admin/peserta-semak/${item.ic}`} className='aktiviti'>
-                <IconButton>
-                  <VisibilityIcon color="primary" />
-                </IconButton>
-              </NavLink>
-            </td>
-      </tr>
-        ))}
-        </tbody>
-      ):(
-        <tbody>
-        {searchValue.map((item,index)=>(
-          <tr key={index} className={index % 2 === 0 ? "row2" : "row1"}>
-          <td>{item.ic}</td>
-          <td>{item.nama}</td>
-          <td>
-              <NavLink to={`/admin/peserta-semak/${item.ic}`} className='aktiviti'>
-                <IconButton>
-                  <VisibilityIcon color="primary" />
-                </IconButton>
-              </NavLink>
-          </td>
-      </tr>
-        ))}
-        </tbody>
-      )}
-      </table>
+      {searchValue === "" ? (
+          <>
+            <ItemTableWidget
+              key={tableKey}
+              itemList={users}
+            />
+          </>
+        ) : (
+          <>
+            <ItemTableWidget
+              key={tableKey}
+              itemList={searchValue}
+            />
+          </>
+        )}
+
       </div>
     
     </div>

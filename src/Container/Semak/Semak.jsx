@@ -21,6 +21,8 @@ import {
   readCertificate,
   invalidateCertificate,
 } from "../../Utils/ethUtils";
+import ItemTableWidget from './AdminProgramDetailTableWidget';
+
 const Semak = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState("");
@@ -42,7 +44,8 @@ const Semak = () => {
   const [pesertaNama, setPesertaNama] = useState([]);
   const [pesertaStatus, setPesertaStatus] = useState([]);
   const [yuran, setYuran] = useState("");
-
+  const [tableKey, setTableKey] = useState(Date.now()); // State for forcing re-render of table
+  const [programDetail, setProgramDetail] = useState([]);
   //Delete the cert at firestore
   const deleteCert = async (deleteId, appId) => {
     //delete the sijil at sijil section in firebase
@@ -116,6 +119,30 @@ const Semak = () => {
       //define the program info document path and get the document data
       const docRef = doc(db, "Program", programID.toString());
       const detail = await getDoc(docRef);
+      // Check if the document exists
+      if (detail.exists()) {
+        // Extract data from the document snapshot
+        const programData = detail.data();
+
+        // Assume the programData contains a 'pesertaList' (array) and 'pesertaNama' (object) fields
+        const pesertaList = programData.pesertaList || [];
+        const pesertaNama = programData.pesertaNama || {};
+
+        // Map the data to match the structure expected by DataGrid
+        const rows = pesertaList.map((mykad, index) => {
+          return {
+            id: index + 1,  // Or use a unique identifier for the row
+            mykad: mykad,  // The 'mykad' value from the pesertaList
+            pesertaNama: pesertaNama[mykad],  // The mapping of 'mykad' to 'pesertaNama'
+            // You can add other fields here like 'pesertaStatus' if required
+            pesertaStatus: programData.pesertaStatus ? programData.pesertaStatus[mykad] : 'No Status',  // Example of a status field
+          };
+        });
+
+        // Now rows is an array of objects, each representing a row in the DataGrid
+        console.log("Formatted Rows: ", rows);
+        setProgramDetail(rows);
+      }
       setMula(detail.data().mula);
       setNama(detail.data().nama);
       setPenganjur(detail.data().penganjur);
@@ -178,87 +205,14 @@ const Semak = () => {
       </div>
       <div className="subtitle">SENARAI PESERTA</div>
       <div className="program">
-        <table className="progtable">
-          <thead>
-            <tr>
-              <th className="kehadiran" style={{ width: '50px' }}>Bil</th>
-              <th className="nomykad">No. MyKad</th>
-              <th className="pesertaname">Nama Peserta</th>
-              <th className="kehadiran">Kehadiran</th>
-              <th className="statussijil">Status</th>
-              <th className="sijilaktiviti">Sijil</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Object.entries(pesertaStatus).map(([key, value], index) => {
-              return (
-                <tr className="row2">
-                  <td>{index+1}</td>
-                  <td>{key}</td>
-                  <td>{pesertaNama[key]}</td>
-                  <td className="centerdata">80%</td>
-                  <td className="centerdata">{`${value}`}</td>
-                  {/* <td className='centerdata'><Sejarah title={`${value}`} /></td> */}
-                  <td>
-                    {`${value}` === "dicipta" ||
-                    `${value}` === "dikemasKini" ? (
-                      <button className="semakbutton" disabled={true}>
-                        Cipta
-                      </button>
-                    ) : (
-                      <NavLink
-                        to={`/admin/cipta-sijil/${programID}/${key}`}
-                        className="aktivititype"
-                      >
-                        Cipta
-                      </NavLink>
-                    )}
-
-                    {`${value}` === "dipadam" || `${value}` === "-" ? (
-                      <>
-                        <button className="semakbutton" disabled={true}>
-                          Kemaskini
-                        </button>
-                        <button className="semakbutton" disabled={true}>
-                          Semak
-                        </button>
-                        <button className="semakbutton" disabled={true}>
-                          Padam
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        <NavLink
-                          to={`/admin/edit-sijil/${programID}/${key}`}
-                          className="aktivititype"
-                        >
-                          Kemaskini
-                        </NavLink>
-                        <button
-                          className="semakbutton"
-                          onClick={() => {
-                            semakUser(key);
-                          }}
-                        >
-                          Semak
-                        </button>
-                        <button
-                          className="padambutton"
-                          onClick={() => {
-                            setCurrentUser(key);
-                            setIsOpen(true);
-                          }}
-                        >
-                          Padam
-                        </button>
-                      </>
-                    )}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <ItemTableWidget
+          key={tableKey}
+          itemList={programDetail}
+          programID={programID}
+          semakUser={semakUser}
+          setCurrentUser={setCurrentUser}
+          setIsOpen={setIsOpen}
+        />
       </div>
       {/* padam sijil peserta */}
       {isOpen && (

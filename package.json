@@ -8,6 +8,8 @@
     "@fortawesome/fontawesome-free": "^6.4.0",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.12.1",
+    "@mui/system": "^5.15.15",
+    "@mui/x-data-grid": "^7.22.3",
     "@perawallet/connect": "^1.2.3",
     "@randlabs/myalgo-connect": "^1.4.2",
     "@react-pdf-viewer/core": "^3.12.0",
