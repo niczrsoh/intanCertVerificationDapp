@@ -4,11 +4,13 @@ import Intan from "../intan.png"
 import { NavLink } from "react-router-dom";
 import { db } from '../Backend/firebase/firebase-config'
 import { collection, getDocs, deleteDoc, doc,} from 'firebase/firestore'
+import ItemTableWidget from './UserProgramTableWidget';
 
 function SenaraiProgramSediaAda() {
   //state for showing the pop out page
   const [searchValue, setSearchValue] = useState("");
   const [programs,setPrograms] = useState([]);
+  const [tableKey, setTableKey] = useState(Date.now()); // State for forcing re-render of table
 
   //Filter the data array based on the nama or kod value entered by the user.
   const filteredData = programs.filter(
@@ -54,56 +56,21 @@ function SenaraiProgramSediaAda() {
         </div>
       
       </div>
-      {searchValue === "" ? (
-      <table className="Senarai">
-      <thead className="header">
-        <tr>
-          <th>Kod</th>
-          <th>Nama Kursus</th>
-          <th>Tarikh</th>
-          <th>Aktiviti</th>
-        </tr>
-      </thead>
-      <tbody>
-        {programs.map((item,index)=>(
-          <tr key={index} className={index % 2 === 0 ? "even" : "odd"}>
-            <td className="Kod">{item.kod}</td>
-            <td className="NameKursus">{item.nama}</td>
-            <td className="Tarikh">{item.mula}-{item.tamat}</td>
-            <td className="Aktiviti">
-              <NavLink to={`/user/Detail/${item.id}`} className="Semaklink">Mohon</NavLink>
-            </td>
-          </tr>
-        )
+    {searchValue === "" ? (
+          <>
+            <ItemTableWidget
+              key={tableKey}
+              itemList={programs}
+            />
+          </>
+        ) : (
+          <>
+            <ItemTableWidget
+              key={tableKey}
+              itemList={filteredData}
+            />
+          </>
         )}
-      </tbody>
-    </table>
-     ) : (
-      <table className="Senarai">
-      <thead className="header">
-        <tr>
-          <th>Kod</th>
-          <th>Nama Kursus</th>
-          <th>Tarikh</th>
-          <th>Aktiviti</th>
-
-        </tr>
-      </thead>
-      <tbody>
-        {filteredData.map((item,index)=>(
-          <tr key={index} className={index % 2 === 0 ? "even" : "odd"}>
-            <td className="Kod">{item.kod}</td>
-            <td className="NameKursus">{item.nama}</td>
-            <td className="Tarikh">{item.mula}-{item.tamat}</td>
-            <td className="Aktiviti">
-            <NavLink to={`/user/Detail/${item.id}`} className="Semaklink">Mohon</NavLink>
-            </td>
-          </tr>
-        )
-        )}
-      </tbody>
-    </table>
-     )}
     </div>
     </div>
     </>

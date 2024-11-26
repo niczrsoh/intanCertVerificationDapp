@@ -5,45 +5,45 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { NavLink } from 'react-router-dom'
+import { render } from "@testing-library/react";
 
-const AdminLogTableWidget = ({
+const UserProgramTableWidget = ({
   itemList,
 }) => {
-
   const columns = [
     {
-      field: "date",
-      headerName: "Tarikh & Masa",
+      field: "kod",
+      headerName: "Kod",
       flex: 1,
       headerClassName: "super-app-theme--header",
     },
     {
-      field: "adminName",
-      headerName: "Nama Admin",
-      flex: 1,
-      headerClassName: "super-app-theme--header",
-    },
-    {
-      field: "adminID",
-      headerName: "ID Admin",
-      flex: 1,
-      headerClassName: "super-app-theme--header",
-    },
-    {
-      field: "type",
-      headerName: "Jenis",
-      flex: 1,
-      headerClassName: "super-app-theme--header",
-    },
-    {
-      field: "transactionID",
-      headerName: "TransactionID",
+      field: "nama",
+      headerName: "Nama Kursus",
       flex: 3,
+      headerClassName: "super-app-theme--header",
+    },
+    {
+      field: "mula",
+      headerName: "Tarikh Mula",
+      flex: 1,
+      headerClassName: "super-app-theme--header",
+    },
+    {
+      field: "tamat",
+      headerName: "Tarikh Tamat",
+      flex: 1,
+      headerClassName: "super-app-theme--header",
+    },
+    {
+      field: "aktiviti",
+      headerName: "Aktiviti",
+      flex: 1,
       headerClassName: "super-app-theme--header",
       renderCell: (params) => {
         return (
           <div>
-            <a href={`https://bchainexplorer.azurewebsites.net/#/blockchain/transactionList/transactionDetail/${params.row.transactionId}`} target="_blank">{params.row.transactionId}</a>
+            <NavLink to={`/user/Detail/${params.row.id}`} className="Semaklink">Mohon</NavLink>
           </div>
         );
       },
@@ -89,4 +89,4 @@ const AdminLogTableWidget = ({
   );
 };
 
-export default AdminLogTableWidget;
+export default UserProgramTableWidget;

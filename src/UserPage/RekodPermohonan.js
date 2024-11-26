@@ -5,6 +5,7 @@ import Intan from "../intan.png"
 import Modal from './Modal'
 import { db } from '../Backend/firebase/firebase-config'
 import { collection, getDoc, deleteDoc, doc, getDocs, query, where, updateDoc, } from 'firebase/firestore'
+import ItemTableWidget from './UserRecordTableWidget';
 
 function RekodPermohonan() {
     //state for showing the pop out page
@@ -17,6 +18,7 @@ function RekodPermohonan() {
     const userID = sessionStorage.getItem("userID");
     const userRef = doc(db, "User", userID)//crud 1,collection(reference, collectionName)
     const [reload, setReload] = useState(0);
+    const [tableKey, setTableKey] = useState(Date.now()); // State for forcing re-render of table
 
     const navigate = useNavigate();
 
@@ -25,7 +27,8 @@ function RekodPermohonan() {
         (item) =>
             item.nama.toLowerCase().includes(searchValue.toLowerCase()) ||
             item.kod.toLowerCase().includes(searchValue.toLowerCase())
-    );
+    )
+    .map((item, index) => ({...item,index:index+1}));
 
     useEffect(() => {
         const getUserProgram = async () => {
@@ -33,7 +36,9 @@ function RekodPermohonan() {
             //which is the document data in the document path must have the userID in the array fields
             const docRef = query(collection(db, "Program"), where("pesertaList", "array-contains", userID));
             const data = await getDocs(docRef);
-            setPrograms(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));//read 3
+            setPrograms(data.docs
+                .map((doc,index) => ({ ...doc.data(), id: doc.id, index: index+1 }))
+            );//read 3
             setPesertaStatus(data.docs.map((doc) => ({ ...doc.data().pesertaStatus })))
             setTransactionId(data.docs.map((doc) => ({ ...doc.data().transactionId })))
         }
@@ -100,7 +105,7 @@ function RekodPermohonan() {
             <div className="tableRekod">
                 <div style={{ backgroundImage: `url(${Intan})` }}>
                     <div>
-                        <h1>REKOD PERMOHONAN</h1>
+                        <h1>REKOD PERMOHONAN reokd</h1>
                     </div>
                     <div className="Search">
                         <input type="text" placeholder='Kod/Name' className="textboxsearch"
@@ -113,36 +118,13 @@ function RekodPermohonan() {
                     </div>
                     {searchValue === "" ? (
                         <div>
-                            <table className="Rekod">
-                                <thead className="header">
-                                    <tr>
-                                        <th>Kod</th>
-                                        <th>Nama Kursus</th>
-                                        <th>Tarikh</th>
-                                        <th>Status Sijil</th>
-                                        <th className="centered">🗑️</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {programs.map((item, index) => (
-                                        <tr key={index} className={index % 2 === 0 ? "even" : "odd"}>
-                                            <td className="kod">{item.kod}</td>
-                                            <td className="NameKursus">{item.nama}</td>
-                                            <td className="Tarikh">{item.mula} - {item.tamat}</td>
-                                            <td className="Status">
-                                                {(`${pesertaStatus[index][userID]}` === 'dicipta' || `${pesertaStatus[index][userID]}` === 'dikemasKini') ?
-                                                    <button onClick={() => { printSijil(index); }} className="Printbutton">Print</button> :
-                                                    <button disabled={true} className="semakbutton">Print</button>}
-                                            </td>
-                                            <td className="Aktiviti">
-                                                <div className="AktivitiContainer">
-                                                    <button onClick={() => { handleShowMohon(item.id) }} className="Mohonbutton">Batal</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                            <ItemTableWidget
+                                key={tableKey}
+                                itemList={programs}
+                                userID={userID}
+                                printSijil={printSijil}
+                                handleShowMohon={handleShowMohon}
+                            />
                             {showMohon && (
                                 <div className="Rekod-modal">
                                     <Modal isOpen={showMohon} onClose={handleCloseMohon}>
@@ -175,35 +157,15 @@ function RekodPermohonan() {
                                 </div>
                             )}
                         </div>
-
-
                     ) : (
                         <div>
-                            <table className="Rekod">
-                                <thead className="header">
-                                    <tr>
-                                        <th>Kod</th>
-                                        <th>Nama Kursus</th>
-                                        <th>Tarikh</th>
-                                        <th>Status Permohonan</th>
-                                        <th>Aktiviti</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {filteredData.map((item, index) => (
-                                        <tr key={index} className={index % 2 === 0 ? "even" : "odd"}>
-                                            <td className="kod">{item.kod}</td>
-                                            <td className="NameKursus">{item.nama}</td>
-                                            <td className="Tarikh">{item.Tarikh}</td>
-                                            <td className="Status">{item.Status}</td>
-                                            <td className="Aktiviti">
-                                                <button onClick={handleShowMohon} className="Mohonbutton">Mohon</button>
-                                                <button className="Printbutton">Print</button>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                            <ItemTableWidget
+                                key={tableKey}
+                                itemList={filteredData}
+                                userID={userID}
+                                printSijil={printSijil}
+                                handleShowMohon={handleShowMohon}
+                            />
                             {showMohon && (
                                 <div className="Rekod-modal">
                                     <Modal isOpen={showMohon} onClose={handleCloseMohon}>

@@ -5,45 +5,63 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { NavLink } from 'react-router-dom'
+import { render } from "@testing-library/react";
 
-const AdminLogTableWidget = ({
+const UserRecordTableWidget = ({
   itemList,
+  userID,
+  printSijil,
+  handleShowMohon,
 }) => {
-
   const columns = [
     {
-      field: "date",
-      headerName: "Tarikh & Masa",
+      field: "kod",
+      headerName: "Kod",
       flex: 1,
       headerClassName: "super-app-theme--header",
     },
     {
-      field: "adminName",
-      headerName: "Nama Admin",
-      flex: 1,
-      headerClassName: "super-app-theme--header",
-    },
-    {
-      field: "adminID",
-      headerName: "ID Admin",
-      flex: 1,
-      headerClassName: "super-app-theme--header",
-    },
-    {
-      field: "type",
-      headerName: "Jenis",
-      flex: 1,
-      headerClassName: "super-app-theme--header",
-    },
-    {
-      field: "transactionID",
-      headerName: "TransactionID",
+      field: "nama",
+      headerName: "Nama Kursus",
       flex: 3,
+      headerClassName: "super-app-theme--header",
+    },
+    {
+      field: "mula",
+      headerName: "Tarikh Mula",
+      flex: 1,
+      headerClassName: "super-app-theme--header",
+    },
+    {
+      field: "tamat",
+      headerName: "Tarikh Tamat",
+      flex: 1,
+      headerClassName: "super-app-theme--header",
+    },
+    {
+      field: "status",
+      headerName: "Status Sijil",
+      flex: 1,
+      headerClassName: "super-app-theme--header",
+      renderCell: (params) => {
+        return (
+          <>
+            {(`${params.row.pesertaStatus[userID]}` === 'dicipta' || `${params.row.pesertaStatus[userID]}` === 'dikemasKini') ?
+              <button onClick={() => { printSijil(userID); }} className="Printbutton">Print</button> :
+              <button disabled={true} className="semakbutton">Print</button>}
+          </>
+        );
+      },
+    },
+    {
+      field: "aktiviti",
+      headerName: "🗑️",
+      flex: 1,
       headerClassName: "super-app-theme--header",
       renderCell: (params) => {
         return (
           <div>
-            <a href={`https://bchainexplorer.azurewebsites.net/#/blockchain/transactionList/transactionDetail/${params.row.transactionId}`} target="_blank">{params.row.transactionId}</a>
+            <button onClick={() => { handleShowMohon(params.row.id) }} className="Mohonbutton">Batal</button>
           </div>
         );
       },
@@ -89,4 +107,4 @@ const AdminLogTableWidget = ({
   );
 };
 
-export default AdminLogTableWidget;
+export default UserRecordTableWidget;

@@ -52,6 +52,9 @@ const AdminPesertaTableWidget = ({
         getRowId={getRowId}
         hideFooter={true}
         sx={{
+          ...{
+            fontSize: "16px",
+          },
           "& .super-app-theme--header": {
             backgroundColor: "#636DCF",
             color: "#fff",
