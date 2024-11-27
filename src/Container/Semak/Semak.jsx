@@ -41,11 +41,15 @@ const Semak = () => {
   const [maksimumPeserta, setMaksimumPeserta] = useState("");
   const [jumlahPeserta, setJumlahPeserta] = useState("");
   const [tamat, setTamat] = useState("");
+  const [pesertaList, setPesertaList] = useState([]);
   const [pesertaNama, setPesertaNama] = useState([]);
   const [pesertaStatus, setPesertaStatus] = useState([]);
   const [yuran, setYuran] = useState("");
   const [tableKey, setTableKey] = useState(Date.now()); // State for forcing re-render of table
   const [programDetail, setProgramDetail] = useState([]);
+  const ITEMS_PER_PAGE = 10;
+  const [totalPages, setTotalPages] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   //Delete the cert at firestore
   const deleteCert = async (deleteId, appId) => {
     //delete the sijil at sijil section in firebase
@@ -112,7 +116,19 @@ const Semak = () => {
   };
 
   let { programID } = useParams();
-
+  const fetchPesertaData = async (pesertaList,programData,pesertaNama) => {
+    const rows = pesertaList.map((mykad, index) => {
+      return {
+        id: index + 1,  // Or use a unique identifier for the row
+        mykad: mykad,  // The 'mykad' value from the pesertaList
+        pesertaNama: pesertaNama[mykad],  // The mapping of 'mykad' to 'pesertaNama'
+        pesertaStatus: programData.pesertaStatus ? programData.pesertaStatus[mykad] : 'No Status',  // Example of a status field
+      };
+    });
+    setProgramDetail(rows);
+    console.log(rows);
+    setTotalPages(Math.ceil(rows.length / ITEMS_PER_PAGE));
+  };
   //get all the information of the program when entering into this page
   useEffect(() => {
     const getPeserta = async () => {
@@ -127,21 +143,7 @@ const Semak = () => {
         // Assume the programData contains a 'pesertaList' (array) and 'pesertaNama' (object) fields
         const pesertaList = programData.pesertaList || [];
         const pesertaNama = programData.pesertaNama || {};
-
-        // Map the data to match the structure expected by DataGrid
-        const rows = pesertaList.map((mykad, index) => {
-          return {
-            id: index + 1,  // Or use a unique identifier for the row
-            mykad: mykad,  // The 'mykad' value from the pesertaList
-            pesertaNama: pesertaNama[mykad],  // The mapping of 'mykad' to 'pesertaNama'
-            // You can add other fields here like 'pesertaStatus' if required
-            pesertaStatus: programData.pesertaStatus ? programData.pesertaStatus[mykad] : 'No Status',  // Example of a status field
-          };
-        });
-
-        // Now rows is an array of objects, each representing a row in the DataGrid
-        console.log("Formatted Rows: ", rows);
-        setProgramDetail(rows);
+        await fetchPesertaData(pesertaList, programData,pesertaNama);
       }
       setMula(detail.data().mula);
       setNama(detail.data().nama);
@@ -156,7 +158,17 @@ const Semak = () => {
     };
     getPeserta();
   }, [reload]);
-
+  const getCurrentPageItems = () => {
+    if(programDetail.length === 0){
+      return [];
+    }
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    return programDetail.slice(startIndex, endIndex).map((peserta, index) => ({
+      ...peserta, // Include the program data
+      programIndex: startIndex + index, // Calculate the absolute index
+    }));
+  };
   return (
     <div className="app_box">
       <div className="semakdaftarheader">
@@ -205,15 +217,38 @@ const Semak = () => {
       </div>
       <div className="subtitle">SENARAI PESERTA</div>
       <div className="program">
-        <ItemTableWidget
+        {/* {(programDetail.length === 0) ? 
+          "Tiada peserta yang mendaftar pada program ini."
+        : */}
+          <ItemTableWidget
           key={tableKey}
-          itemList={programDetail}
+          itemList={getCurrentPageItems()}
           programID={programID}
           semakUser={semakUser}
           setCurrentUser={setCurrentUser}
           setIsOpen={setIsOpen}
         />
+        
       </div>
+      <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button
+                key={index + 1}
+                onClick={() => setCurrentPage(index + 1)}
+                style={{
+                  margin: "0 5px",
+                  padding: "10px",
+                  borderRadius: "50%",
+                  background: index + 1 === currentPage ? "blue" : "gray",
+                  color: "white",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </div>
       {/* padam sijil peserta */}
       {isOpen && (
         <div className="semaksijil">

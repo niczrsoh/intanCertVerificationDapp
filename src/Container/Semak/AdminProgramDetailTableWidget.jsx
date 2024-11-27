@@ -148,6 +148,7 @@ const AdminProgramDetailTableWidget = ({
 
   return (
     <Box>
+      {(itemList.length === 0)?"Tiada data":
       <DataGrid
         rows={itemList}
         columns={columns}
@@ -178,7 +179,7 @@ const AdminProgramDetailTableWidget = ({
             },
           },
         }}
-      />
+      />}
     </Box>
   );
 };
