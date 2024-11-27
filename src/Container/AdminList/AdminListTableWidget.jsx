@@ -15,7 +15,7 @@ const AdminListTableWidget = ({
     {
       field: "bil",
       headerName: "Bil",
-      flex: 1,
+      flex: 0.5,
       headerClassName: "super-app-theme--header",
     },
     {

@@ -24,7 +24,6 @@ const ProgramHome = () => {
   const [isOpen,setIsOpen]= useState(false);
   const { account, setAccount } = useContext(AppContext);
   const [totalPages, setTotalPages] = useState(0);
-  // console.log(account);
   const ITEMS_PER_PAGE = 10;
   const [programs,setPrograms] = useState([]);
   const [programID,setProgramID] = useState("");

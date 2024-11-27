@@ -16,31 +16,38 @@ const AdminList = () => {
   const [adminList, setAdminList] = useState([])
   const [reload, setReload] = useState(0);
   const [tableKey, setTableKey] = useState(Date.now()); // State for forcing re-render of table
-
+  const [totalPages, setTotalPages] = useState(0);
+  const ITEMS_PER_PAGE = 10;
+  const [currentPage, setCurrentPage] = useState(1);
   //document path of the ActionLog collection
   const userCollectionRef = collection(db, "Admin")
-
+  const fetchAllData = async () => {
+    const data = await getDocs(userCollectionRef);
+    console.log(data);
+    // Map through the documents and include doc.id, then sort by the "name" field
+    const sortedAdminList = data.docs
+      .map((doc) => ({ ...doc.data(), id: doc.id }))
+      .sort((a, b) => a.name.localeCompare(b.name))  // Sort by "name" field in ascending order
+      .map((doc, index) => ({
+        ...doc,         // Spread the existing data
+        bil: index + 1, // Add the index based on the sorted order
+      }));
+    // Set the sorted admin list
+    setAdminList(sortedAdminList);
+    setTotalPages(Math.ceil(sortedAdminList.length / ITEMS_PER_PAGE));
+  };
   useEffect(() => {
-    const getAdminList = async () => {
-      //get all the document data in the ActionLog collection
-      const data = await getDocs(userCollectionRef);
-      console.log(data);
-      // Map through the documents and include doc.id, then sort by the "name" field
-      const sortedAdminList = data.docs
-        .map((doc) => ({ ...doc.data(), id: doc.id }))
-        .sort((a, b) => a.name.localeCompare(b.name))  // Sort by "name" field in ascending order
-        .map((doc, index) => ({
-          ...doc,         // Spread the existing data
-          bil: index + 1, // Add the index based on the sorted order
-        }));
-      // Set the sorted admin list
-      setAdminList(sortedAdminList);
-    }
-
-    getAdminList().then(console.log(adminList));
+    fetchAllData();
   }, [reload])
 
-
+  const getCurrentPageItems = () => {
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    return adminList.slice(startIndex, endIndex).map((admin, index) => ({
+      ...admin, // Include the program data
+      programIndex: startIndex + index, // Calculate the absolute index
+    }));
+  };
   // sort by using tarikh
   const tarikhfilter = () => {
     const sorted = adminList
@@ -140,7 +147,7 @@ const AdminList = () => {
           <>
             <ItemTableWidget
               key={tableKey}
-              itemList={adminList}
+              itemList={getCurrentPageItems()}
               onClickPadam={onClickPadam}
             />
           </>) : (
@@ -154,6 +161,25 @@ const AdminList = () => {
         )}
 
       </div>
+      <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button
+                key={index + 1}
+                onClick={() => setCurrentPage(index + 1)}
+                style={{
+                  margin: "0 5px",
+                  padding: "10px",
+                  borderRadius: "50%",
+                  background: index + 1 === currentPage ? "blue" : "gray",
+                  color: "white",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </div>
     </div>
   )
 }

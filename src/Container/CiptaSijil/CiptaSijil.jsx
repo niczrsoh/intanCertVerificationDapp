@@ -182,7 +182,7 @@ const CiptaSijil = ({ backpage }) => {
               <br></br>
               <div>Sila tunggu sebentar...</div>
               <br></br>
-              <div> Data anda sedang disimpan ke dalam blockchain dan pangkalan data ...</div>
+              <div> Data anda akan disimpan ke dalam blockchain dan pangkalan data ...</div>
             </center>
           </div>
         ) : (

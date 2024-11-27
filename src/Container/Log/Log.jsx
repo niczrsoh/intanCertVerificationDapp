@@ -13,21 +13,31 @@ const Log = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [logs, setLogs] = useState([])
   const [tableKey, setTableKey] = useState(Date.now()); // State for forcing re-render of table
-
+  const [totalPages, setTotalPages] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 10;
   //document path of the ActionLog collection
   const userCollectionRef = collection(db, "ActionLog")
+      // Fetch total item count to calculate total pages
+      const fetchAllData = async () => {
+        const ref = collection(db, "ActionLog");
+        const snapshot = await getDocs(ref);
+        const sortedItems = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        setLogs(sortedItems);
+        setTotalPages(Math.ceil(sortedItems.length / ITEMS_PER_PAGE));
+      };
 
   useEffect(() => {
-    const getLog = async () => {
-      //get all the document data in the ActionLog collection
-      const data = await getDocs(query(userCollectionRef, orderBy("date", "desc")));
-      console.log(data);
-      setLogs(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    }
-
-    getLog().then(console.log(logs));
+    fetchAllData();
   }, [])
-
+  const getCurrentPageItems = () => {
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    return logs.slice(startIndex, endIndex).map((log, index) => ({
+      ...log, // Include the program data
+      programIndex: startIndex + index, // Calculate the absolute index
+    }));
+  };
 
   // sort by using tarikh
   const tarikhfilter = () => {
@@ -123,7 +133,7 @@ const Log = () => {
           <>
             <ItemTableWidget
               key={tableKey}
-              itemList={logs}
+              itemList={getCurrentPageItems()}
             />
           </>) : (
           <>
@@ -134,6 +144,25 @@ const Log = () => {
           </>
         )}
       </div>
+      <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button
+                key={index + 1}
+                onClick={() => setCurrentPage(index + 1)}
+                style={{
+                  margin: "0 5px",
+                  padding: "10px",
+                  borderRadius: "50%",
+                  background: index + 1 === currentPage ? "blue" : "gray",
+                  color: "white",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </div>
     </div>
   )
 }

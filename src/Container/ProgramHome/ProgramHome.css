@@ -48,6 +48,7 @@
     bottom: 6%;
     right: 4%;
     cursor: pointer;
+    z-index: 9999;
 }
 
 .addbutton:hover{
