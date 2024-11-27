@@ -177,7 +177,7 @@ const EditProgram = () => {
                 <input type="text" className='inputtext' onChange={onChangeMaksimumPeserta} value={maksimumPeserta} /></div>
             </div>
             <div className='maklumat'>
-              <label className="kik">YURAN (RM)</label>
+              <label className="kik">YURAN</label>
               <div className='textarea'>
                 <p className="kik">:</p>
                 <span className="currency-symbol">RM</span>
