@@ -185,8 +185,8 @@ function SenaraiProgramSediaAda() {
 
               <div className="contentpopout">
                 <p>
-                  Tekan ya untuk sahkan perdaftaran kursus, tekan tidak untuk
-                  batalkan perdaftaran kursus
+                  Tekan ya untuk sahkan pendaftaran program, tekan tidak untuk
+                  batalkan pendaftaran program
                 </p>
               </div>
 
