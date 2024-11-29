@@ -19,7 +19,9 @@ function RekodPermohonan() {
     const userRef = doc(db, "User", userID)//crud 1,collection(reference, collectionName)
     const [reload, setReload] = useState(0);
     const [tableKey, setTableKey] = useState(Date.now()); // State for forcing re-render of table
-
+    const [totalPages, setTotalPages] = useState(0);
+    const ITEMS_PER_PAGE = 10;
+    const [currentPage, setCurrentPage] = useState(1);
     const navigate = useNavigate();
 
     //Filter the data array based on the nama or kod value entered by the user.
@@ -29,23 +31,26 @@ function RekodPermohonan() {
             item.kod.toLowerCase().includes(searchValue.toLowerCase())
     )
     .map((item, index) => ({...item,index:index+1}));
-
+    const fetchAllData = async () => {
+        const docRef = query(collection(db, "Program"), where("pesertaList", "array-contains", userID));
+        const data = await getDocs(docRef);
+        const sortedItems = data.docs
+        .map((doc,index) => ({ ...doc.data(), id: doc.id, index: index+1 }))
+        setPrograms(sortedItems);//read 3
+        setTransactionId(data.docs.map((doc) => ({ ...doc.data().transactionId })))
+        setTotalPages(Math.ceil(sortedItems.length / ITEMS_PER_PAGE));
+      };
     useEffect(() => {
-        const getUserProgram = async () => {
-            //define the document path with the specific requirement
-            //which is the document data in the document path must have the userID in the array fields
-            const docRef = query(collection(db, "Program"), where("pesertaList", "array-contains", userID));
-            const data = await getDocs(docRef);
-            setPrograms(data.docs
-                .map((doc,index) => ({ ...doc.data(), id: doc.id, index: index+1 }))
-            );//read 3
-            setPesertaStatus(data.docs.map((doc) => ({ ...doc.data().pesertaStatus })))
-            setTransactionId(data.docs.map((doc) => ({ ...doc.data().transactionId })))
-        }
-        getUserProgram();
-        console.log(programs);
+        fetchAllData();
     }, [reload])
-
+    const getCurrentPageItems = () => {
+        const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+        const endIndex = startIndex + ITEMS_PER_PAGE;
+        return programs.slice(startIndex, endIndex).map((program, index) => ({
+          ...program, // Include the program data
+          programIndex: startIndex + index, // Calculate the absolute index
+        }));
+      };
     const handleShowMohon = (progID) => {
         setShowMohon(true);
         console.log(progID);
@@ -120,7 +125,7 @@ function RekodPermohonan() {
                         <div>
                             <ItemTableWidget
                                 key={tableKey}
-                                itemList={programs}
+                                itemList={getCurrentPageItems()}
                                 userID={userID}
                                 printSijil={printSijil}
                                 handleShowMohon={handleShowMohon}
@@ -161,7 +166,7 @@ function RekodPermohonan() {
                         <div>
                             <ItemTableWidget
                                 key={tableKey}
-                                itemList={filteredData}
+                                itemList={getCurrentPageItems()}
                                 userID={userID}
                                 printSijil={printSijil}
                                 handleShowMohon={handleShowMohon}
@@ -198,9 +203,29 @@ function RekodPermohonan() {
                                 </div>
                             )}
                         </div>
+                        
                     )}
                 </div>
             </div>
+            <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button
+                key={index + 1}
+                onClick={() => setCurrentPage(index + 1)}
+                style={{
+                  margin: "0 5px",
+                  padding: "10px",
+                  borderRadius: "50%",
+                  background: index + 1 === currentPage ? "blue" : "gray",
+                  color: "white",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </div>
         </div>
     );
 }
