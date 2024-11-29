@@ -45,7 +45,13 @@ const ProgramHome = () => {
         setPrograms(sortedItems);
         setTotalPages(Math.ceil(sortedItems.length / ITEMS_PER_PAGE));
       };
- 
+   //Filter the data array based on the nama or kod value entered by the user.
+   const filteredData = programs.filter(
+    (item) =>
+      item.nama.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item.kod.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item.penyelaras.toLowerCase() === searchValue.toLowerCase()
+  );
   useEffect(() => {
     if (isOpen) {
       window.scrollTo({ top: 0, behavior: 'smooth' }); // Smooth scrolling to top
@@ -96,28 +102,28 @@ const ProgramHome = () => {
 
     };
 
-    const handleSubmit = async () => {
-      if (isSearching) {
-        return;
-      }
-      setIsSearching(true);
-      try{
-        const lowerCaseFilteredValue = filteredValue.toLowerCase();
+    // const handleSubmit = async () => {
+    //   if (isSearching) {
+    //     return;
+    //   }
+    //   setIsSearching(true);
+    //   try{
+    //     const lowerCaseFilteredValue = filteredValue.toLowerCase();
 
-        const filtered = programs.filter(item =>
-          Object.values(item).some(val =>
-            val.toString().toLowerCase().includes(lowerCaseFilteredValue)
-          )
-        );
-        setSearchValue(filtered);
-      await new Promise((resolve) => setTimeout(resolve, 2000));}
-      catch (error) {
-        console.error('Search failed:', error);
-      } finally {
-        // Set the isSearching flag back to false to indicate search is completed
-        setIsSearching(false);
-      }
-    }
+    //     const filtered = programs.filter(item =>
+    //       Object.values(item).some(val =>
+    //         val.toString().toLowerCase().includes(lowerCaseFilteredValue)
+    //       )
+    //     );
+    //     setSearchValue(filtered);
+    //   await new Promise((resolve) => setTimeout(resolve, 2000));}
+    //   catch (error) {
+    //     console.error('Search failed:', error);
+    //   } finally {
+    //     // Set the isSearching flag back to false to indicate search is completed
+    //     setIsSearching(false);
+    //   }
+    // }
 
     const popOut = (e,id) =>{
       setProgramID(id);
@@ -165,13 +171,13 @@ const ProgramHome = () => {
             </form>
             <form className='search'>
                 <div className='searchbox'>
-                    <input value={filteredValue} type="text" placeholder="Kod / Nama Kursus" className='searchtype' onChange={e => setFilteredValue(e.target.value)}/>
+                    <input value={searchValue} type="text" placeholder="Kod / Kursus / Penyelaras" className='searchtype' onChange={e => setSearchValue(e.target.value)}/>
                 </div>
-                <div className='filtericon'>
+                {/* <div className='filtericon'>
                     <button className="searchbutton" onClick={handleSubmit} disabled={isSearching}>
                         <img src={searchpic} alt='This is a search button.' type="submit" className="searchpic"/>
                     </button>
-                </div>
+                </div> */}
             </form>
         </div>
     </div>
@@ -181,20 +187,20 @@ const ProgramHome = () => {
             <ItemTableWidget
               key={tableKey}
               itemList={getCurrentPageItems()}
-              popOut={popOut}
+           
             />
           </>
         ) : (
           <>
             <ItemTableWidget
               key={tableKey}
-              itemList={searchValue}
-              popOut={popOut}
+              itemList={filteredData}
+        
             />
           </>
         )}
-
-      <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+    </div>
+    <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
             {Array.from({ length: totalPages }, (_, index) => (
               <button
                 key={index + 1}
@@ -213,7 +219,6 @@ const ProgramHome = () => {
               </button>
             ))}
           </div>
-    </div>
     {/* Padam program */}
     {isOpen && (
         <div className='semaksijil'>
