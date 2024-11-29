@@ -105,7 +105,7 @@ function RekodPermohonan() {
             <div className="tableRekod">
                 <div style={{ backgroundImage: `url(${Intan})` }}>
                     <div>
-                        <h1>REKOD PERMOHONAN reokd</h1>
+                        <h1>REKOD PERMOHONAN</h1>
                     </div>
                     <div className="Search">
                         <input type="text" placeholder='Kod/Name' className="textboxsearch"
