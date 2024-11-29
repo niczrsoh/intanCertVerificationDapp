@@ -76,7 +76,7 @@ const AdminPesertaDetailTableWidget = ({
             ) : (
               <NavLink
                 to={`/admin/cipta-sijil/${params.row.id}/${ic}`}
-                className="aktivititype"
+                className="semakbutton"
               >
                 Cipta
               </NavLink>
@@ -100,7 +100,7 @@ const AdminPesertaDetailTableWidget = ({
                 {/* kemaskini button */}
                 <NavLink
                   to={`/admin/edit-sijil/${params.row.id}/${ic}`}
-                  className="aktivititype"
+                  className="semakbutton"
                 >
                   Kemaskini
                 </NavLink>
@@ -115,7 +115,7 @@ const AdminPesertaDetailTableWidget = ({
                 </button>
                 {/* padam button */}
                 <button
-                  className="padambutton"
+                  className="semakbutton"
                   onClick={() => {
                     setCurrentProgram(params.row.id);
                     setIsOpen(true);

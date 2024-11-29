@@ -93,7 +93,7 @@ const AdminProgramDetailTableWidget = ({
                     ) : (
                       <NavLink
                         to={`/admin/cipta-sijil/${programID}/${mykad}`}
-                        className="aktivititype"
+                        className="semakbutton"
                       >
                         Cipta
                       </NavLink>
@@ -101,13 +101,13 @@ const AdminProgramDetailTableWidget = ({
 
                     {`${pesertaStatus}` === "dipadam" || `${pesertaStatus}` === "-" ? (
                       <>
-                        <button className="semakbutton buttontext" disabled={true}>
+                        <button className="semakbutton" disabled={true}>
                           Kemaskini
                         </button>
-                        <button className="semakbutton buttontext" disabled={true}>
+                        <button className="semakbutton" disabled={true}>
                           Semak
                         </button>
-                        <button className="semakbutton buttontext" disabled={true}>
+                        <button className="semakbutton" disabled={true}>
                           Padam
                         </button>
                       </>
@@ -115,12 +115,12 @@ const AdminProgramDetailTableWidget = ({
                       <>
                         <NavLink
                           to={`/admin/edit-sijil/${programID}/${mykad}`}
-                          className="aktivititype buttontext"
+                          className="semakbutton"
                         >
                           Kemaskini
                         </NavLink>
                         <button
-                          className="semakbutton buttontext"
+                          className="semakbutton"
                           onClick={() => {
                             semakUser(mykad);
                           }}
@@ -128,7 +128,7 @@ const AdminProgramDetailTableWidget = ({
                           Semak
                         </button>
                         <button
-                          className="padambutton buttontext"
+                          className="semakbutton"
                           onClick={() => {
                             setCurrentUser(mykad);
                             setIsOpen(true);
