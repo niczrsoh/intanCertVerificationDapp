@@ -24,10 +24,10 @@ const AdminList = () => {
   const fetchAllData = async () => {
     const data = await getDocs(userCollectionRef);
     console.log(data);
-    // Map through the documents and include doc.id, then sort by the "name" field
+    // Map through the documents and include doc.id
     const sortedAdminList = data.docs
       .map((doc) => ({ ...doc.data(), id: doc.id }))
-      .sort((a, b) => a.name.localeCompare(b.name))  // Sort by "name" field in ascending order
+      .sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate))  // Sort by "createdDate" field in descending order
       .map((doc, index) => ({
         ...doc,         // Spread the existing data
         bil: index + 1, // Add the index based on the sorted order

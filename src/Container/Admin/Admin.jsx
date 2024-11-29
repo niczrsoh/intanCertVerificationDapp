@@ -3,7 +3,9 @@ import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { db } from '../../Backend/firebase/firebase-config'
 import '../Admin/admin.css'
 import { Buttons } from '../../Component'
+import { useNavigate } from "react-router-dom"
 const Admin = () => {
+  const navigate = useNavigate();
   const [mykad, setMykad] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -33,6 +35,10 @@ const Admin = () => {
     setRole(e.target.value);
   }
 
+  const padNumber = (num) => {
+    return num.toString().padStart(2, "0");
+  };
+
   const adminRegister = async (e) => {
     e.preventDefault();
     const regex = /[0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]/;
@@ -42,6 +48,14 @@ const Admin = () => {
     }
     //doc() will define the path to the document data 
     const userCollectionRef = doc(db, "Admin", mykad)
+
+    //get current admin created time
+    const date = new Date();
+    const formattedDate = `${date.getFullYear()}-${padNumber(
+      date.getMonth() + 1
+    )}-${padNumber(date.getDate())} ${padNumber(date.getHours())}:${padNumber(
+      date.getMinutes()
+    )}:${padNumber(date.getSeconds())}`;
 
     //getDoc() will get the document data based on the path of doc()
     //in this case, getDoc() will get the info of admin to test whether the admin ic has been registered or not
@@ -56,13 +70,15 @@ const Admin = () => {
           email: email,
           acc: account,
           role: role,
-        }).then(() => {
+          createdDate: `${formattedDate.toString()}`,
+        }).then(async () => {
           setMykad("");
           setName("");
           setEmail("");
           setAccount("");
           setRole("");
-          alert("Admin Baru telah Didaftar!!");
+          await alert("Admin Baru telah Didaftar!!");
+          navigate(`/admin/admin-list`);
         });
       }
     })
