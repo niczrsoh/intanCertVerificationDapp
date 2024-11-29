@@ -31,6 +31,7 @@ const Add = () => {
     setKod(e.target.value);
   }
   const onChangeMula = (e) => {
+    console.log(e);
     setMula(e);
   };
   const formatDate = (date) => {
@@ -38,18 +39,18 @@ const Add = () => {
     const year = date.getFullYear();
     const day = String(date.getDate()).padStart(2, "0");
     const month = String(date.getMonth() + 1).padStart(2, "0");
-    return `${day}/${month}/${year}`;
+    return `${year}-${month}-${day}`;
   };
   const onBlurTamat = (e) => {
     let value = e.target.value;
-    const parts = value.split("/");
+    const parts = value.split("-");
 
     if (parts.length === 3) {
-      let day = parts[0].padStart(2, "0");  // Ensure 2 digits for the day
+      let year = parts[0].padStart(2, "0");  // Keep the year as is
       let month = parts[1].padStart(2, "0"); // Ensure 2 digits for the month
-      let year = parts[2];  // Keep the year as is
+      let day = parts[2]  // Ensure 2 digits for the day
   
-      value = `${day}/${month}/${year}`;
+      value = `${year}-${month}-${day}`;
   
       // Set the properly formatted date in the input field
       setTamat(value);
@@ -79,9 +80,9 @@ if (value.length === 10) {
 } 
 };
 const compareDate = (mula,tamat) => {
-  const [mday, mmonth, myear] = mula.split('/').map(num => parseInt(num, 10));
+  const [myear, mmonth, mday] = mula.split('-').map(num => parseInt(num, 10));
   const mulaDateObj = new Date(myear, mmonth - 1, mday); // Create a Date object (month is 0-indexed)
-  const [day, month, year] = tamat.split('/').map(num => parseInt(num, 10));
+  const [year, month, day] = tamat.split('/').map(num => parseInt(num, 10));
   const tamatDateObj = new Date(year, month - 1, day); // Create a Date object (month is 0-indexed)
 
 
@@ -89,7 +90,7 @@ const compareDate = (mula,tamat) => {
 };
 
   const isPastDate = (dateString) => {
-    const [day, month, year] = dateString.split('/').map(num => parseInt(num, 10));
+    const [year, month, day] = dateString.split('-').map(num => parseInt(num, 10));
     const inputDateObj = new Date(year, month - 1, day); // Create a Date object (month is 0-indexed)
 
     const today = new Date();
@@ -218,6 +219,7 @@ const compareDate = (mula,tamat) => {
           onChange={onChangeMula}
           value={mula}// Optionally close on blur
           minDate={new Date()} 
+          format="y-MM-dd"
         />
       </div>
       </div>
@@ -232,6 +234,7 @@ const compareDate = (mula,tamat) => {
           onChange={onChangeTamat}
           value={tamat}// Optionally close on blur
           minDate={mula} 
+          format="y-MM-dd"
         /></div>
             </div>
             <div className='maklumat'>
