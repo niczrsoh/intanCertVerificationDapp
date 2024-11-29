@@ -276,7 +276,7 @@ const Semak = () => {
                 <div className="contentdelete">
                   <div>
                     <p>
-                    Peringatan! Langkah ini tidak boleh diundur semula selepas tekan butang <b>'Padam'</b> 
+                    Adakah anda pasti untuk memadam program?
                     </p>
                   </div>
                   <div className="padamconfirmbutton">
