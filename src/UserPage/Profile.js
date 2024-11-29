@@ -130,7 +130,7 @@ const Profile = ({
       </div>
       <div className="frame">
         <div className="headerProfileU">
-          <p>Informasi personal</p>
+          <p>BUTIRAN PERIBADI</p>
         </div>
         <div className="rightSide">
           <div className="formleft">
@@ -402,7 +402,7 @@ export default class profile extends React.Component {
               </div>
               <div className="frame">
                 <div className="headerProfileU">
-                  <p>Informasi personal</p>
+                  <p>BUTIRAN PERIBADI</p>
                 </div>
                 <div className="rightSide">
                   <div className="formleft">
