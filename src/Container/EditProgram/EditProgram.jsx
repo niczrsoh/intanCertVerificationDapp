@@ -6,6 +6,7 @@ import '../EditProgram/editprogram.css'
 import { db } from '../../Backend/firebase/firebase-config'
 import { getDoc, updateDoc, doc } from 'firebase/firestore'
 import Calendar from "react-date-picker"; 
+import {DatePicker} from "react-date-picker"; 
 
 const EditProgram = () => {
   const navigate = useNavigate();
@@ -51,12 +52,12 @@ const EditProgram = () => {
     const year = date.getFullYear();
     const day = String(date.getDate()).padStart(2, "0");
     const month = String(date.getMonth() + 1).padStart(2, "0");
-    return `${day}/${month}/${year}`;
+    return `${year}-${month}-${day}`;
   };
   let { programID } = useParams();
   const parseDate = (dateString) => {
     if (!dateString) return null; // Handle empty or invalid input
-    const [day, month, year] = dateString.split("/").map(Number); // Split and convert to numbers
+    const [year, month, day] = dateString.split("-").map(Number); // Split and convert to numbers
     return new Date(year, month - 1, day); // Create and return the Date object
   };
   //useEffect() will be executed once when the web is initialize  
@@ -152,11 +153,12 @@ const EditProgram = () => {
               <label className="kik">TARIKH MULA</label>
               <div className='textarea'>
                 <p className="kik">:</p>
-                <Calendar
+                <DatePicker
          className='date-field'
           onChange={onChangeMula}
           value={mula}// Optionally close on blur
-          minDate={new Date()} 
+          minDate={new Date()}
+          format="y-MM-dd"  
         /></div>
             </div>
             <div className='maklumat'>
@@ -167,7 +169,8 @@ const EditProgram = () => {
          className='date-field'
           onChange={onChangeTamat}
           value={tamat}// Optionally close on blur
-          minDate={mula} 
+          minDate={mula}
+          format="y-MM-dd" 
         /></div>
             </div>
             <div className='maklumat'>
