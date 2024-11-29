@@ -129,12 +129,14 @@ function SenaraiProgramSediaAda() {
       <div class="infoDetail">
         <div class="info1">
           <p>Nama Pengajur</p>
+          <p>Pengyelaras</p>
           <p>Tempoh</p>
           <p>Maksimum peserta</p>
           <p>Jumlah peserta</p>
           <p>Yuran</p>
         </div>
         <div class="info2">
+          <p>:</p>
           <p>:</p>
           <p>:</p>
           <p>:</p>
