@@ -103,19 +103,6 @@ const Log = () => {
         </h1>
         <div className='features'>
           {/* Sorting */}
-          <form className='filter'>
-            <div className='filtericon'>
-              <img src={filterpic} alt='This is a filter icon.' className="filterpic" />
-            </div>
-            <div className='dropdownbox'>
-              <select value={selectedValue} className='dropdown' onChange={handleSelectChange} >
-                <option value="Susunan" data-display-value="Susunan" hidden>Susunan</option>
-                <option value="None" data-display-value="None">None</option>
-                <option value="Tarikh&Masa" data-display-value="Tarikh & Masa">Tarikh & Masa</option>
-                <option value="NamaAdmin" data-display-value="Nama Admin">Nama Admin</option>
-              </select>
-            </div>
-          </form>
           <form className='search'>
             <div className='searchbox'>
               <input value={filteredValue} type="text" placeholder="Nama Admin" className='searchtype' onChange={(e) => { setFilteredValue(e.target.value); handleSubmit();}} />

@@ -155,20 +155,6 @@ const ProgramHome = () => {
             SENARAI PROGRAM
         </h1>
         <div className='features'>
-            <form className='filter'>
-                <div className='filtericon'>
-                    <img src={filterpic} alt='This is a filter icon.' className="filterpic"/>
-                </div>
-                <div className='dropdownbox'>
-                <select value={selectedValue} className='dropdown' onChange={handleSelectChange} >
-                    <option value="Susunan" data-display-value="Susunan" hidden>Susunan</option>
-                    <option value="None" data-display-value="None">None</option>
-                    <option value="KodKursus" label="Kod Kursus" data-display-value="Kod Kursus">Kod Kursus</option>
-                    <option value="TarikhMula" label="Tarikh Mula" data-display-value="Tarikh Mula">Tarikh Mula</option>
-                    <option value="TarikhTamat" label="Tarikh Tamat" data-display-value="Tarikh Tamat">Tarikh Tamat</option>
-                </select>
-                </div>
-            </form>
             <form className='search'>
                 <div className='searchbox'>
                     <input value={searchValue} type="text" placeholder="Kod / Kursus / Penyelaras" className='searchtype' onChange={e => setSearchValue(e.target.value)}/>
