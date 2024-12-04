@@ -64,9 +64,9 @@ export default function SemakSijil() {
             name="search-id"
             type="text"
             placeholder="Sijil App Id"
-            value={appId}
+            value={appId.toLowerCase()}
             onChange={(e) => {
-            setappId(e.target.value);
+            setappId(e.target.value.toLowerCase().trim());
             }}
           />
         </form>
