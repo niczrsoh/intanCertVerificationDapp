@@ -170,7 +170,6 @@ function SenaraiProgramSediaAda() {
           <Modal isOpen={showDaftar} onClose={handleCloseDaftar}>
             <div className="confirmation-message ">
               <div className="headpopout">
-                <p>Alert</p>
               </div>
               <button className="close" onClick={handleCloseDaftar}>
                 <svg

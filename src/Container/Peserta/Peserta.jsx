@@ -96,19 +96,6 @@ const Peserta = () => {
         SENARAI PESERTA
         </h1>
         <div className='features'>
-            <form className='filter'>
-                <div className='filtericon'>
-                    <img src={filterpic} alt='This is a filter icon.' className="filterpic"/>
-                </div>
-                <div className='dropdownbox'>
-                <select value={selectedValue} className='dropdown' onChange={handleSelectChange}  >
-                    <option value="Susunan" data-display-value="Susunan" hidden>Susunan</option>
-                    <option value="None" data-display-value="None">None</option>
-                    <option value="No.MyKad" data-display-value="No.MyKad">No.MyKad</option>
-                    <option value="Nama" data-display-value="Nama">Nama</option>
-                </select>
-                </div>
-            </form>
             <form className='search'>
                 <div className='searchbox'>
                     <input value={filteredValue} type="text" placeholder="No. Mykad / Nama peserta" className='searchtype' onChange={e => setFilteredValue(e.target.value)}/>
