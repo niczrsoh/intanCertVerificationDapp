@@ -46,7 +46,7 @@ const Register = () => {
           imageUrl: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
           telefonPeribadi: TelefonPeribadi,
         }).then(() => {
-          alert("Berjaya Daftar Account!!");
+          alert("Berjaya Daftar Account");
           navigate('/login');
         });//create 2 end
       }
@@ -59,7 +59,7 @@ const Register = () => {
         <div className='registerContainer'>
           <div className='titleRegister'>
             <h1>Daftar Akaun</h1>
-            <p>Sebagai User</p>
+            <p>Sebagai Pengguna</p>
           </div>
           {/* Register Form */}
           <form className='RegisterForm' onSubmit={handleSubmit}>
