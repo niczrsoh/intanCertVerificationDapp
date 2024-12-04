@@ -187,7 +187,7 @@ const ProgramHome = () => {
             <ItemTableWidget
               key={tableKey}
               itemList={getCurrentPageItems()}
-           
+              popOut={popOut}
             />
           </>
         ) : (
@@ -195,7 +195,7 @@ const ProgramHome = () => {
             <ItemTableWidget
               key={tableKey}
               itemList={filteredData}
-        
+              popOut={popOut}
             />
           </>
         )}
