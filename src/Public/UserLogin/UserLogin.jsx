@@ -51,8 +51,8 @@ function UserLogin() {
               }} />
             </label>
             <br></br>
-            <label htmlFor='LoginMyKad'>Password:
-              <input id='LoginMyKad' name='LoginMyKad' type='password' placeholder='Password' onChange={(event) => {
+            <label htmlFor='LoginMyKad'>Kata Laluan:
+              <input id='LoginMyKad' name='LoginMyKad' type='password' placeholder='Kata Laluan' onChange={(event) => {
                 setPassword(event.target.value)
               }} />
             </label>

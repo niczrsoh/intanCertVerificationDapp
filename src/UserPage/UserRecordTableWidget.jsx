@@ -47,7 +47,7 @@ const UserRecordTableWidget = ({
         return (
           <>
             {(`${params.row.pesertaStatus[userID]}` === 'dicipta' || `${params.row.pesertaStatus[userID]}` === 'dikemasKini') ?
-              <button onClick={() => { printSijil(userID); }} className="Printbutton">Print</button> :
+              <button onClick={() => { printSijil(params.row.index-1); }} className="Printbutton">Print</button> :
               <button disabled={true} className="semakbutton">Print</button>}
           </>
         );

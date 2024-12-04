@@ -62,7 +62,7 @@ function RekodPermohonan() {
 
     const printSijil = (index) => {
         const id = sessionStorage.getItem("userID")
-        console.log(transactionId[index][id]);
+        console.log(transactionId[index]);
         navigate(`/informasi-sijil/${transactionId[index][id]}`);
     }
 
@@ -99,7 +99,7 @@ function RekodPermohonan() {
                 jumlahPeserta: newJumlahPesertaString,
             }).then(() => {
                 setShowMohon(false);
-                alert("Anda telah berjaya padam program permohonan");
+                alert("anda telah berjaya batal permohonan program");
                 setReload(reload + 1);
             })
         })
@@ -145,8 +145,7 @@ function RekodPermohonan() {
 
                                             <div className="contentpopout">
                                                 <p>
-                                                    Tekan ya untuk sahkan permohonan program, tekan tidak untuk
-                                                    batalkan pendaftaran program
+                                                Tekan ya untuk batalkan permohonan program, tekan tidak untuk kekalkan pendaftaran program
                                                 </p>
                                             </div>
                                             <div className="buttonrekod">
@@ -186,8 +185,7 @@ function RekodPermohonan() {
 
                                             <div className="contentpopout">
                                                 <p>
-                                                    Tekan ya untuk sahkan permohonan program, tekan tidak
-                                                    untuk batalkan pendaftaran program
+                                                Tekan ya untuk batalkan permohonan program, tekan tidak untuk kekalkan pendaftaran program
                                                 </p>
                                             </div>
                                             <div className="buttonrekod">
