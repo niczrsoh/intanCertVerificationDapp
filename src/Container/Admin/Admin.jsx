@@ -102,14 +102,14 @@ const Admin = () => {
             {/* Input for NO.MYKAD */}
           </div>
           <div className='maklumat'>
-            <label className="kik">ADMIN NAME</label>
+            <label className="kik">NAMA ADMIN</label>
             <div className='textarea'>
               <p className="kik">:</p>
               <input type="text" className='inputtext' onChange={onChangeName} value={name} placeholder="Ali Mohamad" required /></div>
             {/* Input for ADMIN NAME */}
           </div>
           <div className='maklumat'>
-            <label className="kik">ADMIN EMAIL</label>
+            <label className="kik">EMEL ADMIN</label>
             <div className='textarea'>
               <p className="kik">:</p>
               <input type="email" className='inputtext' onChange={onChangeEmail} value={email} placeholder="ali@gmail.com" required /></div>
@@ -123,7 +123,7 @@ const Admin = () => {
             {/* Input for ALAMAT E-Wallet */}
           </div>
           <div className='maklumat'>
-            <label className="kik">ADMIN ROLE</label>
+            <label className="kik">PERANAN ADMIN</label>
             <div className='textarea'>
               <p className="kik">:</p>
               <select className='inputselect' onChange={onChangeRole} >
