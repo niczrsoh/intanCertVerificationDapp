@@ -164,10 +164,10 @@ const Profile = ({
 
 
 export default class profile extends React.Component {
-
+  
   constructor(props) {
     super(props);
-
+  
     this.state = {
       file: "",
       imagePreviewUrl:
@@ -302,6 +302,7 @@ export default class profile extends React.Component {
     });
     this.updateProfile();
   };
+  
   // When the user clicks the "Save" button, the information will be submitted and displayed.
   // When the user clicks the "Edit Profile" button, the form becomes editable, allowing the user to update their Informasi personal.
   async updateProfile() {
@@ -312,11 +313,14 @@ export default class profile extends React.Component {
       return;
     }
     if (this.state.active == "edit") {
+      let activeP = this.state.active === "edit" ? "loading" : "edit";
+      this.setState({
+        active: activeP,
+      });
       console.log(this.state.nama);
       const userID = sessionStorage.getItem("userID");
       const docRef = doc(db, "User", userID);
-
-      if (this.state.file == "") {
+      if (this.state.file === "") {
         //update the user profile info with the new personal info
         await updateDoc(docRef, {
           nama: this.state.nama,
@@ -326,7 +330,11 @@ export default class profile extends React.Component {
           telefonPeribadi: this.state.telefonperibadi,
           alamat: this.state.alamat,
         }).then(() => {
-          alert("Sijil berjaya dikemaskini!");
+          let activeP = this.state.active === "loading" ? "profile" : "loading";
+          this.setState({
+            active: activeP,
+          });
+          alert("Profil berjaya dikemaskini!");
         });
       } else {
         if (this.state.imageOriginalUrl != "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png") {
@@ -338,13 +346,12 @@ export default class profile extends React.Component {
           const desertRef = ref(storage, `images/${imageName}`);
           //delete the previous uploaded profile picture
           deleteObject(desertRef).catch((error) => {
-            alert("!!Ada yang salah!! Sila kontek admin");
             console.log(error);
           });
         }
         const imageRef = ref(storage, `images/${this.state.file.name + v4()}`);
-        uploadBytes(imageRef, this.state.file).then((snapshot) => {
-          getDownloadURL(snapshot.ref).then(async (url) => {
+        await uploadBytes(imageRef, this.state.file).then(async (snapshot) => {
+          await getDownloadURL(snapshot.ref).then(async (url) => {
             //update the new personal info and also the new uploaded profile pic
             await updateDoc(docRef, {
               nama: this.state.nama,
@@ -355,7 +362,11 @@ export default class profile extends React.Component {
               alamat: this.state.alamat,
               imageUrl: url,
             }).then(() => {
-              alert("Sijil berjaya dikemaskini!");
+              let activeP = this.state.active === "loading" ? "profile" : "loading";
+              this.setState({
+                active: activeP,
+              });
+              alert("Gambar profile telah berjaya dikemaskini!");
             });
           });
         });
@@ -363,7 +374,7 @@ export default class profile extends React.Component {
       }
     }
   }
-
+ 
   render() {
     const {
       imageUrl,
@@ -422,7 +433,10 @@ export default class profile extends React.Component {
               </div>
             </form>
           </div>
-        ) : (
+        ) :(active === "loading")? 
+        <center>
+        <div className="loading">Tengah simpan profile anda ... &#8230;</div></center>
+        :(
           <Profile
             onSubmit={this.handleSubmit}
             src={imageUrl}
@@ -433,8 +447,11 @@ export default class profile extends React.Component {
             telefonperibadi={telefonperibadi}
             alamat={alamat}
           />
-        )}
+        )
+        }
+     
       </div>
+     
     );
   }
 }
