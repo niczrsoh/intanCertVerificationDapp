@@ -193,6 +193,7 @@ const EditSijil = ({ backpage }) => {
                 id="tajukSijil"
                 value={tajukSijil}
                 onChange={(e) => setTajukSijil(e.target.value)}
+                disabled
               />
             </div>
           </div>
@@ -207,6 +208,7 @@ const EditSijil = ({ backpage }) => {
                 className="inputtext"
                 value={tarikhMula}
                 onChange={(e) => setTarikhMula(e.target.value)}
+                disabled
               />
             </div>
           </div>
@@ -220,6 +222,7 @@ const EditSijil = ({ backpage }) => {
                 className="inputtext"
                 value={tarikhTamat}
                 onChange={(e) => setTarikhTamat(e.target.value)}
+                disabled
               />
             </div>
           </div>
