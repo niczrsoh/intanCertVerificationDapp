@@ -15,6 +15,18 @@ const Register = () => {
   const [TelefonPeribadi, setTelefonPeribadi] = useState("");
   const navigate = useNavigate();
 
+  const validatePhoneNumber = (phoneNumber) => {
+    // Remove dashes for validation
+    const cleanedNumber = phoneNumber.replace(/\D/g, '');
+    const phoneRegex = /^(01[0-9])-?[0-9]{7,8}$/;
+    
+    if (cleanedNumber.length < 10 || cleanedNumber.length > 11) {
+      return false;
+    }
+    
+    return phoneRegex.test(phoneNumber.replace(/\D/g, ''));
+  };
+  
   //navigate to login page after register
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,6 +66,7 @@ const Register = () => {
   }
 
   return (
+    
     <>
       <div className='registerPage'>
         <div className='registerContainer'>
@@ -73,7 +86,7 @@ const Register = () => {
                 setNama(event.target.value)
               }} />
             </label>
-            <label htmlFor='RegisterMyKad'><br></br>Alamat:
+            <label htmlFor='RegisterMyKad'><br></br>Alamat Pejabat:
               <input id='RegisterMyKad' name='Alamat' type='text' placeholder='23, Jalan Teknologi, Shah Alam' required onChange={(event) => {
                 setAlamat(event.target.value)
               }} />
@@ -84,15 +97,20 @@ const Register = () => {
               }} />
             </label>
 
-            <label htmlFor='RegisterMyKad'><br></br>Jawatan/Gred:
-              <input id='RegisterMyKad' name='Jawatan/Gred' type='text' placeholder='Jurutera V027' required onChange={(event) => {
+            <label htmlFor='RegisterMyKad'><br></br>Jawatan:
+              <input id='RegisterMyKad' name='Jawatan/Gred' type='text' placeholder='Jurutera' required onChange={(event) => {
                 setJawatan(event.target.value)
               }} />
             </label>
             <label htmlFor='RegisterMyKad'><br></br>Telefon Peribadi:
-              <input id='RegisterMyKad' name='TelefonPeribadi' type='tel' placeholder='012-34567819' required onChange={(event) => {
-                setTelefonPeribadi(event.target.value)
-              }} />
+              <input id='RegisterMyKad' name='TelefonPeribadi' type='tel'  pattern="[0-9]{3}-[0-9]{7,8}"
+                inputMode='numeric' required keyboardType='numeric' placeholder='012-3456789'
+                onChange={
+                  (event) => {
+                    event.target.value = event.target.value.replace(/[^0-9]/g, '').replace(/(\d{3})(\d+)/, '$1-$2');
+                    setTelefonPeribadi(event.target.value)}
+                }
+                />
             </label>
             <label htmlFor='RegisterMyKad'><br></br>Kata Laluan:
               <input id='RegisterMyKad' name='KataLaluan' type='password' placeholder='******' required onChange={(event) => {
@@ -112,7 +130,9 @@ const Register = () => {
 
         </div>
       </div>
+      
     </>
+    
   )
 }
 

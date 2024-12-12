@@ -26,8 +26,17 @@ function SenaraiProgramSediaAda() {
   };
   const handleCloseDaftar = () => {
     setShowDaftar(false);
-  };
+    //navigate back code
+    navigate(-1);
 
+  };
+  function formatDate(dateString) {
+    // Split the original date string
+    const [year, month, day] = dateString.split('-');
+    
+    // Reassemble in dd-mm-yyyy format
+    return `${day}-${month}-${year}`;
+  }
   let { programID } = useParams();
 
   //get the program info
@@ -128,8 +137,8 @@ function SenaraiProgramSediaAda() {
       </div>
       <div class="infoDetail">
         <div class="info1">
-          <p>Nama Pengajur</p>
-          <p>Pengyelaras</p>
+          <p>Nama Penganjur</p>
+          <p>Penyelaras</p>
           <p>Tempoh</p>
           <p>Maksimum peserta</p>
           <p>Jumlah peserta</p>
@@ -146,7 +155,7 @@ function SenaraiProgramSediaAda() {
         <div class="info3">
           <p>{penganjur}</p>
           <p>{penyelaras}</p>
-          <p>{mula} - {tamat}</p>
+          <p>{formatDate(mula)} hingga {formatDate(mula)}</p>
           <p>{maksimumPeserta}</p>
           <p>{jumlahPeserta}</p>
           <p>RM {yuran}</p>
@@ -186,7 +195,7 @@ function SenaraiProgramSediaAda() {
 
               <div className="contentpopout">
                 <p>
-                  Tekan ya untuk memohonan program, tekan tidak untuk kekalkan memohon program
+                  Tekan ya untuk memohonan program
                 </p>
               </div>
 

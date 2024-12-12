@@ -17,7 +17,7 @@ function NavbarU() {
 					</NavLink>
 				</li>
 				<li>
-					<NavLink className="uNavMenu" to="/user/profile">Profile</NavLink>
+					<NavLink className="uNavMenu" to="/user/profile">Profil</NavLink>
 				</li>
 			</ul>
 		</div>

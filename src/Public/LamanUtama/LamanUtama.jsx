@@ -29,7 +29,7 @@ export default function LamanUtama() {
             <h1 className='title'>INTAN</h1>
             <hr className='lineBreak' />
             <p className='white'>
-              Bagi mempelbagaikan kaedah penyampaian perkhidmatan kepada pelanggan, INTAN telah menyediakan kemudahan di mana penjawat awam boleh memohon kursus secara dalam talian. Kemudahan ini bukan saja dapat memudahkan proses permohonan kursus tetapi juga telah menggalakkan lebih ramai lagi penjawat awam untuk mengikuti kursus di INTAN.
+              Bagi mempelbagaikan kaedah penyampaian perkhidmatan kepada pelanggan, INTAN telah menyediakan kemudahan di mana penjawat awam boleh memohon program secara dalam talian. Kemudahan ini bukan saja dapat memudahkan proses permohonan program tetapi juga telah menggalakkan lebih ramai lagi penjawat awam untuk mengikuti program di INTAN.
             </p>
             {/* Dashboard button for user who had logged in, Log Masuk button for others */}
             <button className="login-Btn">

@@ -113,7 +113,7 @@ function RekodPermohonan() {
                         <h1>REKOD PERMOHONAN</h1>
                     </div>
                     <div className="Search">
-                        <input type="text" placeholder='Kod/Name' className="textboxsearch"
+                        <input type="text" placeholder='Kod/Nama' className="textboxsearch"
                             value={searchValue} onChange={e => setSearchValue(e.target.value)} ></input>
                         <div className="searchicon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
@@ -145,7 +145,7 @@ function RekodPermohonan() {
 
                                             <div className="contentpopout">
                                                 <p>
-                                                Tekan ya untuk batalkan permohonan program, tekan tidak untuk kekalkan pendaftaran program
+                                                Tekan ya untuk batalkan permohonan program
                                                 </p>
                                             </div>
                                             <div className="buttonrekod">
@@ -185,7 +185,7 @@ function RekodPermohonan() {
 
                                             <div className="contentpopout">
                                                 <p>
-                                                Tekan ya untuk batalkan permohonan program, tekan tidak untuk kekalkan pendaftaran program
+                                                Tekan ya untuk batalkan permohonan program
                                                 </p>
                                             </div>
                                             <div className="buttonrekod">

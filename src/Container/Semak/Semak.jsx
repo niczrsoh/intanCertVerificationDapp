@@ -97,7 +97,13 @@ const Semak = () => {
     });
     setReload(reload + 1);
   };
-
+  function formatDate(dateString) {
+    // Split the original date string
+    const [year, month, day] = dateString.split('-');
+    
+    // Reassemble in dd-mm-yyyy format
+    return `${day}-${month}-${year}`;
+  }
   const padNumber = (num) => {
     return num.toString().padStart(2, "0");
   };
@@ -195,7 +201,7 @@ const Semak = () => {
             <label>Tempoh</label>
             <p>:</p>
             <p className="informasicontent">
-              {mula} - {tamat}
+              {formatDate(mula)} hingga {formatDate(tamat)}
             </p>
           </div>
           <div className="informasiprogram">

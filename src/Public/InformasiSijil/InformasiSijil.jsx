@@ -18,6 +18,13 @@ function InformasiSijil() {
   const [formData, setFormData] = useState(null);
   const [qrCodeDataUrl, setQrCodeDataUrl] = useState(null);
   const [fileUrl, setFileUrl] = useState(null);
+  function formatDate(dateString) {
+    // Split the original date string
+    const [year, month, day] = dateString.split('-');
+    
+    // Reassemble in dd-mm-yyyy format
+    return `${day}-${month}-${year}`;
+  }
   // console.log(transId.transId);
   //  fetch all the data from blockchain first when entering this page
   useEffect(() => {
@@ -37,11 +44,11 @@ function InformasiSijil() {
         data = {
           participantName: recipientName ? recipientName : "PESERTA NAMA",
           participantMykad: recipientIC ? recipientIC : "PESERTA NO. MYKAD",
-          courseName: courseTitle ? courseTitle : "NAMA KURSUS",
+          courseName: courseTitle ? courseTitle : "NAMA PROGRAM",
           courseDate:
             startDate && endDate
-              ? `${startDate} - ${endDate}`
-              : "TARIKH KURSUS",
+              ? `${formatDate(startDate)} hingga ${formatDate(endDate)}`
+              : "TARIKH PROGRAM",
               appId: contractAddress ? contractAddress : "APP ID",
         //    explorer: `http://172.26.112.1:4000/#/blockchain/transactionList/transactionDetail/${transId.transId}`,
          explorer: `https://bchainexplorer.azurewebsites.net/#/blockchain/transactionList/transactionDetail/${transId.transId}`,
@@ -113,8 +120,8 @@ function InformasiSijil() {
       const data = {
         participantName: nama ? nama : "PESERTA NAMA",
         participantMykad: mykad ? mykad : "PESERTA NO. MYKAD",
-        courseName: tajuk ? tajuk : "NAMA KURSUS",
-        courseDate: mula && tamat ? `${mula} - ${tamat}` : "TARIKH KURSUS",
+        courseName: tajuk ? tajuk : "NAMA PROGRAM",
+        courseDate: mula && tamat ? `${formatDate(mula)} hingga ${formatDate(tamat)}` : "TARIKH PROGRAM",
        // explorer: `https://testnet.algoscan.app/tx/${transId.transId}`,
         appId: dappID ? dappID : "APP ID",
       //  isEther: false,
@@ -191,7 +198,7 @@ function InformasiSijil() {
               <div className="data">{formData.participantMykad}</div>
             </div>
             <div className="info">
-              <span className="label">NAMA KURSUS</span>
+              <span className="label">NAMA PROGRAM</span>
               <span>:</span>
               <div className="data">{formData.courseName}</div>
             </div>

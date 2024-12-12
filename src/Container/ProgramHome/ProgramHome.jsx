@@ -157,7 +157,7 @@ const ProgramHome = () => {
         <div className='features'>
             <form className='search'>
                 <div className='searchbox'>
-                    <input value={searchValue} type="text" placeholder="Kod / Kursus / Penyelaras" className='searchtype' onChange={e => setSearchValue(e.target.value)}/>
+                    <input value={searchValue} type="text" placeholder="Kod / Program / Penyelaras" className='searchtype' onChange={e => setSearchValue(e.target.value)}/>
                 </div>
                 {/* <div className='filtericon'>
                     <button className="searchbutton" onClick={handleSubmit} disabled={isSearching}>

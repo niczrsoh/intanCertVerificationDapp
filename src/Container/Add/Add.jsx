@@ -184,14 +184,14 @@ const compareDate = (mula,tamat) => {
           </div>
           <div className='maklumatsijil'>
             <div className='maklumat'>
-              <label className="kik">KOD KURSUS</label>
+              <label className="kik">KOD PROGRAM</label>
               <div className='textarea'>
                 <p className="kik">:</p>
                 <input type="text" className='inputtext' onChange={onChangeKod} value={kod} /></div>
               {/* Input for Kod Kursus */}
             </div>
             <div className='maklumat'>
-              <label className="kik">NAMA KURSUS</label>
+              <label className="kik">NAMA PROGRAM</label>
               <div className='textarea'>
                 <p className="kik">:</p>
                 <input type="text" className='inputtext' onChange={onChangeNama} value={nama} /></div>

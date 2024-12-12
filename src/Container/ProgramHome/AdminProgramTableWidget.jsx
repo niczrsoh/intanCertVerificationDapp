@@ -20,7 +20,7 @@ const AdminProgramTableWidget = ({
     },
     {
       field: "nama",
-      headerName: "Nama Kursus",
+      headerName: "Nama Program",
       flex: 3,
       headerClassName: "super-app-theme--header",
     },
