@@ -29,6 +29,15 @@ const ProgramHome = () => {
   const [programID,setProgramID] = useState("");
   const [tableKey, setTableKey] = useState(Date.now()); // State for forcing re-render of table
   const [reload,setReload] = useState(0);
+  const formatDate = (dateString) => {
+    const date = new Date(dateString); // Convert the string to a Date object
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is 0-based
+    const year = date.getFullYear();
+    console.log(`${day}-${month}-${year}`);
+    return `${day}-${month}-${year}`;
+  };
+
       // Fetch total item count to calculate total pages
       const fetchAllData = async () => {
         const ref = collection(db, "Program");
@@ -38,10 +47,10 @@ const ProgramHome = () => {
         const fetchedItems = snapshot.docs.map((doc) => ({
           ...doc.data(),
           id: doc.id,
-          formattedDate: new Date(doc.data().mula.split("/").reverse().join("-")), // Format mula to Date
+          formattedMula: formatDate(doc.data().mula.split("/").reverse().join("-")), // Format mula to Date
+          formattedTamat: formatDate(doc.data().tamat.split("/").reverse().join("-")), // Format tamat to Date
         }));
-        const sortedItems = fetchedItems.sort((a, b) => b.formattedDate - a.formattedDate); // Sort in descending order
-    
+        const sortedItems = fetchedItems.sort((a, b) => new Date(b.mula) - new Date(a.mula)); // Sort in descending order
         setPrograms(sortedItems);
         setTotalPages(Math.ceil(sortedItems.length / ITEMS_PER_PAGE));
       };
@@ -83,24 +92,6 @@ const ProgramHome = () => {
       setSearchValue(sorted);
      };
 
-    const handleSelectChange = (event) => {
-      const selectedOption = event.target.options[event.target.selectedIndex];
-      const displayValue = selectedOption.getAttribute('data-display-value');
-      selectedOption.textContent = displayValue;
-      
-      // By default the display value should be Susunan to indicate this is for the susunan filter function
-      // There don't have any "Susunan" in the list instead of "None" to indicate that they are filtering nothing
-      if (selectedOption.value === "None"){
-        selectedOption.value = "Susunan";
-      }
-      setSelectedValue(selectedOption.value);
-      if (selectedOption.value === "KodKursus"){kodfilter();}
-      else if (selectedOption.value === "TarikhMula"){tmfilter();}
-      else if (selectedOption.value === "TarikhTamat"){ttfilter();}
-      else if (selectedOption.value === "Susunan"){setSearchValue(programs)}
-
-
-    };
 
     // const handleSubmit = async () => {
     //   if (isSearching) {

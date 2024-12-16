@@ -20,20 +20,28 @@ function SenaraiProgramSediaAda() {
       item.nama.toLowerCase().includes(searchValue.toLowerCase()) ||
       item.kod.toLowerCase().includes(searchValue.toLowerCase())
   );
+  const formatDate = (dateString) => {
+    const date = new Date(dateString); // Convert the string to a Date object
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is 0-based
+    const year = date.getFullYear();
   
+    return `${day}-${month}-${year}`;
+  };
   const userCollectionRef = collection(db, "Program")
       // Fetch total item count to calculate total pages
       const fetchAllData = async () => {
         const ref = collection(db, "Program");
         const snapshot = await getDocs(ref);
-    
+        
         // Transform data and sort by formattedDate
         const fetchedItems = snapshot.docs.map((doc) => ({
           ...doc.data(),
           id: doc.id,
-          formattedDate: new Date(doc.data().mula.split("/").reverse().join("-")), // Format mula to Date
+          formattedMula: formatDate(doc.data().mula.split("/").reverse().join("-")), // Format mula to Date
+          formattedTamat: formatDate(doc.data().tamat.split("/").reverse().join("-")), // Format tamat to Date
         }));
-        const sortedItems = fetchedItems.sort((a, b) => b.formattedDate - a.formattedDate); // Sort in descending order
+        const sortedItems = fetchedItems.sort((a, b) => new Date(b.mula) - new Date(a.mula)); // Sort in descending order
     
         setPrograms(sortedItems);
         setTotalPages(Math.ceil(sortedItems.length / ITEMS_PER_PAGE));

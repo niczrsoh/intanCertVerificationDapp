@@ -147,12 +147,13 @@ function AdminLogin() {
               <div>{account}</div>
             </div>
             <button type="Submit">Masuk</button>
-          </form>
-          <div className="otherLinks">
+            <div className="otherLinks">
             <NavLink className="otherlink" to="/login">
               Log masuk sebagai pengguna
             </NavLink>
           </div>
+          </form>
+        
         </div>
       </div>
     </>

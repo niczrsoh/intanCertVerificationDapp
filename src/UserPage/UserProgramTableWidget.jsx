@@ -24,13 +24,13 @@ const UserProgramTableWidget = ({
       headerClassName: "super-app-theme--header",
     },
     {
-      field: "mula",
+      field: "formattedMula",
       headerName: "Tarikh Mula",
       flex: 1,
       headerClassName: "super-app-theme--header",
     },
     {
-      field: "tamat",
+      field: "formattedTamat",
       headerName: "Tarikh Tamat",
       flex: 1,
       headerClassName: "super-app-theme--header",

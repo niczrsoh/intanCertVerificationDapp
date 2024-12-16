@@ -57,12 +57,13 @@ function UserLogin() {
               }} />
             </label>
             <button className='login' type='Submit'>Masuk</button>
-          </form>
-          <div className='otherLinks'>
+            <div className='otherLinks'>
             <NavLink className='otherlink' to='/register'>Tidak mempunyai akaun? Daftar akaun</NavLink>
             <NavLink className='otherlink' to='/admin-login'>Log masuk sebagai Admin</NavLink>
           </div>
 
+          </form>
+          
         </div>
       </div>
     </>
