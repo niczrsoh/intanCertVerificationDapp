@@ -37,7 +37,7 @@ function User1() {
       <h2>REKOD PERMOHONAN</h2>
       </div>
       <div class="Search">
-        <input type="text" placeholder='Kod/Nama' className="textbox"
+        <input type="text" placeholder='Kod/Nama Program' className="textbox"
         value={searchValue} onChange={e => setSearchValue(e.target.value)}  style={{ width: "150px", height: "20px" }}></input>
         <div className="icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
