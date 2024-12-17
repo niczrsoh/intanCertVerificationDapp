@@ -32,10 +32,10 @@ const AdminPesertaTableWidget = ({
         return (
           <div>
             <NavLink to={`/admin/peserta-semak/${params.row.ic}`} className='aktiviti'>
-                <IconButton>
-                  <VisibilityIcon color="primary" />
-                </IconButton>
-              </NavLink>
+              <IconButton>
+                <VisibilityIcon color="primary" />
+              </IconButton>
+            </NavLink>
           </div>
         );
       },
@@ -51,6 +51,9 @@ const AdminPesertaTableWidget = ({
         columns={columns}
         getRowId={getRowId}
         hideFooter={true}
+        localeText={{
+          noRowsLabel: "Tidak ada rekod dijumpai", // Custom "no rows" message
+        }}
         sx={{
           ...{
             fontSize: "16px",

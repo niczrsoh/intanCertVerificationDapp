@@ -47,7 +47,7 @@ const UserRecordTableWidget = ({
         return (
           <>
             {(`${params.row.pesertaStatus[userID]}` === 'dicipta' || `${params.row.pesertaStatus[userID]}` === 'dikemasKini') ?
-              <button onClick={() => { printSijil(params.row.index-1); }} className="Printbutton">Print</button> :
+              <button onClick={() => { printSijil(params.row.index - 1); }} className="Printbutton">Print</button> :
               <button disabled={true} className="semakbutton">Print</button>}
           </>
         );
@@ -77,6 +77,9 @@ const UserRecordTableWidget = ({
         columns={columns}
         getRowId={getRowId}
         hideFooter={true}
+        localeText={{
+          noRowsLabel: "Tidak ada rekod dijumpai", // Custom "no rows" message
+        }}
         sx={{
           ...{
             fontSize: "16px",

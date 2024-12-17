@@ -51,20 +51,20 @@ const AdminProgramTableWidget = ({
         return (
           <div>
             <NavLink to={`/admin/semak/${params.row.id}`} className="aktivititype">
-                <IconButton>
-                  <VisibilityIcon color="primary" />
-                </IconButton>
-              </NavLink>
-              <NavLink to={`/admin/edit-program/${params.row.id}`} className="aktivititype">
-                <IconButton>
-                  <EditIcon color={"primary"} />
-                </IconButton>
-              </NavLink>
-              <IconButton
-                onClick={(event) => popOut(event, params.row.id)}
-              >
-                <DeleteIcon color={"error"} />
+              <IconButton>
+                <VisibilityIcon color="primary" />
               </IconButton>
+            </NavLink>
+            <NavLink to={`/admin/edit-program/${params.row.id}`} className="aktivititype">
+              <IconButton>
+                <EditIcon color={"primary"} />
+              </IconButton>
+            </NavLink>
+            <IconButton
+              onClick={(event) => popOut(event, params.row.id)}
+            >
+              <DeleteIcon color={"error"} />
+            </IconButton>
           </div>
         );
       },
@@ -80,6 +80,9 @@ const AdminProgramTableWidget = ({
         columns={columns}
         getRowId={getRowId}
         hideFooter={true}
+        localeText={{
+          noRowsLabel: "Tidak ada rekod dijumpai", // Custom "no rows" message
+        }}
         sx={{
           ...{
             fontSize: "16px",

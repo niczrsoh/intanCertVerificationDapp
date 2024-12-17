@@ -140,6 +140,9 @@ const AdminPesertaDetailTableWidget = ({
         columns={columns}
         getRowId={getRowId}
         hideFooter={true}
+        localeText={{
+          noRowsLabel: "Tidak ada rekod dijumpai", // Custom "no rows" message
+        }}
         sx={{
           ...{
             fontSize: "16px",

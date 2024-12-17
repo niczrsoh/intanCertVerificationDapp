@@ -45,10 +45,10 @@ const AdminProgramDetailTableWidget = ({
       renderCell: (params) => {
         // Get the 'mykad' for the current row
         const mykad = params.row.mykad;
-  
+
         // Find the corresponding name from the pesertaNamaMapping object
         const pesertaNama = params.row.pesertaNama
-  
+
         // Display the name, or fallback to "No Data" if not found
         return <p>{params.row.pesertaNama || "No Data"}</p>;
       },
@@ -86,58 +86,58 @@ const AdminProgramDetailTableWidget = ({
         return (
           <div>
             {`${pesertaStatus}` === "dicipta" ||
-                    `${pesertaStatus}` === "dikemasKini" ? (
-                      <button className="semakbutton" disabled={true}>
-                        Cipta
-                      </button>
-                    ) : (
-                      <NavLink
-                        to={`/admin/cipta-sijil/${programID}/${mykad}`}
-                        className="semakbutton"
-                      >
-                        Cipta
-                      </NavLink>
-                    )}
+              `${pesertaStatus}` === "dikemasKini" ? (
+              <button className="semakbutton" disabled={true}>
+                Cipta
+              </button>
+            ) : (
+              <NavLink
+                to={`/admin/cipta-sijil/${programID}/${mykad}`}
+                className="semakbutton"
+              >
+                Cipta
+              </NavLink>
+            )}
 
-                    {`${pesertaStatus}` === "dipadam" || `${pesertaStatus}` === "-" ? (
-                      <>
-                        <button className="semakbutton" disabled={true}>
-                          Kemaskini
-                        </button>
-                        <button className="semakbutton" disabled={true}>
-                          Semak
-                        </button>
-                        <button className="semakbutton" disabled={true}>
-                          Padam
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        <NavLink
-                          to={`/admin/edit-sijil/${programID}/${mykad}`}
-                          className="semakbutton"
-                        >
-                          Kemaskini
-                        </NavLink>
-                        <button
-                          className="semakbutton"
-                          onClick={() => {
-                            semakUser(mykad);
-                          }}
-                        >
-                          Semak
-                        </button>
-                        <button
-                          className="semakbutton"
-                          onClick={() => {
-                            setCurrentUser(mykad);
-                            setIsOpen(true);
-                          }}
-                        >
-                          Padam
-                        </button>
-                      </>
-                    )}
+            {`${pesertaStatus}` === "dipadam" || `${pesertaStatus}` === "-" ? (
+              <>
+                <button className="semakbutton" disabled={true}>
+                  Kemaskini
+                </button>
+                <button className="semakbutton" disabled={true}>
+                  Semak
+                </button>
+                <button className="semakbutton" disabled={true}>
+                  Padam
+                </button>
+              </>
+            ) : (
+              <>
+                <NavLink
+                  to={`/admin/edit-sijil/${programID}/${mykad}`}
+                  className="semakbutton"
+                >
+                  Kemaskini
+                </NavLink>
+                <button
+                  className="semakbutton"
+                  onClick={() => {
+                    semakUser(mykad);
+                  }}
+                >
+                  Semak
+                </button>
+                <button
+                  className="semakbutton"
+                  onClick={() => {
+                    setCurrentUser(mykad);
+                    setIsOpen(true);
+                  }}
+                >
+                  Padam
+                </button>
+              </>
+            )}
           </div>
         );
       },
@@ -148,38 +148,41 @@ const AdminProgramDetailTableWidget = ({
 
   return (
     <Box>
-      {(itemList.length === 0)?"Tiada data":
-      <DataGrid
-        rows={itemList}
-        columns={columns}
-        getRowId={getRowId}
-        hideFooter={true}
-        sx={{
-          ...{
-            fontSize: "16px",
-          },
-          "& .super-app-theme--header": {
-            backgroundColor: "#636DCF",
-            color: "#fff",
-            fontWeight: "bold",
-          },
-          "& .MuiDataGrid-row:nth-of-type(odd)": {
-            backgroundColor: "#F0F0F0",
-          },
-          "& .MuiDataGrid-row:nth-of-type(even)": {
-            backgroundColor: "#FFFFFF",
-          },
-          "& .MuiDataGrid-cell": {
-            borderBottom: "1px solid rgba(224, 224, 224, 1)",
-          },
-          "& .MuiDataGrid-row.Mui-selected": {
-            backgroundColor: "#D3D3D3", // Change this to your desired color for selected rows
-            "&:hover": {
-              backgroundColor: "#D3D3D3", // Ensure the hover effect does not change the color
+      {(itemList.length === 0) ? "Tiada data" :
+        <DataGrid
+          rows={itemList}
+          columns={columns}
+          getRowId={getRowId}
+          hideFooter={true}
+          localeText={{
+            noRowsLabel: "Tidak ada rekod dijumpai", // Custom "no rows" message
+          }}
+          sx={{
+            ...{
+              fontSize: "16px",
             },
-          },
-        }}
-      />}
+            "& .super-app-theme--header": {
+              backgroundColor: "#636DCF",
+              color: "#fff",
+              fontWeight: "bold",
+            },
+            "& .MuiDataGrid-row:nth-of-type(odd)": {
+              backgroundColor: "#F0F0F0",
+            },
+            "& .MuiDataGrid-row:nth-of-type(even)": {
+              backgroundColor: "#FFFFFF",
+            },
+            "& .MuiDataGrid-cell": {
+              borderBottom: "1px solid rgba(224, 224, 224, 1)",
+            },
+            "& .MuiDataGrid-row.Mui-selected": {
+              backgroundColor: "#D3D3D3", // Change this to your desired color for selected rows
+              "&:hover": {
+                backgroundColor: "#D3D3D3", // Ensure the hover effect does not change the color
+              },
+            },
+          }}
+        />}
     </Box>
   );
 };
