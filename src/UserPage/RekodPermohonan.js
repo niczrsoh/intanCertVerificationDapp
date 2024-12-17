@@ -23,7 +23,14 @@ function RekodPermohonan() {
     const ITEMS_PER_PAGE = 10;
     const [currentPage, setCurrentPage] = useState(1);
     const navigate = useNavigate();
-
+    const formatDate = (dateString) => {
+        const date = new Date(dateString); // Convert the string to a Date object
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is 0-based
+        const year = date.getFullYear();
+        console.log(`${day}-${month}-${year}`);
+        return `${day}-${month}-${year}`;
+      };
     //Filter the data array based on the nama or kod value entered by the user.
     const filteredData = programs.filter(
         (item) =>
@@ -35,7 +42,10 @@ function RekodPermohonan() {
         const docRef = query(collection(db, "Program"), where("pesertaList", "array-contains", userID));
         const data = await getDocs(docRef);
         const sortedItems = data.docs
-        .map((doc,index) => ({ ...doc.data(), id: doc.id, index: index+1 }))
+        .map((doc,index) => ({ ...doc.data(), id: doc.id, index: index+1,
+            formattedMula: formatDate(doc.data().mula.split("/").reverse().join("-")), // Format mula to Date
+            formattedTamat: formatDate(doc.data().tamat.split("/").reverse().join("-")), // Format tamat to Date
+        }))
         setPrograms(sortedItems);//read 3
         setTransactionId(data.docs.map((doc) => ({ ...doc.data().transactionId })))
         setTotalPages(Math.ceil(sortedItems.length / ITEMS_PER_PAGE));
