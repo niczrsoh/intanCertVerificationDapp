@@ -10,12 +10,32 @@ const AdminLogTableWidget = ({
   itemList,
 }) => {
 
+  const convertDateFormat = (date) => {
+    // Split the input into date and time
+    const [datePart, timePart] = date.split(' ');
+
+    // Further split the date part into year, month, and day
+    const dateParts = datePart.split('-');
+    
+    if (dateParts.length === 3 && timePart) {
+      // Return the formatted string as dd-mm-yyyy HH:MM:SS
+      return `${dateParts[2]}-${dateParts[1]}-${dateParts[0]} ${timePart}`;
+    }
+
+    return date; // Return the original date if the format is incorrect
+  };
+
   const columns = [
     {
       field: "date",
       headerName: "Tarikh & Masa",
       flex: 1,
       headerClassName: "super-app-theme--header",
+      renderCell: (params) => {
+        // Get the row index, and add 1 to start from 1
+        const date = convertDateFormat(params.row.date);
+        return <p>{date}</p>;
+      },
     },
     {
       field: "adminName",

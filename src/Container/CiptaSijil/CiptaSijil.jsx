@@ -32,14 +32,21 @@ const CiptaSijil = ({ backpage }) => {
       const programData = await getDoc(programDocRef);
       const userData = await getDoc(userDocRef);
       setTajukSijil(programData.data().nama);
-      setTarikhMula(programData.data().mula);
-      setTarikhTamat(programData.data().tamat);
+      setTarikhMula(convertDateFormat(programData.data().mula));
+      setTarikhTamat(convertDateFormat(programData.data().tamat));
       setNRIC(userData.data().ic);
       setNama(userData.data().nama);
     };
 
     getProgramAndUser();
   }, []);
+  const convertDateFormat = (date) => {
+    const dateParts = date.split('-'); // Split the input date into [yyyy, mm, dd]
+    if (dateParts.length === 3) {
+      return `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`; // Return the date in dd-mm-yyyy format
+    }
+    return date; // Return the original date if the format is incorrect
+  };
   const createSijil = async (sender, transId, appid) => {
     const date = new Date();
     const formattedDate = `${date.getFullYear()}-${padNumber(

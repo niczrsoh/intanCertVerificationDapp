@@ -16,6 +16,14 @@ const AdminPesertaDetailTableWidget = ({
   setIsOpen,
 }) => {
 
+  const convertDateFormat = (date) => {
+    const dateParts = date.split('-'); // Split the input date into [yyyy, mm, dd]
+    if (dateParts.length === 3) {
+      return `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`; // Return the date in dd-mm-yyyy format
+    }
+    return date; // Return the original date if the format is incorrect
+  };
+
   const columns = [
     {
       field: "id",
@@ -24,8 +32,8 @@ const AdminPesertaDetailTableWidget = ({
       headerClassName: "super-app-theme--header",
       renderCell: (params) => {
         // Get the row index, and add 1 to start from 1
-        const mula = params.row.mula;
-        const tamat = params.row.tamat;
+        const mula = convertDateFormat(params.row.mula);
+        const tamat = convertDateFormat(params.row.tamat);
         return <p>{mula} - {tamat}</p>;
       },
     },

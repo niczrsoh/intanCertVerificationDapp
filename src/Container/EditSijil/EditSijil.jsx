@@ -56,8 +56,8 @@ const EditSijil = ({ backpage }) => {
           contractAddress,
         } = info;
         setTajukSijil(courseTitle);
-        setTarikhMula(startDate);
-        setTarikhTamat(endDate);
+        setTarikhMula(convertDateFormat(startDate));
+        setTarikhTamat(convertDateFormat(endDate));
         setNama(recipientName);
         setPrevName(recipientName);
         setNRIC(recipientIC);
@@ -85,8 +85,8 @@ const EditSijil = ({ backpage }) => {
         );
 
         //  Convert all the bytes variables into string object and assign them to particular varibles based on their variable names
-        setTajukSijil(Object.values(JSON.parse(dTajuk))[0]);
-        setTarikhMula(Object.values(JSON.parse(dMula))[0]);
+        setTajukSijil(convertDateFormat(Object.values(JSON.parse(dTajuk))[0]));
+        setTarikhMula(convertDateFormat(Object.values(JSON.parse(dMula))[0]));
         setTarikhTamat(Object.values(JSON.parse(dTamat))[0]);
         setNama(Object.values(JSON.parse(dNama))[0]);
         setNRIC(Object.values(JSON.parse(dNRIC))[0]);
@@ -96,6 +96,14 @@ const EditSijil = ({ backpage }) => {
 
     getUser();
   }, []);
+
+  const convertDateFormat = (date) => {
+    const dateParts = date.split('-'); // Split the input date into [yyyy, mm, dd]
+    if (dateParts.length === 3) {
+      return `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`; // Return the date in dd-mm-yyyy format
+    }
+    return date; // Return the original date if the format is incorrect
+  };
 
   const updateSijil = async (sender, transId) => {
     //creat 2
