@@ -13,6 +13,7 @@ const Register = () => {
   const [jawatan, setJawatan] = useState("");
   const [nama, setNama] = useState("");
   const [TelefonPeribadi, setTelefonPeribadi] = useState("");
+  const [isPhoneValid, setIsPhoneValid] = useState(false);
   const navigate = useNavigate();
 
   const validatePhoneNumber = (phoneNumber) => {
@@ -65,6 +66,19 @@ const Register = () => {
     });
   }
 
+  const handlePhoneChange = (event) => {
+    let value = event.target.value.replace(/[^0-9]/g, '').replace(/(\d{3})(\d+)/, '$1-$2');
+    setTelefonPeribadi(value);
+    
+    // Validate the phone number format
+    const regex = /^[0-9]{3}-[0-9]{7,8}$/;
+    if (regex.test(value)) {
+      setIsPhoneValid(true);
+    } else {
+      setIsPhoneValid(false);
+    }
+  };
+
   return (
     
     <>
@@ -97,21 +111,36 @@ const Register = () => {
               }} />
             </label>
 
-            <label htmlFor='RegisterMyKad'><br></br>Jawatan:
+            <label htmlFor='RegisterMyKad'><br></br>Jawatan dan Gred:
               <input id='RegisterMyKad' name='Jawatan/Gred' type='text' placeholder='Jurutera' required onChange={(event) => {
                 setJawatan(event.target.value)
               }} />
             </label>
-            <label htmlFor='RegisterMyKad'><br></br>Telefon Peribadi:
-              <input id='RegisterMyKad' name='TelefonPeribadi' type='tel'  pattern="[0-9]{3}-[0-9]{7,8}"
-                inputMode='numeric' required keyboardType='numeric' placeholder='012-3456789'
-                onChange={
-                  (event) => {
-                    event.target.value = event.target.value.replace(/[^0-9]/g, '').replace(/(\d{3})(\d+)/, '$1-$2');
-                    setTelefonPeribadi(event.target.value)}
-                }
+            <div>
+              <label htmlFor='RegisterMyKad'>
+                <br></br>Telefon Peribadi:
+                <input
+                  id='RegisterMyKad'
+                  name='TelefonPeribadi'
+                  type='tel'
+                  pattern="[0-9]{3}-[0-9]{7,8}"
+                  inputMode='numeric'
+                  required
+                  placeholder='012-3456789'
+                  value={TelefonPeribadi}
+                  onChange={handlePhoneChange}
                 />
-            </label>
+              </label>
+
+              {/* Error message if the phone number format is invalid */}
+              {!isPhoneValid && (
+                <p style={{ color: 'red', textAlign: 'left' }}>
+                  Sila ikut format nombor telefon : 
+                  <br/>
+                  xxx-xxxxxxxxx
+                </p>
+              )}
+            </div>
             <label htmlFor='RegisterMyKad'><br></br>Kata Laluan:
               <input id='RegisterMyKad' name='KataLaluan' type='password' placeholder='******' required onChange={(event) => {
                 setKataLaluan(event.target.value)
