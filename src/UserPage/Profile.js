@@ -366,7 +366,7 @@ export default class profile extends React.Component {
               this.setState({
                 active: activeP,
               });
-              alert("Gambar profile telah berjaya dikemaskini!");
+              alert("Profil telah berjaya dikemaskini.");
             });
           });
         });
@@ -435,7 +435,7 @@ export default class profile extends React.Component {
           </div>
         ) :(active === "loading")? 
         <center>
-        <div className="loading">Tengah simpan profile anda ... &#8230;</div></center>
+        <div className="loading">Sedang mengemaskini profil… &#8230;</div></center>
         :(
           <Profile
             onSubmit={this.handleSubmit}
