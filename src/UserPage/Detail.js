@@ -105,7 +105,7 @@ function SenaraiProgramSediaAda() {
         transactionId: newTran,
         jumlahPeserta: newJumlahPesertaString,
       }).then(() => {
-        alert("And telah berjaya mendaftar program ini!!");
+        alert("Anda telah berjaya mendaftar program");
         navigate(-1);
       })
     }
@@ -195,7 +195,7 @@ function SenaraiProgramSediaAda() {
 
               <div className="contentpopout">
                 <p>
-                  Tekan ya untuk memohon program
+                  Tekan Ya untuk memohon program
                 </p>
               </div>
 

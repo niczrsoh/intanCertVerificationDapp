@@ -109,7 +109,7 @@ function RekodPermohonan() {
                 jumlahPeserta: newJumlahPesertaString,
             }).then(() => {
                 setShowMohon(false);
-                alert("anda telah berjaya batal permohonan program");
+                alert("Anda telah berjaya padam permohonan program");
                 setReload(reload + 1);
             })
         })
@@ -155,7 +155,7 @@ function RekodPermohonan() {
 
                                             <div className="contentpopout">
                                                 <p>
-                                                Tekan ya untuk batalkan permohonan program
+                                                Tekan Ya untuk batalkan permohonan program
                                                 </p>
                                             </div>
                                             <div className="buttonrekod">
@@ -195,7 +195,7 @@ function RekodPermohonan() {
 
                                             <div className="contentpopout">
                                                 <p>
-                                                Tekan ya untuk batalkan permohonan program
+                                                Tekan Ya untuk batalkan permohonan program
                                                 </p>
                                             </div>
                                             <div className="buttonrekod">
