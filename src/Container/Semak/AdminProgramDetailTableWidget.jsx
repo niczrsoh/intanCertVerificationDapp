@@ -54,15 +54,6 @@ const AdminProgramDetailTableWidget = ({
       },
     },
     {
-      field: "mula",
-      headerName: "Kehadiran",
-      flex: 1,
-      headerClassName: "super-app-theme--header",
-      renderCell: (params) => {
-        return <p>80%</p>;
-      },
-    },
-    {
       field: "status",
       headerName: "Status",
       flex: 1,
