@@ -55,17 +55,21 @@ const AdminProgramTableWidget = ({
                 <VisibilityIcon color="primary" />
               </IconButton>
             </NavLink>
-            <NavLink to={`/admin/edit-program/${params.row.id}`} className="aktivititype">
-              <IconButton>
-                <EditIcon color={"primary"} />
-              </IconButton>
-            </NavLink>
+            {params.row.editable ? (
+              <NavLink to={`/admin/edit-program/${params.row.id}`} className="aktivititype">
+                <IconButton>
+                  <EditIcon color={"primary"} />
+                </IconButton>
+              </NavLink>
+            ) : (
+              <> </>
+            )}
             {params.row.deleteable ? (
               <IconButton
-              onClick={(event) => popOut(event, params.row.id)}
-            >
-              <DeleteIcon color={"error"} />
-            </IconButton>
+                onClick={(event) => popOut(event, params.row.id)}
+              >
+                <DeleteIcon color={"error"} />
+              </IconButton>
             ) : (
               <> </>
             )}
