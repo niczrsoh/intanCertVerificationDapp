@@ -179,9 +179,20 @@ const Semak = () => {
     <div className="app_box">
       <div className="semakdaftarheader">
         <button className="backbutton" onClick={() => navigate(-1)}>
-          <img src={backicon} className="backicon" alt="It is a back icon." />
+          <div className="back-wrapper" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer' }}>
+            <img
+              src={backicon}
+              alt="This is a back button."
+              className="backicon"
+              style={{ width: '24px', height: '24px', objectFit: 'contain' }} // Make sure the image has a fixed size
+            />
+            {/* Adding the "Kembali" (Back) text below the back icon */}
+            <div className="kembali-text" onClick={() => navigate(-1)}>
+              Kembali
+            </div>
+          </div>
         </button>
-        <h1 className="semakdaftaradmin">{nama}</h1>
+        <h1 className="semakdaftaradmin" style={{ marginLeft: '16px' }}>{nama}</h1>
       </div>
       {/* Program Information */}
       <div className="informasibox">

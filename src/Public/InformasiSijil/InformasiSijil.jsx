@@ -177,13 +177,20 @@ function InformasiSijil() {
                 navigate(-1);
               }}
             >
-              <img
-                src={backicon}
-                alt="This is a back button."
-                className="backicon"
-              />
+              <div className="back-wrapper" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer' }}>
+                <img
+                  src={backicon}
+                  alt="This is a back button."
+                  className="backicon"
+                  style={{ width: '24px', height: '24px', objectFit: 'contain' }} // Make sure the image has a fixed size
+                />
+                {/* Adding the "Kembali" (Back) text below the back icon */}
+                <div className="kembali-text" onClick={() => navigate(-1)}>
+                  Kembali
+                </div>
+              </div>
             </button>
-            <h1>Informasi Sijil</h1>
+            <h1 style={{ marginLeft: '16px' }}>Informasi Sijil</h1>
           </div>
           {/* Sijil detail section */}
           <div className="infoContent">

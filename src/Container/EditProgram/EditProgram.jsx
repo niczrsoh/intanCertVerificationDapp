@@ -118,9 +118,21 @@ const EditProgram = () => {
   return (
     <div className='app_box'>
       <div className='semakdaftarheader'>
-        {/* back to previous page */}
-        <button className='backbutton' onClick={() => navigate(-1)}><img src={backicon} alt='This is a back button.' className="backicon" /></button>
-        <h1 className='semakdaftaradmin'>KEMASKINI PROGRAM</h1>
+      <button className="backbutton" onClick={() => navigate(-1)}>
+          <div className="back-wrapper" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer' }}>
+            <img
+              src={backicon}
+              alt="This is a back button."
+              className="backicon"
+              style={{ width: '24px', height: '24px', objectFit: 'contain' }} // Make sure the image has a fixed size
+            />
+            {/* Adding the "Kembali" (Back) text below the back icon */}
+            <div className="kembali-text" onClick={() => navigate(-1)}>
+              Kembali
+            </div>
+          </div>
+        </button>
+        <h1 className='semakdaftaradmin' style={{ marginLeft: '16px' }}>KEMASKINI PROGRAM</h1>
       </div>
       {/*Information input section for Edit Program */}
       <form className='maklumatbox' onSubmit={editProgram}>
