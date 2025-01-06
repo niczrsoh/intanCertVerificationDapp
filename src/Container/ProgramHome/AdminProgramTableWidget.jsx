@@ -60,11 +60,15 @@ const AdminProgramTableWidget = ({
                 <EditIcon color={"primary"} />
               </IconButton>
             </NavLink>
-            <IconButton
+            {params.row.deleteable ? (
+              <IconButton
               onClick={(event) => popOut(event, params.row.id)}
             >
               <DeleteIcon color={"error"} />
             </IconButton>
+            ) : (
+              <> </>
+            )}
           </div>
         );
       },

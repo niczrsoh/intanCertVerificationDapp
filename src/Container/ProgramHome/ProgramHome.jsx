@@ -25,6 +25,8 @@ const ProgramHome = () => {
   const { account, setAccount } = useContext(AppContext);
   const [totalPages, setTotalPages] = useState(0);
   const ITEMS_PER_PAGE = 10;
+  const adminName = sessionStorage.getItem("adminName");
+  const adminRole = sessionStorage.getItem("adminRole");
   const [programs,setPrograms] = useState([]);
   const [programID,setProgramID] = useState("");
   const [tableKey, setTableKey] = useState(Date.now()); // State for forcing re-render of table
@@ -49,6 +51,7 @@ const ProgramHome = () => {
           id: doc.id,
           formattedMula: formatDate(doc.data().mula.split("/").reverse().join("-")), // Format mula to Date
           formattedTamat: formatDate(doc.data().tamat.split("/").reverse().join("-")), // Format tamat to Date
+          deleteable: doc.data().penyelaras === adminName || adminRole === "SuperAdmin", // Check if the user can delete the program
         }));
         const sortedItems = fetchedItems.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate)); // Sort by "createdDate" field in descending order
         setPrograms(sortedItems);
