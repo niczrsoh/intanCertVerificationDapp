@@ -19,6 +19,7 @@ const EditProgram = () => {
   const [maksimumPeserta, setMaksimumPeserta] = useState("");
   const [yuran, setYuran] = useState("");
   const [tamat, setTamat] = useState("");
+  const [createdDate, setCreatedDate] = useState("");
 
   const onChangeIsiProgram = (e) => {
     setIsiProgram(e.target.value);
@@ -77,6 +78,7 @@ const EditProgram = () => {
       setMaksimumPeserta(data1.data().maksimumPeserta);
       setYuran(data1.data().yuran);
       setTamat(parseDate(data1.data().tamat));
+      setCreatedDate(data1.data().createdDate);
     }
 
     getProgram();
@@ -97,6 +99,7 @@ const EditProgram = () => {
       maksimumPeserta: maksimumPeserta,
       yuran: yuran,
       tamat: formatDate(tamat),
+      createdDate: createdDate,
     }).then(() => {
       setIsiProgram("");
       setKod("");
@@ -107,6 +110,7 @@ const EditProgram = () => {
       setMaksimumPeserta("");
       setTamat("");
       setYuran("");
+      setCreatedDate("");
       alert("Program telah dikemaskini!!");
       navigate(-1);
     });

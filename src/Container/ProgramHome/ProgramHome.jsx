@@ -50,7 +50,7 @@ const ProgramHome = () => {
           formattedMula: formatDate(doc.data().mula.split("/").reverse().join("-")), // Format mula to Date
           formattedTamat: formatDate(doc.data().tamat.split("/").reverse().join("-")), // Format tamat to Date
         }));
-        const sortedItems = fetchedItems.sort((a, b) => new Date(b.mula) - new Date(a.mula)); // Sort in descending order
+        const sortedItems = fetchedItems.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate)); // Sort by "createdDate" field in descending order
         setPrograms(sortedItems);
         setTotalPages(Math.ceil(sortedItems.length / ITEMS_PER_PAGE));
       };

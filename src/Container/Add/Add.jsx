@@ -22,6 +22,7 @@ const Add = () => {
   const [maksimumPeserta, setMaksimumPeserta] = useState("");
   const [yuran, setYuran] = useState('0.00');
   const [tamat, setTamat] = useState("");
+  const [createdDate, setCreatedDate] = useState("");
   const [timeValidating, setTimeValidating] = useState(false);
   const calendarRef = useRef(null);
   const onChangeIsiProgram = (e) => {
@@ -126,6 +127,10 @@ const compareDate = (mula,tamat) => {
     setTamat(e);
   };
 
+  const padNumber = (num) => {
+    return num.toString().padStart(2, "0");
+  };
+
   const programRegister = async (e) => {
     e.preventDefault();
     // if(!timeValidating){
@@ -138,7 +143,16 @@ const compareDate = (mula,tamat) => {
       return;
     }
     //collection() will define the path to the collection
-    const userCollectionRef = collection(db, "Program")
+    const userCollectionRef = collection(db, "Program");
+
+    //get current admin created time
+    const date = new Date();
+    const formattedDate = `${date.getFullYear()}-${padNumber(
+      date.getMonth() + 1
+    )}-${padNumber(date.getDate())} ${padNumber(date.getHours())}:${padNumber(
+      date.getMinutes()
+    )}:${padNumber(date.getSeconds())}`;
+
     //addDoc() is used for add new document data but with auto generated id in the firestore
     //in this case it will add new program
     await addDoc(userCollectionRef, {
@@ -156,6 +170,7 @@ const compareDate = (mula,tamat) => {
       pesertaNama: {},
       tamat: formatDate(tamat),
       yuran: yuran,
+      createdDate: `${formattedDate.toString()}`,
     }).then(() => {
       setIsiProgram("");
       setKod("");
@@ -166,6 +181,7 @@ const compareDate = (mula,tamat) => {
       setMaksimumPeserta("");
       setTamat("");
       setYuran("");
+      setCreatedDate("");
       alert("Program berjaya didaftarkan!!");
       navigate(-1);
     });//create 2 end
