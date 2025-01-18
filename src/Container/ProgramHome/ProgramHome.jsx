@@ -63,7 +63,7 @@ const ProgramHome = () => {
     (item) =>
       item.nama.toLowerCase().includes(searchValue.toLowerCase()) ||
       item.kod.toLowerCase().includes(searchValue.toLowerCase()) ||
-      item.penyelaras.toLowerCase() === searchValue.toLowerCase()
+      item.penyelaras.toLowerCase().trim().includes(searchValue.toLowerCase().trim()) 
   );
   useEffect(() => {
     if (isOpen) {
@@ -154,11 +154,12 @@ const ProgramHome = () => {
                 <div className='searchbox'>
                     <input value={searchValue} type="text" placeholder="Kod / Program / Penyelaras" className='searchtype' onChange={e => setSearchValue(e.target.value)}/>
                 </div>
-                {/* <div className='filtericon'>
-                    <button className="searchbutton" onClick={handleSubmit} disabled={isSearching}>
-                        <img src={searchpic} alt='This is a search button.' type="submit" className="searchpic"/>
-                    </button>
-                </div> */}
+                <div className='filtericon'>
+                  <img src={searchpic} alt='This is a search button.' type="submit" className="searchpic"/>
+                    {/* <button className="searchbutton" onClick={handleSubmit} disabled={isSearching}>
+                        
+                    </button> */}
+                </div>
             </form>
         </div>
     </div>
