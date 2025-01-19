@@ -195,7 +195,7 @@ function SenaraiProgramSediaAda() {
 
               <div className="contentpopout">
                 <p>
-                  Tekan Ya untuk memohon program
+                  Tekan Ya untuk memohon program.
                 </p>
               </div>
 

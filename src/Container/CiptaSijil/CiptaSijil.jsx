@@ -172,7 +172,7 @@ const CiptaSijil = ({ backpage }) => {
               </div>
             </div>
             <div className="maklumat">
-              <label className="kik">No. MYKAD</label>
+              <label className="kik">NO. MYKAD</label>
               <div className="textarea">
                 <p className="kik">:</p>
                 <input

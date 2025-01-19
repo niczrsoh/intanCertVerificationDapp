@@ -182,7 +182,7 @@ const compareDate = (mula,tamat) => {
       setTamat("");
       setYuran("");
       setCreatedDate("");
-      alert("Program berjaya didaftarkan.");
+      alert("Program berjaya didaftar.");
       navigate(-1);
     });//create 2 end
   }

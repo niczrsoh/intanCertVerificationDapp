@@ -64,7 +64,7 @@ const ProgramEdit = () => {
             <input type="text" className='inputtext'/></div>
           </div>
           <div className='maklumat'>
-            <label>No. MYKAD</label>
+            <label>NO. MYKAD</label>
             <div className='textarea'>
             <p>:</p>
             <input type="text" className='inputtext'/></div>

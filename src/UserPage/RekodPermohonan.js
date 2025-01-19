@@ -155,7 +155,7 @@ function RekodPermohonan() {
 
                                             <div className="contentpopout">
                                                 <p>
-                                                Tekan Ya untuk batalkan permohonan program
+                                                Tekan Ya untuk batalkan permohonan program.
                                                 </p>
                                             </div>
                                             <div className="buttonrekod">
@@ -195,7 +195,7 @@ function RekodPermohonan() {
 
                                             <div className="contentpopout">
                                                 <p>
-                                                Tekan Ya untuk batalkan permohonan program
+                                                Tekan Ya untuk batalkan permohonan program.
                                                 </p>
                                             </div>
                                             <div className="buttonrekod">
