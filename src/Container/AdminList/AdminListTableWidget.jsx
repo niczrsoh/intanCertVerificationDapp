@@ -11,6 +11,7 @@ const AdminListTableWidget = ({
   itemList,
   onClickPadam,
 }) => {
+  const adminRole = sessionStorage.getItem("adminRole");
   const columns = [
     {
       field: "bil",
@@ -44,11 +45,22 @@ const AdminListTableWidget = ({
       renderCell: (params) => {
         return (
           <div>
-            <IconButton
-              onClick={(e) => onClickPadam(params.row.id)}
-            >
-              <DeleteIcon color={"error"} />
-            </IconButton>
+            {adminRole == "SuperAdmin" ?
+              <div>
+                <NavLink to={`/admin/kemaskini-admin/${params.row.id}`} className="aktivititype">
+                  <IconButton>
+                    <EditIcon color={"primary"} />
+                  </IconButton>
+                </NavLink>
+                <IconButton
+                  onClick={(e) => onClickPadam(params.row.id)}
+                >
+                  <DeleteIcon color={"error"} />
+                </IconButton>
+              </div>
+              :
+              <div></div>
+            }
           </div>
         );
       },

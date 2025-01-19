@@ -28,6 +28,7 @@ import PublicRoutes from "./publicRoutes";
 import UserRoutes from "./userRoutes";
 import DisplaySijil from "../Container/CiptaSijil/DisplaySijil";
 import InformasiErrorPage from "../Public/InformasiSijil/ErrorPage";
+import EditAdmin from "../Container/EditAdmin/EditAdmin";
 function Router() {
   return (
     <>
@@ -48,6 +49,7 @@ function Router() {
           <Route path="/admin/home" exact element={<ProgramHome />} />
           <Route path="/admin/peserta" exact element={<Peserta />} />
           <Route path="/admin/daftar-admin" exact element={<Admin />} />
+          <Route path="/admin/kemaskini-admin/:adminID" exact element={<EditAdmin />} />
           <Route path="/admin/admin-list" exact element={<AdminList/>} />
           <Route path="/admin/log" exact element={<Log />} />
           <Route path="/admin/semak/:programID" exact element={<Semak />} />

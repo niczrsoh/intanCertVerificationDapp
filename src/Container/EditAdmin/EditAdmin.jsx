@@ -1,16 +1,30 @@
-import React, { useState } from 'react'
-import { doc, getDoc, setDoc } from 'firebase/firestore'
+import React, { useState,useEffect } from 'react'
+import { doc, getDoc, setDoc, deleteDoc } from 'firebase/firestore'
 import { db } from '../../Backend/firebase/firebase-config'
-import '../Admin/admin.css'
+import '../EditAdmin/editAdmin.css'
 import { Buttons } from '../../Component'
-import { useNavigate } from "react-router-dom"
-const Admin = () => {
+import { useNavigate, useParams  } from "react-router-dom"
+const EditAdmin = () => {
+  let { adminID } = useParams();
   const navigate = useNavigate();
   const [mykad, setMykad] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [account, setAccount] = useState("");
   const [role, setRole] = useState("Admin");
+
+  useEffect(() => {
+      const getAdminInfo = async () => {
+        const adminRef = doc(db, "Admin", adminID);
+        const data = await getDoc(adminRef);
+        setMykad(adminID);
+        setName(data.data().name);
+        setEmail(data.data().email);
+        setAccount(data.data().acc);
+        setRole(data.data().role);
+      };
+      getAdminInfo();
+    }, []);
 
   const onChangeMykad = (e) => {
     const regex = /[0-9]*/;
@@ -39,7 +53,7 @@ const Admin = () => {
     return num.toString().padStart(2, "0");
   };
 
-  const adminRegister = async (e) => {
+  const adminUpdate = async (e) => {
     e.preventDefault();
     const regex = /[0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]/;
     if (!regex.test(mykad)) {
@@ -59,11 +73,8 @@ const Admin = () => {
 
     //getDoc() will get the document data based on the path of doc()
     //in this case, getDoc() will get the info of admin to test whether the admin ic has been registered or not
-    await getDoc(userCollectionRef).then(async (data) => {
+    
       //console.log(data.data())
-      if (data.data() != undefined) {
-        alert("No. MyKad telah didaftar.");
-      } else {
         //setDoc() will add the document data with the specific document id
         await setDoc(userCollectionRef, {
           name: name,
@@ -77,28 +88,26 @@ const Admin = () => {
           setEmail("");
           setAccount("");
           setRole("");
-          await alert("Admin baru telah didaftar.");
+          await alert("Informasi admin telah dikemaskini.");
           navigate(`/admin/admin-list`);
         });
-      }
-    })
   }
 
   return (
     <div className='app_box'>
-      <h1 className='admintitle'>DAFTAR ADMIN</h1>
+      <h1 className='admintitle'>KEMASKINI ADMIN</h1>
       <div>
         <div className='maklumatadminbahru'>
           MAKLUMAT ADMIN BARU
         </div>
-        <form className='maklumatadmin' onSubmit={adminRegister}>
+        <form className='maklumatadmin' onSubmit={adminUpdate}>
           <div className='maklumat'>
             <label className="kik" onChange={(event) => {
               setMykad(event.target.value)
             }}>NO.MYKAD</label>
             <div className='textarea'>
               <p className="kik">:</p>
-              <input type="text" className='inputtext' onChange={onChangeMykad} value={mykad} placeholder="000000-00-0000" minLength='14' maxLength='14' required /></div>
+              <input type="text" className='inputtext' onChange={onChangeMykad} value={mykad} placeholder="000000-00-0000" minLength='14' maxLength='14' required disabled  /></div>
             {/* Input for NO.MYKAD */}
           </div>
           <div className='maklumat'>
@@ -134,7 +143,7 @@ const Admin = () => {
             {/* Input for ADMIN ROLE */}
           </div>
         </form>
-        <div className='submitBtn' ><Buttons title="Daftar Admin" onClick={adminRegister}/></div>
+        <div className='submitBtn' ><Buttons title="Kemaskini Admin" onClick={adminUpdate}/></div>
       </div >
 
 
@@ -142,4 +151,4 @@ const Admin = () => {
   )
 }
 
-export default Admin
+export default EditAdmin
