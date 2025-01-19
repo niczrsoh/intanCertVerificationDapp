@@ -248,7 +248,7 @@ const compareDate = (mula,tamat) => {
           onChange={onChangeMula}
           value={mula}// Optionally close on blur
           minDate={new Date()} 
-          format="y-MM-dd"
+          format="dd-MM-y"  
         />
       </div>
       </div>
@@ -263,7 +263,7 @@ const compareDate = (mula,tamat) => {
           onChange={onChangeTamat}
           value={tamat}// Optionally close on blur
           minDate={mula} 
-          format="y-MM-dd"
+          format="dd-MM-y"  
         /></div>
             </div>
             <div className='maklumat'>
