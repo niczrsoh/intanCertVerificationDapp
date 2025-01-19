@@ -71,7 +71,7 @@ export default function SemakSijil() {
           />
         </form>
         <div className='submitBtn'><Buttons title="🔍 Semak" onClick={handleFormSubmit}/></div>
-        <p>Untuk menyemak pensijilan, terdapat dua kaedah</p>
+        <p>Untuk menyemak sijil, terdapat dua kaedah</p>
         <div className="table-container">
           <div className="row">
             {/* First Row, First Column */}
@@ -80,7 +80,7 @@ export default function SemakSijil() {
                 <span className="circle-number">1</span>
               </div>
               <div className="instruction">
-                <p>Salin id pensijilan dan tampal dalam bar carian untuk carian</p>
+                <p>Salin id sijil dan tampal dalam bar carian untuk carian</p>
               </div>
             </div>
 
@@ -90,7 +90,7 @@ export default function SemakSijil() {
                 <span className="circle-number">2</span>
               </div>
               <div className="instruction">
-                <p>Imbas kod qr untuk menyemak pensijilan</p>
+                <p>Imbas kod qr untuk menyemak sijil</p>
               </div>
             </div>
           </div>
