@@ -111,7 +111,7 @@ const EditProgram = () => {
       setTamat("");
       setYuran("");
       setCreatedDate("");
-      alert("Program telah dikemaskini!!");
+      alert("Program telah dikemaskini.");
       navigate(-1);
     });
   }

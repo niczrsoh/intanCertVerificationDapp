@@ -76,7 +76,7 @@ const AdminProgramDetailTableWidget = ({
         const pesertaStatus = params.row.pesertaStatus;  // Find the corresponding status from the pesertaStatusMapping object
         return (
           <div>
-            {`${pesertaStatus}` === "dicipta" ||
+            {`${pesertaStatus}` === "Dicipta" ||
               `${pesertaStatus}` === "dikemasKini" ? (
               <button className="semakbutton" disabled={true}>
                 Cipta
@@ -90,7 +90,7 @@ const AdminProgramDetailTableWidget = ({
               </NavLink>
             )}
 
-            {`${pesertaStatus}` === "dipadam" || `${pesertaStatus}` === "-" ? (
+            {`${pesertaStatus}` === "Dipadam" || `${pesertaStatus}` === "-" ? (
               <>
                 <button className="semakbutton" disabled={true}>
                   Kemaskini

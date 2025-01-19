@@ -104,7 +104,7 @@ const AdminList = () => {
   const deleteAccount = async (id) => {
     const accRef = doc(db, "Admin", id.toString());
     await deleteDoc(accRef).then(() => {
-      alert("Akaun Admin telah dipadam!!");
+      alert("Akaun admin telah dipadam.");
       setReload(reload + 1);
     });
   }

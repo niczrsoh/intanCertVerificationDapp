@@ -51,7 +51,7 @@ const PesertaSemak = () => {
     const data = await getDoc(programDocRef);
     const pesertaStatusList = data.data().pesertaStatus;
     const txnIdList = data.data().transactionId;
-    pesertaStatusList[pesertaID] = "dipadam";
+    pesertaStatusList[pesertaID] = "Dipadam";
     txnIdList[pesertaID] = deleteId;
     //update the new documnet data
     await updateDoc(programDocRef, {

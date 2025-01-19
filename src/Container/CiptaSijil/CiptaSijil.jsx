@@ -75,13 +75,13 @@ const CiptaSijil = ({ backpage }) => {
     const txnIdList = data.data().transactionId;
     const pesertaStatusList = data.data().pesertaStatus;
     txnIdList[key] = transId;
-    pesertaStatusList[key] = "dicipta";
+    pesertaStatusList[key] = "Dicipta";
     await updateDoc(programDocRef, {
       transactionId: txnIdList,
       pesertaStatus: pesertaStatusList,
     })
       .then((response) => {
-        alert("sijil berjaya dicipta");
+        alert("Sijil berjaya dicipta.");
       })
       .catch((error) => {
         console.log(error.message);

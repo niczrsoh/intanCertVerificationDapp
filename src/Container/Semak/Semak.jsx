@@ -62,7 +62,7 @@ const Semak = () => {
     const data = await getDoc(programDocRef);
     const pesertaStatusList = data.data().pesertaStatus;
     const txnIdList = data.data().transactionId;
-    pesertaStatusList[currentUser] = "dipadam";
+    pesertaStatusList[currentUser] = "Dipadam";
     txnIdList[currentUser] = deleteId;
 
     const adminName = sessionStorage.getItem("adminName");
@@ -74,7 +74,7 @@ const Semak = () => {
       pesertaStatus: pesertaStatusList,
     })
       .then(() => {
-        alert("sijil telah dipadam");
+        alert("Sijil telah dipadam.");
       })
       .catch((error) => {
         console.error(error.message);

@@ -156,7 +156,7 @@ const EditSijil = ({ backpage }) => {
       pesertaStatus: pesertaStatusList,
     })
       .then((response) => {
-        alert("Sijil berjaya dikemaskini");
+        alert("Sijil berjaya dikemaskini.");
       })
       .catch((error) => {
         console.log(error.message);
