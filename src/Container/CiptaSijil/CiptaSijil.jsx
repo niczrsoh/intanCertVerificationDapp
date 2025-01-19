@@ -156,7 +156,7 @@ const CiptaSijil = ({ backpage }) => {
           </div>
         </div>
         <div>
-          <div className="maklumatadminbahru">MAKLUMAT PENGUNA</div>
+          <div className="maklumatadminbahru">MAKLUMAT PENGGUNA</div>
           <div className="maklumatsijil">
             <div className="maklumat">
               <label className="kik">NAMA</label>

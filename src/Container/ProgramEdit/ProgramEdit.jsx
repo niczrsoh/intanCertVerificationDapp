@@ -54,7 +54,7 @@ const ProgramEdit = () => {
           </div>
           <div>
           <div className='maklumatadminbahru'>
-          MAKLUMAT PENGUNA
+          MAKLUMAT PENGGUNA
         </div>
         <div className='maklumatsijil'>
           <div className='maklumat'>
