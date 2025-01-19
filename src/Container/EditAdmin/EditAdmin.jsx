@@ -3,6 +3,7 @@ import { doc, getDoc, setDoc, deleteDoc } from 'firebase/firestore'
 import { db } from '../../Backend/firebase/firebase-config'
 import '../EditAdmin/editAdmin.css'
 import { Buttons } from '../../Component'
+import backicon from '../../img/arrow.png'
 import { useNavigate, useParams  } from "react-router-dom"
 const EditAdmin = () => {
   let { adminID } = useParams();
@@ -95,7 +96,23 @@ const EditAdmin = () => {
 
   return (
     <div className='app_box'>
+      <div className='semakdaftarheader'>
+      <button className="backbutton" onClick={() => navigate(-1)}>
+          <div className="back-wrapper" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer' }}>
+            <img
+              src={backicon}
+              alt="This is a back button."
+              className="backicon"
+              style={{ width: '24px', height: '24px', objectFit: 'contain' }} // Make sure the image has a fixed size
+            />
+            {/* Adding the "Kembali" (Back) text below the back icon */}
+            <div className="kembali-text" onClick={() => navigate(-1)}>
+              Kembali
+            </div>
+          </div>
+        </button>
       <h1 className='admintitle'>KEMASKINI ADMIN</h1>
+      </div>
       <div>
         <div className='maklumatadminbahru'>
           MAKLUMAT ADMIN BARU
@@ -135,8 +152,8 @@ const EditAdmin = () => {
             <label className="kik">PERANAN ADMIN</label>
             <div className='textarea'>
               <p className="kik">:</p>
-              <select className='inputselect' onChange={onChangeRole} >
-                <option value="Admin" selected>Admin</option>
+              <select className='inputselect' onChange={onChangeRole} value={role}>
+                <option value="Admin">Admin</option>
                 <option value="SuperAdmin">SuperAdmin</option>
               </select>
             </div>
