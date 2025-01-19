@@ -41,7 +41,7 @@ const CiptaSijil = ({ backpage }) => {
     getProgramAndUser();
   }, []);
   const convertDateFormat = (date) => {
-    const dateParts = date.split('-'); // Split the input date into [yyyy, mm, dd]
+    const dateParts = date.split('-'); // Split the input date into [dd, mm, yyyy]
     if (dateParts.length === 3) {
       return `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`; // Return the date in dd-mm-yyyy format
     }

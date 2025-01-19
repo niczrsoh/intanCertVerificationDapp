@@ -20,7 +20,7 @@ function InformasiSijil() {
   const [fileUrl, setFileUrl] = useState(null);
   function formatDate(dateString) {
     // Split the original date string
-    const [year, month, day] = dateString.split('-');
+    const [day, month, year] = dateString.split('-');
     
     // Reassemble in dd-mm-yyyy format
     return `${day}-${month}-${year}`;
