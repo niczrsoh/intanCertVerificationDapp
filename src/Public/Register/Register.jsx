@@ -33,11 +33,11 @@ const Register = () => {
     e.preventDefault();
     const regex = /[0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]/;
     if (!regex.test(mykad)) {
-      alert('Sila masukan ic dengan format "123456-12-1234"');
+      alert('Sila masukan ic dengan format "123456-12-1234".');
       return;
     }
     if (kataLaluan != sahkataLaluan) {
-      alert('kata laluan tidak sama dengan kata laluan yang sah \n Sila pastikan kata laluan sama dengan pengesahan kata laluan');
+      alert('kata laluan tidak sama dengan kata laluan yang sah. \n Sila pastikan kata laluan sama dengan pengesahan kata laluan.');
       return;
     }
 
@@ -47,7 +47,7 @@ const Register = () => {
     await getDoc(userCollectionRef).then(async (data) => {
       // console.log(data.data());
       if (data.data() != undefined) {
-        alert("No. MyKad telah didaftar !!");
+        alert("No. MyKad telah didaftar.");
       } else {
         await setDoc(userCollectionRef, {// create 2
           alamat: alamat,
@@ -59,7 +59,7 @@ const Register = () => {
           imageUrl: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
           telefonPeribadi: TelefonPeribadi,
         }).then(() => {
-          alert("berjaya daftar akaun");
+          alert("Berjaya daftar akaun.");
           navigate('/login');
         });//create 2 end
       }

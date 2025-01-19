@@ -206,7 +206,7 @@ export default class profile extends React.Component {
         });
       } else {
         //translate to malay
-        alert("!!Ada yang salah!! Sila cuba lagi nanti");
+        alert("Ralat sistem berlaku, sila cuba lagi nanti.");
       }
     }
     getProfile();
@@ -238,7 +238,7 @@ export default class profile extends React.Component {
       image.src = reader.result;
       console.log(`image width=>${image.width}\nimage height=>${image.height}`);
       if(image.width>200 || image.height>200){
-        alert("Saiz imej perlu rendah dari 200 x 200 pixel!!");        
+        alert("Saiz imej perlu rendah dari 200 x 200 pixel.");        
         return;
       }else{
         this.setState({
@@ -309,7 +309,7 @@ export default class profile extends React.Component {
     const regex = /[0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]/;
     const mykad = this.state.myKad;
     if (!regex.test(mykad)) {
-      alert('Sila masukan ic dengan format "123456-12-1234"');
+      alert('Sila masukan ic dengan format "123456-12-1234".');
       return;
     }
     if (this.state.active == "edit") {

@@ -43,7 +43,7 @@ const Admin = () => {
     e.preventDefault();
     const regex = /[0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]/;
     if (!regex.test(mykad)) {
-      alert('Sila masukan ic dengan format "123456-12-1234"');
+      alert('Sila masukan ic dengan format "123456-12-1234".');
       return;
     }
     //doc() will define the path to the document data 
@@ -62,7 +62,7 @@ const Admin = () => {
     await getDoc(userCollectionRef).then(async (data) => {
       //console.log(data.data())
       if (data.data() != undefined) {
-        alert("No. MyKad telah didaftar !!");
+        alert("No. MyKad telah didaftar.");
       } else {
         //setDoc() will add the document data with the specific document id
         await setDoc(userCollectionRef, {
@@ -77,7 +77,7 @@ const Admin = () => {
           setEmail("");
           setAccount("");
           setRole("");
-          await alert("Admin Baru telah Didaftar!!");
+          await alert("Admin baru telah didaftar.");
           navigate(`/admin/admin-list`);
         });
       }

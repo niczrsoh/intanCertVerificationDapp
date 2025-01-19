@@ -63,15 +63,15 @@ if (value.length === 10) {
   const datePattern = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
   // Check if the full date matches the DD/MM/YYYY format
   if (!datePattern.test(value)) {
-    alert("Peringatan! Sila letakkan format yang betul DD/MM/YYYY dan nilai tarikh yang betul (e.g., 01/01/2024)");
+    alert("Peringatan! Sila letakkan format yang betul DD/MM/YYYY dan nilai tarikh yang betul (e.g., 01/01/2024).");
     setTimeValidating(false); // Reset validating flag after alert
     return;
   }else if (isPastDate(value)) {
-    alert("Peringatan! Tarikh tamat tidak boleh meletakkan sebelum tarikh hari ini");
+    alert("Peringatan! Tarikh tamat tidak boleh meletakkan sebelum tarikh hari ini.");
     setTimeValidating(false); // Reset validating flag after alert
     return;
   }else if (!compareDate(mula,value)) {
-    alert("Peringatan! Tarikh tamat tidak boleh meletakkan sebelum tarikh mula");
+    alert("Peringatan! Tarikh tamat tidak boleh meletakkan sebelum tarikh mula.");
     setTimeValidating(false); // Reset validating flag after alert
     return;
   }else{
@@ -139,7 +139,7 @@ const compareDate = (mula,tamat) => {
     // }
     //ensure all the fields are filled
     if (isiProgram === "" || kod === "" || mula === "" || nama === "" || penganjur === "" || penyelaras === "" || maksimumPeserta === "" || tamat === "" || yuran === "") {
-      alert("Sila isi semua ruangan");
+      alert("Sila isi semua ruangan.");
       return;
     }
     //collection() will define the path to the collection
@@ -182,7 +182,7 @@ const compareDate = (mula,tamat) => {
       setTamat("");
       setYuran("");
       setCreatedDate("");
-      alert("Program berjaya didaftarkan!!");
+      alert("Program berjaya didaftarkan.");
       navigate(-1);
     });//create 2 end
   }

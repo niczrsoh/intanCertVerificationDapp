@@ -44,12 +44,12 @@ export default function SemakSijil() {
       if(status !== 'Delete')
         handleSubmit(transId);
       else
-      navigate(`/errorPage/${appId}`,{state:{message:"merupakan sijil yang tidak sah. Sila semak semula!"}});
+      navigate(`/errorPage/${appId}`,{state:{message:"merupakan sijil yang tidak sah. Sila semak semula."}});
 
     } catch (error) {
       console.error("Error retrieving data:", error);
       // Handle the error appropriately, e.g., display an error message
-      navigate(`/errorPage/${appId}`,{state:{message:"tidak wujud!"}});
+      navigate(`/errorPage/${appId}`,{state:{message:"tidak wujud."}});
     }
   };
   return (

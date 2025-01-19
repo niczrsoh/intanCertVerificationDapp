@@ -14,7 +14,7 @@ function UserLogin() {
     e.preventDefault();
     const regex = /[0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]/;
     if (!regex.test(mykad)) {
-      alert('Sila masukan ic dengan format "123456-12-1234"');
+      alert('Sila masukan ic dengan format "123456-12-1234".');
       return;
     }
 
@@ -29,7 +29,7 @@ function UserLogin() {
       navigate("/user/senarai-program-sedia-ada");
     } else {
       // docSnap.data() will be undefined in this case
-      alert("Salah IC atau Kata Laluan!, Sila Masukan Semula !");
+      alert("Salah IC atau kata laluan, dila masukan demula.");
     }
 
 

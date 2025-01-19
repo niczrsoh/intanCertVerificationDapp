@@ -82,13 +82,13 @@ function SenaraiProgramSediaAda() {
 
     tempList.forEach((id) => {
       if (id == userID) {
-        alert("Anda tidak dibenarkan untuk daftar semula program yang anda telah mendaftar")
+        alert("Anda tidak dibenarkan untuk daftar semula program yang anda telah mendaftar.")
         check = false;
       }
     })
 
     if (newJumlahPesertaString > tempMaksimumPesertaNum) {
-      alert("Anda tidak dibenarkan untuk daftar program yang telah mempunyai maksimum peserta")
+      alert("Anda tidak dibenarkan untuk daftar program yang telah mempunyai maksimum peserta.")
       check = false;
     }
 
@@ -105,7 +105,7 @@ function SenaraiProgramSediaAda() {
         transactionId: newTran,
         jumlahPeserta: newJumlahPesertaString,
       }).then(() => {
-        alert("Anda telah berjaya mendaftar program");
+        alert("Anda telah berjaya mendaftar program.");
         navigate(-1);
       })
     }

@@ -67,7 +67,7 @@ function AdminLogin() {
     const regex =
       /[0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]/;
     if (!regex.test(mykad)) {
-      alert('Sila masukan ic dengan format "123456-12-1234"');
+      alert('Sila masukan ic dengan format "123456-12-1234".');
       return;
     }
 
@@ -84,11 +84,11 @@ function AdminLogin() {
         navigate("/admin/home");
         //window.location.reload();
       } else {
-        alert("Salah Wallet Account !, Sila Masukan Semula !");
+        alert("Salah Wallet Account, Sila Masukan Semula.");
       }
     } else {
       // docSnap.data() will be undefined in this case
-      alert("Salah IC !, Sila Masukan Semula !");
+      alert("Salah IC, sila masukan semula.");
     }
   };
 
