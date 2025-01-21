@@ -82,7 +82,7 @@ function SenaraiProgramSediaAda() {
 
     tempList.forEach((id) => {
       if (id == userID) {
-        alert("Anda tidak dibenarkan untuk daftar semula program yang anda telah mendaftar.")
+        alert("Anda tidak dibenarkan untuk daftar semula program yang telah anda daftar.")
         check = false;
       }
     })
