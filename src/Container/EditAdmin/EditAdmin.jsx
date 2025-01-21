@@ -89,7 +89,7 @@ const EditAdmin = () => {
           setEmail("");
           setAccount("");
           setRole("");
-          await alert("Informasi admin telah dikemaskini.");
+          await alert("Informasi Admin telah dikemaskini.");
           navigate(`/admin/admin-list`);
         });
   }

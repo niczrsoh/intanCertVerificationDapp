@@ -94,7 +94,7 @@ const AdminList = () => {
   }
 
   const onClickPadam = (id) => {
-    if (window.confirm("Adakah anda ingin memadamkan akaun admin ini?")) {
+    if (window.confirm("Adakah anda ingin memadam akaun Admin ini?")) {
       deleteAccount(id);
     } else {
       return;
@@ -104,7 +104,7 @@ const AdminList = () => {
   const deleteAccount = async (id) => {
     const accRef = doc(db, "Admin", id.toString());
     await deleteDoc(accRef).then(() => {
-      alert("Akaun admin telah dipadam.");
+      alert("Akaun Admin telah dipadam.");
       setReload(reload + 1);
     });
   }
