@@ -5,6 +5,7 @@ import { NavLink, useParams, useNavigate } from "react-router-dom";
 import { db } from '../Backend/firebase/firebase-config'
 import { collection, getDoc, deleteDoc, doc, updateDoc, } from 'firebase/firestore'
 import { LocalActivity } from "@mui/icons-material";
+import backicon from '../img/arrow.png';
 
 
 function SenaraiProgramSediaAda() {
@@ -115,21 +116,20 @@ function SenaraiProgramSediaAda() {
   return (
     <div class="Detail">
       <div class="Detailheader">
-        <NavLink to="/user/senarai-program-sedia-ada" class="Detailbackicon">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="30"
-            height="30"
-            fill="currentColor"
-            class="bi bi-arrow-left"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+      <button className="backbutton" onClick={() => navigate("/user/senarai-program-sedia-ada")}>
+          <div className="back-wrapper" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer' }}>
+            <img
+              src={backicon}
+              alt="This is a back button."
+              className="backicon"
+              style={{ width: '24px', height: '24px', objectFit: 'contain' }} // Make sure the image has a fixed size
             />
-          </svg>
-        </NavLink>
+            {/* Adding the "Kembali" (Back) text below the back icon */}
+            <div className="kembali-text" onClick={() => navigate(-1)}>
+              Kembali
+            </div>
+          </div>
+        </button>
         <h1 class="titleDetail">{nama}</h1>
       </div>
       <div class="blue">
