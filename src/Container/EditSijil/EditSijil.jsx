@@ -100,7 +100,7 @@ const EditSijil = ({ backpage }) => {
   const convertDateFormat = (date) => {
     const dateParts = date.split('-'); // Split the input date into [yyyy, mm, dd]
     if (dateParts.length === 3) {
-      return `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`; // Return the date in dd-mm-yyyy format
+      return `${dateParts[0]}-${dateParts[1]}-${dateParts[2]}`; // Return the date in dd-mm-yyyy format
     }
     return date; // Return the original date if the format is incorrect
   };
