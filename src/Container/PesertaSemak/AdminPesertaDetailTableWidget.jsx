@@ -68,7 +68,7 @@ const AdminPesertaDetailTableWidget = ({
         return (
           <div>
             {`${params.row.pesertaStatus[ic]}` === "Dicipta" ||
-              `${params.row.pesertaStatus[ic]}` === "dikemasKini" ? (
+              `${params.row.pesertaStatus[ic]}` === "Dikemaskini" ? (
               <button className="semakbutton" disabled={true}>
                 Cipta
               </button>

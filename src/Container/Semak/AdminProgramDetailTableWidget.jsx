@@ -77,7 +77,7 @@ const AdminProgramDetailTableWidget = ({
         return (
           <div>
             {`${pesertaStatus}` === "Dicipta" ||
-              `${pesertaStatus}` === "dikemasKini" ? (
+              `${pesertaStatus}` === "Dikemaskini" ? (
               <button className="semakbutton" disabled={true}>
                 Cipta
               </button>

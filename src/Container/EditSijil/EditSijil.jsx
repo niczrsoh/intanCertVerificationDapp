@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import AppContext from "../../Context/AppContext";
 import { updateCertificateAction } from "../../Utils/utils";
 import { db } from "../../Backend/firebase/firebase-config";
-import { collection, getDoc, addDoc, updateDoc, doc } from "firebase/firestore";
+import { collection, getDoc, addDoc, updateDoc, doc,setDoc } from "firebase/firestore";
 import algosdk from "algosdk";
 import { indexerClient } from "../../Constant/ALGOkey";
 import {
@@ -115,8 +115,8 @@ const EditSijil = ({ backpage }) => {
       date.getMinutes()
     )}:${padNumber(date.getSeconds())}`;
     //console.log(formattedDate.toLocaleString());
-    //console.log(appId.toString());
-    const sijilCollectionRef = doc(db, "Sijil", appId.toString());
+    console.log("AppID: ",appId.toString().toLocaleLowerCase());
+    const sijilCollectionRef = doc(db, "Sijil", appId.toString().toLocaleLowerCase());
     const programCollectionRef = doc(db, "Program", programId);
     const adminName = sessionStorage.getItem("adminName");
     const adminID = sessionStorage.getItem("userID");
@@ -151,7 +151,7 @@ const EditSijil = ({ backpage }) => {
     const txnIdList = data.data().transactionId;
     const pesertaStatusList = data.data().pesertaStatus;
     txnIdList[key] = transId;
-    pesertaStatusList[key] = "dikemasKini";
+    pesertaStatusList[key] = "Dikemaskini";
     await updateDoc(programDocRef, {
       transactionId: txnIdList,
       pesertaStatus: pesertaStatusList,
