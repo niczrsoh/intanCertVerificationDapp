@@ -41,7 +41,7 @@ function Router() {
           <Route path='register' element={<Register />} />
           <Route path='admin-login' element={<AdminLogin />} />
           <Route path='maklumat-penyemak/:transId?' element={<Penyemak />} />
-          <Route path='informasi-sijil/:transId' element={<InformasiSijil />} />
+          <Route path='informasi-sijil/:transId/:isCiptaEdit?' element={<InformasiSijil />} />
           <Route path="errorPage/:appid"  element={<InformasiErrorPage />} />
         </Route>
         {/*Admin */}

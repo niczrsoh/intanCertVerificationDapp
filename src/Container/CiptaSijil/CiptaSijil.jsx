@@ -215,7 +215,7 @@ const CiptaSijil = ({ backpage }) => {
                   const { contractAddress, transactionId, accountAddr } =
                     response;
                   createSijil(accountAddr, transactionId, contractAddress);
-                  navigate(`/informasi-sijil/${transactionId}`);
+                  navigate(`/informasi-sijil/${transactionId}/true`);
                 })
                 .catch((error) => {
                   console.log(error.message);

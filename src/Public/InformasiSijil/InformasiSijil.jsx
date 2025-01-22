@@ -14,6 +14,14 @@ import { checkTransactionAndFetchData } from "../../Utils/ethUtils";
 import QRCode from 'qrcode';
 function InformasiSijil() {
   const transId = useParams();
+  const isCiptaEdit = useParams()["isCiptaEdit"];
+  let ciptaEditBool = null;
+
+  if (isCiptaEdit === 'true') {
+    ciptaEditBool = true;
+  } else {
+    ciptaEditBool = false;
+  } 
   const navigate = useNavigate();
   const [formData, setFormData] = useState(null);
   const [qrCodeDataUrl, setQrCodeDataUrl] = useState(null);
@@ -174,7 +182,11 @@ function InformasiSijil() {
               className="backbtn"
               onClick={() => {
                 sessionStorage.setItem("navigatingBack", "true");
-                navigate(-1);
+                if(ciptaEditBool){
+                  navigate(-2);
+                } else {
+                  navigate(-1);
+                }
               }}
             >
               <div className="back-wrapper" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer' }}>
@@ -185,7 +197,7 @@ function InformasiSijil() {
                   style={{ width: '24px', height: '24px', objectFit: 'contain' }} // Make sure the image has a fixed size
                 />
                 {/* Adding the "Kembali" (Back) text below the back icon */}
-                <div className="kembali-text" onClick={() => navigate(-1)}>
+                <div className="kembali-text">
                   Kembali
                 </div>
               </div>

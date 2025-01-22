@@ -308,7 +308,7 @@ const EditSijil = ({ backpage }) => {
                   );
                   updateSijil(userAcc.addr, txnId);
                   // console.log(updateSijil);
-                  navigate(`/informasi-sijil/${txnId}`);
+                  navigate(`/informasi-sijil/${txnId}/true`);
                 }
               } else {
                 const { transactionHash, userAddress } =
@@ -321,7 +321,7 @@ const EditSijil = ({ backpage }) => {
                     tarikhTamat
                   );
                 updateSijil(userAddress, transactionHash);
-                navigate(`/informasi-sijil/${transactionHash}`);
+                navigate(`/informasi-sijil/${transactionHash}/true`);
               }
             }}
           ></Buttons>
