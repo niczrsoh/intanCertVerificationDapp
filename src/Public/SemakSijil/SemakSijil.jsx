@@ -80,7 +80,7 @@ export default function SemakSijil() {
                 <span className="circle-number">1</span>
               </div>
               <div className="instruction">
-                <p>Salin id sijil dan tampal dalam bar carian untuk carian</p>
+                <p>Salin ID sijil dan tampal dalam bar carian untuk carian</p>
               </div>
             </div>
 
@@ -90,7 +90,7 @@ export default function SemakSijil() {
                 <span className="circle-number">2</span>
               </div>
               <div className="instruction">
-                <p>Imbas kod qr untuk menyemak sijil</p>
+                <p>Imbas kod QR untuk menyemak sijil</p>
               </div>
             </div>
           </div>

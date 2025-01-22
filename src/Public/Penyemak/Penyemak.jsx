@@ -17,7 +17,7 @@ export default function Penyemak() {
     e.preventDefault();
     const regex = /[0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]/;
     if (!regex.test(mykad)) {
-      alert('Sila masukan ic dengan format "123456-12-1234".');
+      alert('Sila masukan IC dengan format "123456-12-1234".');
       return;
     }
     

@@ -201,7 +201,7 @@ const PesertaSemak = () => {
                 <div className="contentdelete">
                   <div>
                     <p>
-                    Peringatan! Adakah anda pasti untuk memadam program ini? <b>'Padam'</b> 
+                    Adakah anda pasti untuk memadam sijil? 
                     </p>
                   </div>
                   <div className="padamconfirmbutton">

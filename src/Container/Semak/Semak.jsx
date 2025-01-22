@@ -293,7 +293,7 @@ const Semak = () => {
                 <div className="contentdelete">
                   <div>
                     <p>
-                    Adakah anda pasti untuk padam sijil?
+                    Adakah anda pasti untuk memadam sijil ini?
                     </p>
                   </div>
                   <div className="padamconfirmbutton">

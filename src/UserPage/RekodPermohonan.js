@@ -109,7 +109,7 @@ function RekodPermohonan() {
                 jumlahPeserta: newJumlahPesertaString,
             }).then(() => {
                 setShowMohon(false);
-                alert("Anda telah berjaya padam permohonan program.");
+                alert("Anda telah berjaya batal permohonan program.");
                 setReload(reload + 1);
             })
         })

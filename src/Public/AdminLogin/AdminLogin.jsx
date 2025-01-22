@@ -67,7 +67,7 @@ function AdminLogin() {
     const regex =
       /[0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]/;
     if (!regex.test(mykad)) {
-      alert('Sila masukan ic dengan format "123456-12-1234".');
+      alert('Sila masukan IC dengan format "123456-12-1234".');
       return;
     }
 
@@ -88,7 +88,7 @@ function AdminLogin() {
       }
     } else {
       // docSnap.data() will be undefined in this case
-      alert("Salah IC, sila masukan semula.");
+      alert("Salah IC, sila masukkan semula.");
     }
   };
 
