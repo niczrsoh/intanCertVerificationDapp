@@ -29,7 +29,7 @@ function UserLogin() {
       navigate("/user/senarai-program-sedia-ada");
     } else {
       // docSnap.data() will be undefined in this case
-      alert("Salah IC atau kata laluan, sila masukan semula.");
+      alert("Salah IC atau kata laluan, sila masukkan semula.");
     }
 
 
