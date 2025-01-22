@@ -63,7 +63,7 @@ export default function SemakSijil() {
             id="search-id"
             name="search-id"
             type="text"
-            placeholder="Sijil App Id"
+            placeholder="Sijil App ID"
             value={appId.toLowerCase()}
             onChange={(e) => {
             setappId(e.target.value.toLowerCase().trim());
