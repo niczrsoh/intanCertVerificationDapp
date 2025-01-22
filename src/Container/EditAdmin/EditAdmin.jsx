@@ -106,7 +106,7 @@ const EditAdmin = () => {
               style={{ width: '24px', height: '24px', objectFit: 'contain' }} // Make sure the image has a fixed size
             />
             {/* Adding the "Kembali" (Back) text below the back icon */}
-            <div className="kembali-text" onClick={() => navigate(-1)}>
+            <div className="kembali-text">
               Kembali
             </div>
           </div>
