@@ -20,20 +20,20 @@ const Register = () => {
     // Remove dashes for validation
     const cleanedNumber = phoneNumber.replace(/\D/g, '');
     const phoneRegex = /^(01[0-9])-?[0-9]{7,8}$/;
-    
+
     if (cleanedNumber.length < 10 || cleanedNumber.length > 11) {
       return false;
     }
-    
+
     return phoneRegex.test(phoneNumber.replace(/\D/g, ''));
   };
-  
+
   //navigate to login page after register
   const handleSubmit = async (e) => {
     e.preventDefault();
     const regex = /[0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]/;
     if (!regex.test(mykad)) {
-      alert('Sila masukan IC dengan format "123456-12-1234".');
+      alert('Sila masukkan IC dengan format "123456-12-1234".');
       return;
     }
     if (kataLaluan != sahkataLaluan) {
@@ -69,7 +69,7 @@ const Register = () => {
   const handlePhoneChange = (event) => {
     let value = event.target.value.replace(/[^0-9]/g, '').replace(/(\d{3})(\d+)/, '$1-$2');
     setTelefonPeribadi(value);
-    
+
     // Validate the phone number format
     const regex = /^[0-9]{3}-[0-9]{7,8}$/;
     if (regex.test(value)) {
@@ -80,7 +80,7 @@ const Register = () => {
   };
 
   return (
-    
+
     <>
       <div className='registerPage'>
         <div className='registerContainer'>
@@ -157,9 +157,9 @@ const Register = () => {
 
         </div>
       </div>
-      
+
     </>
-    
+
   )
 }
 

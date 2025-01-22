@@ -43,7 +43,7 @@ const Admin = () => {
     e.preventDefault();
     const regex = /[0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]/;
     if (!regex.test(mykad)) {
-      alert('Sila masukan IC dengan format "123456-12-1234".');
+      alert('Sila masukkan IC dengan format "123456-12-1234".');
       return;
     }
     //doc() will define the path to the document data 
@@ -134,7 +134,7 @@ const Admin = () => {
             {/* Input for ADMIN ROLE */}
           </div>
         </form>
-        <div className='submitBtn' ><Buttons title="Daftar Admin" onClick={adminRegister}/></div>
+        <div className='submitBtn' ><Buttons title="Daftar Admin" onClick={adminRegister} /></div>
       </div >
 
 

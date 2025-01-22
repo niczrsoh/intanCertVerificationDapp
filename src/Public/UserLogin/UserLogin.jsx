@@ -14,7 +14,7 @@ function UserLogin() {
     e.preventDefault();
     const regex = /[0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]/;
     if (!regex.test(mykad)) {
-      alert('Sila masukan IC dengan format "123456-12-1234".');
+      alert('Sila masukkan IC dengan format "123456-12-1234".');
       return;
     }
 
@@ -58,12 +58,12 @@ function UserLogin() {
             </label>
             <button className='login' type='Submit'>Masuk</button>
             <div className='otherLinks'>
-            <NavLink className='otherlink' to='/register'>Tidak mempunyai akaun? Daftar akaun</NavLink>
-            <NavLink className='otherlink' to='/admin-login'>Log masuk sebagai Admin</NavLink>
-          </div>
+              <NavLink className='otherlink' to='/register'>Tidak mempunyai akaun? Daftar akaun</NavLink>
+              <NavLink className='otherlink' to='/admin-login'>Log masuk sebagai Admin</NavLink>
+            </div>
 
           </form>
-          
+
         </div>
       </div>
     </>

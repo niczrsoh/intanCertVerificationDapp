@@ -67,7 +67,7 @@ function AdminLogin() {
     const regex =
       /[0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]/;
     if (!regex.test(mykad)) {
-      alert('Sila masukan IC dengan format "123456-12-1234".');
+      alert('Sila masukkan IC dengan format "123456-12-1234".');
       return;
     }
 
@@ -84,7 +84,7 @@ function AdminLogin() {
         navigate("/admin/home");
         //window.location.reload();
       } else {
-        alert("Salah Wallet Account, Sila Masukan Semula.");
+        alert("Salah wallet account, sila masukkan semula.");
       }
     } else {
       // docSnap.data() will be undefined in this case
@@ -148,12 +148,12 @@ function AdminLogin() {
             </div>
             <button type="Submit">Masuk</button>
             <div className="otherLinks">
-            <NavLink className="otherlink" to="/login">
-              Log masuk sebagai pengguna
-            </NavLink>
-          </div>
+              <NavLink className="otherlink" to="/login">
+                Log masuk sebagai pengguna
+              </NavLink>
+            </div>
           </form>
-        
+
         </div>
       </div>
     </>

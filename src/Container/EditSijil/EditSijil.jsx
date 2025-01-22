@@ -29,6 +29,7 @@ const EditSijil = ({ backpage }) => {
   const [isEther, setIsEther] = useState(false);
   const { account, setAccount } = useContext(AppContext);
   const actionRef = collection(db, "ActionLog");
+  const actionCollectionRef = collection(db, "ActionLog");
   const [prevName, setPrevName] = useState("");
   //sijil collection document path
   const programDocRef = doc(db, "Program", programId);

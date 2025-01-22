@@ -32,6 +32,7 @@ const Nama = ({ onChange, value }) => (
       type="text"
       onChange={onChange}
       maxLength="25"
+      required
       value={value}
     />
   </div>
@@ -48,6 +49,7 @@ const MyKad = ({ onChange, value }) => (
       maxLength="14"
       minLength="14"
       value={value}
+      required
       disabled={true}
     />
   </div>
@@ -61,6 +63,7 @@ const Emelperibadi = ({ onChange, value }) => (
       type="email"
       onChange={onChange}
       value={value}
+      required
       className="profileinput"
     />
   </div>
@@ -74,6 +77,7 @@ const Jawatan = ({ onChange, value }) => (
       type="text"
       onChange={onChange}
       value={value}
+      required
       className="profileinput"
     />
   </div>
@@ -84,9 +88,12 @@ const TelefonPeribadi = ({ onChange, value }) => (
     <label htmlFor="telefon">TELEFON PERIBADI:</label>
     <input
       id="telefon"
-      type="text"
+      type="numeric"
       onChange={onChange}
       value={value}
+      pattern="[0-9]{3}-[0-9]{7,8}"
+      inputMode='numeric'
+      required
       className="profileinput"
     />
   </div>
@@ -100,6 +107,7 @@ const Alamat = ({ onChange, value }) => (
       type="text"
       onChange={onChange}
       value={value}
+      required
       className="profileinput"
     />
   </div>
@@ -123,7 +131,7 @@ const Profile = ({
         <div className="img-wrap">
           <img for="photo-upload" src={src} alt="profile" className="profile-pic" />
         </div>
-        <div className='submitBtn'><Buttons title="KEMASKINI PROFIL" onClick={onSubmit}/></div>
+        <div className='submitBtn'><Buttons title="KEMASKINI PROFIL" onClick={onSubmit} /></div>
         {/* <button type="submit" className="editbutton">
           KEMASKINI PROFIL{" "}
         </button> */}
@@ -164,10 +172,10 @@ const Profile = ({
 
 
 export default class profile extends React.Component {
-  
+
   constructor(props) {
     super(props);
-  
+
     this.state = {
       file: "",
       imagePreviewUrl:
@@ -237,10 +245,10 @@ export default class profile extends React.Component {
     reader.onloadend = () => {
       image.src = reader.result;
       console.log(`image width=>${image.width}\nimage height=>${image.height}`);
-      if(image.width>200 || image.height>200){
-        alert("Saiz imej perlu rendah dari 200 x 200 pixel.");        
+      if (image.width > 200 || image.height > 200) {
+        alert("Saiz imej perlu rendah dari 200 x 200 pixel.");
         return;
-      }else{
+      } else {
         this.setState({
           file: file,
           imageUrl: reader.result,
@@ -302,14 +310,14 @@ export default class profile extends React.Component {
     });
     this.updateProfile();
   };
-  
+
   // When the user clicks the "Save" button, the information will be submitted and displayed.
   // When the user clicks the "Edit Profile" button, the form becomes editable, allowing the user to update their Informasi personal.
   async updateProfile() {
     const regex = /[0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]/;
     const mykad = this.state.myKad;
     if (!regex.test(mykad)) {
-      alert('Sila masukan IC dengan format "123456-12-1234".');
+      alert('Sila masukkan IC dengan format "123456-12-1234".');
       return;
     }
     if (this.state.active == "edit") {
@@ -374,7 +382,7 @@ export default class profile extends React.Component {
       }
     }
   }
- 
+
   render() {
     const {
       imageUrl,
@@ -408,8 +416,8 @@ export default class profile extends React.Component {
                     alt="Preview"
                   />
                 )} */}
-                 <ImgUpload onChange={this.photoUpload} src={imageUrl} />
-                <div className='submitBtn'><Buttons title="SIMPAN" onClick={this.handleSubmit}/></div>
+                <ImgUpload onChange={this.photoUpload} src={imageUrl} />
+                <div className='submitBtn'><Buttons title="SIMPAN" onClick={this.handleSubmit} /></div>
               </div>
               <div className="frame">
                 <div className="headerProfileU">
@@ -433,25 +441,25 @@ export default class profile extends React.Component {
               </div>
             </form>
           </div>
-        ) :(active === "loading")? 
-        <center>
-        <div className="loading">Sedang mengemaskini profil… &#8230;</div></center>
-        :(
-          <Profile
-            onSubmit={this.handleSubmit}
-            src={imageUrl}
-            nama={nama}
-            myKad={myKad}
-            emelperibadi={emelperibadi}
-            jawatan={jawatan}
-            telefonperibadi={telefonperibadi}
-            alamat={alamat}
-          />
-        )
+        ) : (active === "loading") ?
+          <center>
+            <div className="loading">Sedang mengemaskini profil… &#8230;</div></center>
+          : (
+            <Profile
+              onSubmit={this.handleSubmit}
+              src={imageUrl}
+              nama={nama}
+              myKad={myKad}
+              emelperibadi={emelperibadi}
+              jawatan={jawatan}
+              telefonperibadi={telefonperibadi}
+              alamat={alamat}
+            />
+          )
         }
-     
+
       </div>
-     
+
     );
   }
 }

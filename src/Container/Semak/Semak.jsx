@@ -366,7 +366,7 @@ const Semak = () => {
                 <div className="contentdelete">
                   <div>
                     <p>
-                    Sijil ini berjaya dipadamkan dalam rangkaian blockchain
+                    Sijil ini berjaya dipadamkan dalam rangkaian blockchain.
                     </p>
                   </div>
                 </div>

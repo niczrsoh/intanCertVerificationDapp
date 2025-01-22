@@ -1,10 +1,10 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { doc, getDoc, setDoc, deleteDoc } from 'firebase/firestore'
 import { db } from '../../Backend/firebase/firebase-config'
 import '../EditAdmin/editAdmin.css'
 import { Buttons } from '../../Component'
 import backicon from '../../img/arrow.png'
-import { useNavigate, useParams  } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 const EditAdmin = () => {
   let { adminID } = useParams();
   const navigate = useNavigate();
@@ -15,17 +15,17 @@ const EditAdmin = () => {
   const [role, setRole] = useState("Admin");
 
   useEffect(() => {
-      const getAdminInfo = async () => {
-        const adminRef = doc(db, "Admin", adminID);
-        const data = await getDoc(adminRef);
-        setMykad(adminID);
-        setName(data.data().name);
-        setEmail(data.data().email);
-        setAccount(data.data().acc);
-        setRole(data.data().role);
-      };
-      getAdminInfo();
-    }, []);
+    const getAdminInfo = async () => {
+      const adminRef = doc(db, "Admin", adminID);
+      const data = await getDoc(adminRef);
+      setMykad(adminID);
+      setName(data.data().name);
+      setEmail(data.data().email);
+      setAccount(data.data().acc);
+      setRole(data.data().role);
+    };
+    getAdminInfo();
+  }, []);
 
   const onChangeMykad = (e) => {
     const regex = /[0-9]*/;
@@ -58,7 +58,7 @@ const EditAdmin = () => {
     e.preventDefault();
     const regex = /[0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]/;
     if (!regex.test(mykad)) {
-      alert('Sila masukan IC dengan format "123456-12-1234".');
+      alert('Sila masukkan IC dengan format "123456-12-1234".');
       return;
     }
     //doc() will define the path to the document data 
@@ -74,30 +74,30 @@ const EditAdmin = () => {
 
     //getDoc() will get the document data based on the path of doc()
     //in this case, getDoc() will get the info of admin to test whether the admin ic has been registered or not
-    
-      //console.log(data.data())
-        //setDoc() will add the document data with the specific document id
-        await setDoc(userCollectionRef, {
-          name: name,
-          email: email,
-          acc: account,
-          role: role,
-          createdDate: `${formattedDate.toString()}`,
-        }).then(async () => {
-          setMykad("");
-          setName("");
-          setEmail("");
-          setAccount("");
-          setRole("");
-          await alert("Informasi Admin telah dikemaskini.");
-          navigate(`/admin/admin-list`);
-        });
+
+    //console.log(data.data())
+    //setDoc() will add the document data with the specific document id
+    await setDoc(userCollectionRef, {
+      name: name,
+      email: email,
+      acc: account,
+      role: role,
+      createdDate: `${formattedDate.toString()}`,
+    }).then(async () => {
+      setMykad("");
+      setName("");
+      setEmail("");
+      setAccount("");
+      setRole("");
+      await alert("Informasi Admin telah dikemaskini.");
+      navigate(`/admin/admin-list`);
+    });
   }
 
   return (
     <div className='app_box'>
       <div className='semakdaftarheader'>
-      <button className="backbutton" onClick={() => navigate(-1)}>
+        <button className="backbutton" onClick={() => navigate(-1)}>
           <div className="back-wrapper" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer' }}>
             <img
               src={backicon}
@@ -111,7 +111,7 @@ const EditAdmin = () => {
             </div>
           </div>
         </button>
-      <h1 className='admintitle'>KEMASKINI ADMIN</h1>
+        <h1 className='admintitle'>KEMASKINI ADMIN</h1>
       </div>
       <div>
         <div className='maklumatadminbahru'>
@@ -124,7 +124,7 @@ const EditAdmin = () => {
             }}>NO.MYKAD</label>
             <div className='textarea'>
               <p className="kik">:</p>
-              <input type="text" className='inputtext' onChange={onChangeMykad} value={mykad} placeholder="000000-00-0000" minLength='14' maxLength='14' required disabled  /></div>
+              <input type="text" className='inputtext' onChange={onChangeMykad} value={mykad} placeholder="000000-00-0000" minLength='14' maxLength='14' required disabled /></div>
             {/* Input for NO.MYKAD */}
           </div>
           <div className='maklumat'>
@@ -160,7 +160,7 @@ const EditAdmin = () => {
             {/* Input for ADMIN ROLE */}
           </div>
         </form>
-        <div className='submitBtn' ><Buttons title="Kemaskini Admin" onClick={adminUpdate}/></div>
+        <div className='submitBtn' ><Buttons title="Kemaskini Admin" onClick={adminUpdate} /></div>
       </div >
 
 

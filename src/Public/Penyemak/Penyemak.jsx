@@ -1,7 +1,7 @@
 import { React, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import './Penyemak.css';
-import { collection, addDoc} from 'firebase/firestore'
+import { collection, addDoc } from 'firebase/firestore'
 import { db } from '../../Backend/firebase/firebase-config'
 import { Buttons } from '../../Component'
 export default function Penyemak() {
@@ -17,10 +17,10 @@ export default function Penyemak() {
     e.preventDefault();
     const regex = /[0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]/;
     if (!regex.test(mykad)) {
-      alert('Sila masukan IC dengan format "123456-12-1234".');
+      alert('Sila masukkan IC dengan format "123456-12-1234".');
       return;
     }
-    
+
     //add the new penyemak info into firestore
     const userCollectionRef = collection(db, "Penyemak")
     await addDoc(userCollectionRef, {
@@ -33,7 +33,7 @@ export default function Penyemak() {
       navigate(`/semaksijil`);
       return;
     }
-    
+
     navigate(`/semaksijil/${transId}`);
   }
 
@@ -68,9 +68,9 @@ export default function Penyemak() {
             <br></br>
             <br></br>
           </form>
-          <div className='submitBtn'><Buttons title="Masuk" onClick={handleSubmit}/></div>
+          <div className='submitBtn'><Buttons title="Masuk" onClick={handleSubmit} /></div>
         </div>
-        
+
       </div>
     </>
   )
