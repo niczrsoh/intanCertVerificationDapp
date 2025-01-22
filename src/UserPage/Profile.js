@@ -87,13 +87,16 @@ const TelefonPeribadi = ({ onChange, value }) => (
   <div className="text">
     <label htmlFor="telefon">TELEFON PERIBADI:</label>
     <input
-      id="telefon"
-      type="numeric"
+      id='telefon'
+      type='tel'
       onChange={onChange}
       value={value}
       pattern="[0-9]{3}-[0-9]{7,8}"
       inputMode='numeric'
+      placeholder='012-3456789'
       required
+      maxLength={12}
+      minLength={11}
       className="profileinput"
     />
   </div>
@@ -289,10 +292,15 @@ export default class profile extends React.Component {
   };
 
   edittelefonperibadi = (e) => {
-    const telefonperibadi = e.target.value;
+    const telefonperibadi = e;
     this.setState({
       telefonperibadi: telefonperibadi,
     });
+  };
+
+  handlePhoneChange = (event) => {
+    let value = event.target.value.replace(/[^0-9]/g, '').replace(/(\d{3})(\d+)/, '$1-$2');
+    this.edittelefonperibadi(value);
   };
 
   editalamat = (e) => {
@@ -304,6 +312,12 @@ export default class profile extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const phoneRegex = /^[0-9]{3}-[0-9]{7,8}$/;
+    const telefonperibadi = this.state.telefonperibadi;
+    if (!phoneRegex.test(telefonperibadi)) {
+      alert('Sila masukkan IC dengan format "012-34567890".');
+      return;
+    }
     let activeP = this.state.active === "edit" ? "profile" : "edit";
     this.setState({
       active: activeP,
@@ -434,7 +448,7 @@ export default class profile extends React.Component {
                   </div>
                   <div className="formright">
                     <Jawatan onChange={this.editjawatan} value={jawatan} />
-                    <TelefonPeribadi onChange={this.edittelefonperibadi} value={telefonperibadi} />
+                    <TelefonPeribadi onChange={this.handlePhoneChange} value={telefonperibadi} />
                     <Alamat onChange={this.editalamat} value={alamat} />
                   </div>
                 </div>
