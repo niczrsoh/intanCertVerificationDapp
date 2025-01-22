@@ -135,9 +135,7 @@ const Register = () => {
               {/* Error message if the phone number format is invalid */}
               {!isPhoneValid && (
                 <p style={{ color: 'red', textAlign: 'left' }}>
-                  Sila ikut format nombor telefon : 
-                  <br/>
-                  xxx-xxxxxxxxx
+                  Nombor telefon mestilah 10 atau 11 digit
                 </p>
               )}
             </div>
