@@ -254,6 +254,7 @@ const EditSijil = ({ backpage }) => {
                   id="nama"
                   className="inputtext"
                   value={nama}
+                  required
                   onChange={(e) => setNama(e.target.value)}
                 />
               </div>
@@ -267,6 +268,7 @@ const EditSijil = ({ backpage }) => {
                   id="NRIC"
                   className="inputtext"
                   value={NRIC}
+                  minLength='14' maxLength='14' required
                   onChange={(e) => setNRIC(e.target.value)}
                 />
               </div>
@@ -289,6 +291,11 @@ const EditSijil = ({ backpage }) => {
           <Buttons
             title="Hantar"
             onClick={async () => {
+              const regex = /[0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]/;
+              if (!regex.test(NRIC)) {
+                alert('Sila masukkan IC dengan format "123456-12-1234".');
+                return;
+              }
               setLoading(true);
               if (!isEther) {
                 const mnemonic = await handleClick();
