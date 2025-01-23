@@ -21,7 +21,7 @@ function InformasiSijil() {
     ciptaEditBool = true;
   } else {
     ciptaEditBool = false;
-  } 
+  }
   const navigate = useNavigate();
   const [formData, setFormData] = useState(null);
   const [qrCodeDataUrl, setQrCodeDataUrl] = useState(null);
@@ -29,7 +29,7 @@ function InformasiSijil() {
   function formatDate(dateString) {
     // Split the original date string
     const [day, month, year] = dateString.split('-');
-    
+
     // Reassemble in dd-mm-yyyy format
     return `${day}-${month}-${year}`;
   }
@@ -57,29 +57,37 @@ function InformasiSijil() {
             startDate && endDate
               ? `${formatDate(startDate)} hingga ${formatDate(endDate)}`
               : "TARIKH PROGRAM",
-              appId: contractAddress ? contractAddress : "APP ID",
-        //    explorer: `http://172.26.112.1:4000/#/blockchain/transactionList/transactionDetail/${transId.transId}`,
-         explorer: `https://bchainexplorer.azurewebsites.net/#/blockchain/transactionList/transactionDetail/${transId.transId}`,
+          appId: contractAddress ? contractAddress : "APP ID",
+          //    explorer: `http://172.26.112.1:4000/#/blockchain/transactionList/transactionDetail/${transId.transId}`,
+          explorer: `https://bchainexplorer.azurewebsites.net/#/blockchain/transactionList/transactionDetail/${transId.transId}`,
           isEther: true,
         };
       } else {
         data = await fetchformDataFromBlockchain();
       }
       setFormData(data);
+      generateQRCode(transId.transId,data);
     }
-    fetchData();
-    const generateQRCode = async () => {
+    // Function to generate the QR code
+    async function generateQRCode(transactionId, data) {
       try {
-        const url = `https://bchainexplorer.azurewebsites.net/#/blockchain/transactionList/transactionDetail/${transId.transId}`; // Replace with your QR code URL
-        const qrDataUrl = await QRCode.toDataURL(url); // Generate QR code as Data URL
-        setQrCodeDataUrl(qrDataUrl); // Store the generated QR code image
+        const url = `https://intan-cert-verification-dapp.azurewebsites.net/informasi-sijil/${transactionId}`;
+        const qrDataUrl = await QRCode.toDataURL(url);
+        setQrCodeDataUrl(qrDataUrl);
+        const blob = await pdf(
+          <Certificate
+            {...data}
+            templateSrc={templateSrc}
+            qrCodeImage={qrDataUrl}
+          />
+        ).toBlob();
+        setFileUrl(URL.createObjectURL(blob));
       } catch (err) {
         console.error('Failed to generate QR code', err);
       }
-    };
-
-    generateQRCode();
-  }, []);
+    }
+    fetchData();
+  }, [transId.transId]);
 
   async function fetchformDataFromBlockchain() {
     //  using indexerClient to look up the transaction details by validating with the provided transaction id
@@ -122,7 +130,7 @@ function InformasiSijil() {
       const tamat = Object.values(JSON.parse(dTamat))[0];
       const nama = Object.values(JSON.parse(dNama))[0];
       const mykad = Object.values(JSON.parse(dNRIC))[0];
-      console.log("Contract address in informasi sijil:"+dappID);
+      console.log("Contract address in informasi sijil:" + dappID);
 
       //  Assign all the data into a constant variable named data
       const data = {
@@ -130,9 +138,9 @@ function InformasiSijil() {
         participantMykad: mykad ? mykad : "PESERTA NO. MYKAD",
         courseName: tajuk ? tajuk : "NAMA PROGRAM",
         courseDate: mula && tamat ? `${formatDate(mula)} hingga ${formatDate(tamat)}` : "TARIKH PROGRAM",
-       // explorer: `https://testnet.algoscan.app/tx/${transId.transId}`,
+        // explorer: `https://testnet.algoscan.app/tx/${transId.transId}`,
         appId: dappID ? dappID : "APP ID",
-      //  isEther: false,
+        //  isEther: false,
         // qrCodeImage: getQrCodeDataUrl(
         //  `https://intan-cert-verification-dapp.azurewebsites.net/informasi-sijil/${transId.transId}`
         // )
@@ -142,7 +150,7 @@ function InformasiSijil() {
             change the QRcode to become the URL of the transaction
             */
       const newQrCodeDataUrl = await getQrCodeDataUrl(
-       `https://intan-cert-verification-dapp.azurewebsites.net/informasi-sijil/${transId.transId}`
+        `https://intan-cert-verification-dapp.azurewebsites.net/informasi-sijil/${transId.transId}`
       );
       setQrCodeDataUrl(newQrCodeDataUrl);
 
@@ -182,7 +190,7 @@ function InformasiSijil() {
               className="backbtn"
               onClick={() => {
                 sessionStorage.setItem("navigatingBack", "true");
-                if(ciptaEditBool){
+                if (ciptaEditBool) {
                   navigate(-2);
                 } else {
                   navigate(-1);
@@ -249,9 +257,10 @@ function InformasiSijil() {
                     color="primary"
                     href={fileUrl}
                     target="_blank"
-                    rel="noreferrer"
+                    //download="sijil.pdf"  // Force download if it's on a mobile device
+                    rel="noreferrer noopener"
                   >
-                    Preview Sijil
+                    Download Sijil
                   </Button>
                 </>
               ) : (
