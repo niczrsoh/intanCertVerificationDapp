@@ -121,12 +121,16 @@ const PesertaSemak = () => {
         data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
       ); //read 3
     };
-    getPesertaProgram();
-    getPesertaInfo();
+    if(isOpen){
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      getPesertaProgram();
+      getPesertaInfo();
+    }
     //getPesertaProgram();
     // console.log(pesertaInfo);
     // console.log(pesertaPrograms);
-  }, [reload]);
+  }, [reload,isOpen]);
 
   return (
     <div className="app_box">
