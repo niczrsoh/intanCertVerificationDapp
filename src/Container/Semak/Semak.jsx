@@ -162,8 +162,12 @@ const Semak = () => {
       setPesertaNama(detail.data().pesertaNama);
       setYuran(detail.data().yuran);
     };
-    getPeserta();
-  }, [reload]);
+    if(isOpen){
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      getPeserta();
+    }
+  }, [reload, isOpen]);
   const getCurrentPageItems = () => {
     if(programDetail.length === 0){
       return [];
