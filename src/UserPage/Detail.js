@@ -211,9 +211,6 @@ function SenaraiProgramSediaAda() {
                 <p>
                   Adakah anda ingin memohon program ini? 
                 </p>
-                <p>
-                  Tekan Ya atau Tidak.
-                </p>
               </div>
 
               <div className="buttonrekod">
