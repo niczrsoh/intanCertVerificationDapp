@@ -60,6 +60,10 @@ function SenaraiProgramSediaAda() {
 
   }, []);
 
+  const padNumber = (num) => {
+    return num.toString().padStart(2, "0");
+  };
+
   const programDaftar = async () => {
     const docRef = doc(db, "Program", programID);
     //get the program info and modify the info data
@@ -80,7 +84,12 @@ function SenaraiProgramSediaAda() {
     const userID = sessionStorage.getItem("userID");
     const userNama = sessionStorage.getItem("userNama");
     const check = true;
-
+    //get current admin created time
+    const date = new Date();
+    const currentDate = new Date(`${date.getFullYear()}-${padNumber(date.getMonth() + 1)}-${padNumber(date.getDate())}`);
+    const programEndDate = new Date(`${tamat}`);
+    console.log("currentDate", currentDate);
+    console.log("programEndDate", programEndDate);
     tempList.forEach((id) => {
       if (id == userID) {
         alert("Anda tidak dibenarkan untuk daftar semula program yang telah anda daftar.")
@@ -90,6 +99,9 @@ function SenaraiProgramSediaAda() {
 
     if (newJumlahPesertaString > tempMaksimumPesertaNum) {
       alert("Anda tidak dibenarkan untuk daftar program yang telah mempunyai maksimum peserta.")
+      check = false;
+    } else if (currentDate > programEndDate) {
+      alert("Anda tidak dibenarkan untuk daftar program yang telah tamat.")
       check = false;
     }
 
