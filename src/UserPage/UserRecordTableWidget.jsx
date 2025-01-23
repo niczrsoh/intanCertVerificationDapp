@@ -47,21 +47,23 @@ const UserRecordTableWidget = ({
         return (
           <>
             {(`${params.row.pesertaStatus[userID]}` === 'Dicipta' || `${params.row.pesertaStatus[userID]}` === 'Dikemaskini') ?
-              <button onClick={() => { printSijil(params.row.index - 1); }} className="Printbutton">Print</button> :
-              <button disabled={true} className="semakbutton">Print</button>}
+              <button onClick={() => { printSijil(params.row.index - 1); }} className="Printbutton">Cetak</button> :
+              <button disabled={true} className="semakbutton">Cetak</button>}
           </>
         );
       },
     },
     {
       field: "aktiviti",
-      headerName: "🗑️",
+      headerName: "Tindakan",
       flex: 1,
       headerClassName: "super-app-theme--header",
       renderCell: (params) => {
         return (
           <div>
-            <button onClick={() => { handleShowMohon(params.row.id) }} className="Mohonbutton">Batal</button>
+            {(`${params.row.pesertaStatus[userID]}` === 'Dicipta' || `${params.row.pesertaStatus[userID]}` === 'Dikemaskini') ?
+              <button disabled={true} className="semakbutton">Batal</button> :
+              <button onClick={() => { handleShowMohon(params.row.id) }} className="Mohonbutton">Batal</button>}
           </div>
         );
       },
