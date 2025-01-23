@@ -83,17 +83,16 @@ function SenaraiProgramSediaAda() {
     var newTran = tempTran;
     const userID = sessionStorage.getItem("userID");
     const userNama = sessionStorage.getItem("userNama");
-    const check = true;
+    var check = true;
     //get current admin created time
     const date = new Date();
     const currentDate = new Date(`${date.getFullYear()}-${padNumber(date.getMonth() + 1)}-${padNumber(date.getDate())}`);
     const programEndDate = new Date(`${tamat}`);
-    console.log("currentDate", currentDate);
-    console.log("programEndDate", programEndDate);
     tempList.forEach((id) => {
       if (id == userID) {
         alert("Anda telah memohon program ini.")
         check = false;
+        console.log("check", check);
       }
     })
 
@@ -121,6 +120,9 @@ function SenaraiProgramSediaAda() {
         alert("Pemohonan program anda telah berjaya.");
         navigate(-1);
       })
+    } else {
+      console.log("check", check);
+      handleCloseDaftar();
     }
   }
 
