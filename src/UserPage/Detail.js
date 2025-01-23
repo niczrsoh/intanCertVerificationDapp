@@ -92,16 +92,16 @@ function SenaraiProgramSediaAda() {
     console.log("programEndDate", programEndDate);
     tempList.forEach((id) => {
       if (id == userID) {
-        alert("Anda tidak dibenarkan untuk daftar semula program yang telah anda daftar.")
+        alert("Anda telah memohon program ini.")
         check = false;
       }
     })
 
     if (newJumlahPesertaString > tempMaksimumPesertaNum) {
-      alert("Anda tidak dibenarkan untuk daftar program yang telah mempunyai maksimum peserta.")
+      alert("Program telah mencapai jumlah peserta maksimum.")
       check = false;
     } else if (currentDate > programEndDate) {
-      alert("Anda tidak dibenarkan untuk daftar program yang telah tamat.")
+      alert("Program telah tamat.")
       check = false;
     }
 
@@ -118,7 +118,7 @@ function SenaraiProgramSediaAda() {
         transactionId: newTran,
         jumlahPeserta: newJumlahPesertaString,
       }).then(() => {
-        alert("Anda telah berjaya mendaftar program.");
+        alert("Pemohonan program anda telah berjaya.");
         navigate(-1);
       })
     }
@@ -183,7 +183,7 @@ function SenaraiProgramSediaAda() {
       </div>
       <div className="daftarcenter">
         <button onClick={handleShowDaftar} className="Daftarbutton">
-          Daftar
+          Mohon
         </button>
       </div>
       {showDaftar && (
@@ -207,7 +207,10 @@ function SenaraiProgramSediaAda() {
 
               <div className="contentpopout">
                 <p>
-                  Tekan Ya untuk memohon program.
+                  Adakah anda ingin memohon program ini? 
+                </p>
+                <p>
+                  Tekan Ya atau Tidak.
                 </p>
               </div>
 
