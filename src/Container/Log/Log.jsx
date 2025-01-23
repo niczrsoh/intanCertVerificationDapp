@@ -8,7 +8,7 @@ import ItemTableWidget from './AdminLogTableWidget';
 
 const Log = () => {
   const [selectedValue, setSelectedValue] = useState('');
-  const [searchValue, setSearchValue] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
   const [filteredValue, setFilteredValue] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [logs, setLogs] = useState([])
@@ -69,6 +69,11 @@ const Log = () => {
 
   };
 
+  const filteredData = logs.filter(obj =>
+    obj.adminName.toLowerCase().includes(searchValue.toLowerCase()) ||
+    obj.adminID.toLowerCase().includes(searchValue.toLowerCase()) 
+  );
+
   const handleSubmit = async () => {
     if (isSearching) {
       return;
@@ -76,14 +81,8 @@ const Log = () => {
     setIsSearching(true);
     //    try {
     // Search by using the value that they input
-    const filtered = logs.filter(obj =>
-      Object.values(obj).some(value =>
-        new String(value).toLowerCase().includes(new String(filteredValue.toLowerCase())) || new String(value).toLowerCase() === new String(filteredValue.toLowerCase())
-      )
-    );
+
     // const filtered = logs.find((item) => new String(item.adminName).toLowerCase().includes(new String(filteredValue.toLowerCase())));
-    console.log(filtered);
-    setSearchValue(filtered);
     await new Promise((resolve) => setTimeout(resolve, 2000));
     // }
     // catch (error) {
@@ -105,18 +104,16 @@ const Log = () => {
           {/* Sorting */}
           <form className='search'>
             <div className='searchbox'>
-              <input value={filteredValue} type="text" placeholder="Nama Admin" className='searchtype' onChange={(e) => { setFilteredValue(e.target.value); handleSubmit();}} />
+              <input value={searchValue} type="text" placeholder="Nama Admin" className='searchtype' onChange={(e) => { setSearchValue(e.target.value);}} />
             </div>
             <div className='filtericon'>
-              <button className="searchbutton" onClick={handleSubmit} disabled={isSearching}>
                 <img src={searchpic} alt='This is a search button.' className="searchpic" />
-              </button>
             </div>
           </form>
         </div>
       </div>
       <div className='program'>
-        {filteredValue == "" ? (
+        {searchValue == "" ? (
           <>
             <ItemTableWidget
               key={tableKey}
@@ -126,7 +123,7 @@ const Log = () => {
           <>
             <ItemTableWidget
               key={tableKey}
-              itemList={searchValue}
+              itemList={filteredData}
             />
           </>
         )}

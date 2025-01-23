@@ -38,56 +38,12 @@ const Peserta = () => {
       programIndex: startIndex + index, // Calculate the absolute index
     }));
   };
-  const nomykadfilter = () => {
-    // console.log(users);
-      const sorted = users.sort((a, b) => a.ic.localeCompare(b.ic));
-      setSearchValue(sorted)}
 
-  const namefilter = () => {
-      const sorted = users.sort((a, b) => a.nama.localeCompare(b.nama));
-      setSearchValue(sorted)}
-
-    const handleSelectChange = (event) => {
-      const selectedOption = event.target.options[event.target.selectedIndex];
-      const displayValue = selectedOption.getAttribute('data-display-value');
-      selectedOption.textContent = displayValue;
-      
-      // By default the display value should be Susunan to indicate this is for the susunan filter function
-      // There don't have any "Susunan" in the list instead of "None" to indicate that they are filtering nothing
-      if (selectedOption.value === "None"){
-        selectedOption.value = "Susunan";
-      }
-      setSelectedValue(selectedOption.value);
-      if (selectedOption.value === "No.MyKad"){nomykadfilter();}
-      else if (selectedOption.value === "Nama"){namefilter();}
-      else if (selectedOption.value === "Susunan"){setSearchValue(users)}
-
-
-    };
-
-    const handleSubmit = async () => {
-      if (isSearching) {
-        return;
-      }
-      setIsSearching(true);
-      try{
-        // Check the value whether it is number, if so, filter using nomykad, or else using name
-        const lowerCaseFilteredValue = filteredValue.toLowerCase();
-
-        const filtered = users.filter(item =>
-          Object.values(item).some(val =>
-            val.toString().toLowerCase().includes(lowerCaseFilteredValue)
-          )
-        );
-        setSearchValue(filtered);
-      await new Promise((resolve) => setTimeout(resolve, 2000));}
-      catch (error) {
-        console.error('Search failed:', error);
-      } finally {
-        // Set the isSearching flag back to false to indicate search is completed
-        setIsSearching(false);
-      }
-    }
+  const filteredData = users.filter(
+    (item) =>
+      item.ic.includes(searchValue.toLowerCase()) ||
+      item.nama.toLowerCase().includes(searchValue.toLowerCase()) 
+  );
   
   return (
     <div className='app_box'>
@@ -98,12 +54,10 @@ const Peserta = () => {
         <div className='features'>
             <form className='search'>
                 <div className='searchbox'>
-                    <input value={filteredValue} type="text" placeholder="No. Mykad / Nama peserta" className='searchtype' onChange={e => setFilteredValue(e.target.value)}/>
+                    <input value={searchValue} type="text" placeholder="No. Mykad / Nama peserta" className='searchtype' onChange={e => setSearchValue(e.target.value)}/>
                 </div>
                 <div className='filtericon'>
-                    <button className="searchbutton" onClick={handleSubmit} disabled={isSearching}>
-                        <img src={searchpic} alt='This is a search button.' className="searchpic" />
-                    </button>
+                  <img src={searchpic} alt='This is a search button.' className="searchpic" />
                 </div>
             </form>
         </div>
@@ -120,7 +74,7 @@ const Peserta = () => {
           <>
             <ItemTableWidget
               key={tableKey}
-              itemList={searchValue}
+              itemList={filteredData}
             />
           </>
         )}

@@ -175,7 +175,7 @@ function RekodPermohonan() {
                         <div>
                             <ItemTableWidget
                                 key={tableKey}
-                                itemList={getCurrentPageItems()}
+                                itemList={filteredData}
                                 userID={userID}
                                 printSijil={printSijil}
                                 handleShowMohon={handleShowMohon}
