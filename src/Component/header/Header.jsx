@@ -124,7 +124,7 @@ function Header() {
               {authIdentify() ?
                 <li className={subMenuClick ? "menu-has-children active" : "menu-has-children"} onClick={handleSubMenuClick} ref={subMenuRef}>
                   <span className="akaun">
-                    <i className="bi bi-person-square"></i>Nama Pengguna
+                    <i className="bi bi-person-square"></i>{roleChoice() ? sessionStorage.getItem("adminName") : sessionStorage.getItem("userNama")}
                   </span>
                   <ul
                     className={subMenuClick ? "sub-menu active" : "sub-menu"}

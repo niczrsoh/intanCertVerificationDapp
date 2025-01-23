@@ -26,6 +26,8 @@ function UserLogin() {
       sessionStorage.setItem("user", JSON.stringify({ role: "USER" }));
       sessionStorage.setItem("userID", mykad);
       sessionStorage.setItem("userNama", docSnap.data().nama);
+      sessionStorage.setItem("adminName", "");
+      sessionStorage.setItem("adminRole", "");
       navigate("/user/senarai-program-sedia-ada");
     } else {
       // docSnap.data() will be undefined in this case

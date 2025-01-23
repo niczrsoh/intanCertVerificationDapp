@@ -81,6 +81,7 @@ function AdminLogin() {
         sessionStorage.setItem("userID", mykad);
         sessionStorage.setItem("adminName", docSnap.data().name);
         sessionStorage.setItem("adminRole", docSnap.data().role);
+        sessionStorage.setItem("userNama", "");
         navigate("/admin/home");
         //window.location.reload();
       } else {
