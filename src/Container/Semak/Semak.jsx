@@ -95,6 +95,7 @@ const Semak = () => {
       transactionId: deleteId,
       type: "Delete",
     });
+    setIsOpen(false);
     setReload(reload + 1);
   };
   function formatDate(dateString) {
@@ -358,7 +359,7 @@ const Semak = () => {
                           deleteCert(deleteId, appId);
 
                           // const transId=payContract(deleteId);
-                          setDeleteAlert(true);
+                          // setDeleteAlert(true);
                           // const transId=payContract(deleteId);
                           // setDeleteAlert(true);
                         }}
