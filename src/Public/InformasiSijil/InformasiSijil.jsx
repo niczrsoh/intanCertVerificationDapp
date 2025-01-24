@@ -87,7 +87,7 @@ function InformasiSijil() {
       }
     }
     fetchData();
-  }, [transId.transId]);
+  }, [transId.transId,formData]);
 
   async function fetchformDataFromBlockchain() {
     //  using indexerClient to look up the transaction details by validating with the provided transaction id
