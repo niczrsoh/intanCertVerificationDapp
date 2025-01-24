@@ -249,7 +249,7 @@ function InformasiSijil() {
             </div>
           </div>
           <div className="viewPdf">
-            <ErrorBoundary>
+            {/* <ErrorBoundary>
               {isMobile ? (
                 <>
                   <Button
@@ -272,7 +272,7 @@ function InformasiSijil() {
                   />
                 </PDFViewer>
               )}
-            </ErrorBoundary>
+            </ErrorBoundary> */}
           </div>
         </div>
       </div>
