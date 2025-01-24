@@ -66,7 +66,7 @@ function InformasiSijil() {
         data = await fetchformDataFromBlockchain();
       }
       setFormData(data);
-      generateQRCode(transId.transId,data);
+      generateQRCode(transId.transId, data);
     }
     // Function to generate the QR code
     async function generateQRCode(transactionId, data) {
@@ -87,7 +87,7 @@ function InformasiSijil() {
       }
     }
     fetchData();
-  }, [transId.transId,formData]);
+  }, [transId.transId, formData]);
 
   async function fetchformDataFromBlockchain() {
     //  using indexerClient to look up the transaction details by validating with the provided transaction id
@@ -169,7 +169,6 @@ function InformasiSijil() {
     return data;
   }
 
-  if (!formData) return <div>Memuatkan...</div>;
   const handleClick = (event) => {
     event.preventDefault();
     const newWindow = window.open(
@@ -183,99 +182,101 @@ function InformasiSijil() {
   };
   return (
     <>
-      <div className="infoSijil-container">
-        <div className="infoSection">
-          <div className="infoSijil-title">
-            <button
-              className="backbtn"
-              onClick={() => {
-                sessionStorage.setItem("navigatingBack", "true");
-                if (ciptaEditBool) {
-                  navigate(-2);
-                } else {
-                  navigate(-1);
-                }
-              }}
-            >
-              <div className="back-wrapper" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer' }}>
-                <img
-                  src={backicon}
-                  alt="This is a back button."
-                  className="backicon"
-                  style={{ width: '24px', height: '24px', objectFit: 'contain' }} // Make sure the image has a fixed size
-                />
-                {/* Adding the "Kembali" (Back) text below the back icon */}
-                <div className="kembali-text">
-                  Kembali
-                </div>
-              </div>
-            </button>
-            <h1 style={{ marginLeft: '16px' }}>Informasi Sijil</h1>
-          </div>
-          {/* Sijil detail section */}
-          <div className="infoContent">
-            <div className="info">
-              <span className="label">NAMA</span>
-              <span>:</span>
-              <div className="data">{formData.participantName}</div>
-            </div>
-            <div className="info">
-              <span className="label">NO. MYKAD</span>
-              <span>:</span>
-              <div className="data">{formData.participantMykad}</div>
-            </div>
-            <div className="info">
-              <span className="label">NAMA PROGRAM</span>
-              <span>:</span>
-              <div className="data">{formData.courseName}</div>
-            </div>
-            <div className="info">
-              <span className="label">TARIKH</span>
-              <span>:</span>
-              <div className="data">{formData.courseDate}</div>
-            </div>
-            <div className="info">
-              <span className="label">
-                {formData.isEther ? "ETHEREUM" : "ALGOSCAN"}
-              </span>
-              <span>:</span>
-              <a
-                className="data"
-                href={`${formData.explorer}`}
-                onClick={handleClick}
+      {(formData == null) ? (<div>Memuatkan...</div>) :
+        (<div className="infoSijil-container">
+          <div className="infoSection">
+            <div className="infoSijil-title">
+              <button
+                className="backbtn"
+                onClick={() => {
+                  sessionStorage.setItem("navigatingBack", "true");
+                  if (ciptaEditBool) {
+                    navigate(-2);
+                  } else {
+                    navigate(-1);
+                  }
+                }}
               >
-                Semak sijil dalam {formData.isEther ? "ETHEREUM" : "AlgoScan"}
-              </a>
+                <div className="back-wrapper" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer' }}>
+                  <img
+                    src={backicon}
+                    alt="This is a back button."
+                    className="backicon"
+                    style={{ width: '24px', height: '24px', objectFit: 'contain' }} // Make sure the image has a fixed size
+                  />
+                  {/* Adding the "Kembali" (Back) text below the back icon */}
+                  <div className="kembali-text">
+                    Kembali
+                  </div>
+                </div>
+              </button>
+              <h1 style={{ marginLeft: '16px' }}>Informasi Sijil</h1>
+            </div>
+            {/* Sijil detail section */}
+            <div className="infoContent">
+              <div className="info">
+                <span className="label">NAMA</span>
+                <span>:</span>
+                <div className="data">{formData.participantName}</div>
+              </div>
+              <div className="info">
+                <span className="label">NO. MYKAD</span>
+                <span>:</span>
+                <div className="data">{formData.participantMykad}</div>
+              </div>
+              <div className="info">
+                <span className="label">NAMA PROGRAM</span>
+                <span>:</span>
+                <div className="data">{formData.courseName}</div>
+              </div>
+              <div className="info">
+                <span className="label">TARIKH</span>
+                <span>:</span>
+                <div className="data">{formData.courseDate}</div>
+              </div>
+              <div className="info">
+                <span className="label">
+                  {formData.isEther ? "ETHEREUM" : "ALGOSCAN"}
+                </span>
+                <span>:</span>
+                <a
+                  className="data"
+                  href={`${formData.explorer}`}
+                  onClick={handleClick}
+                >
+                  Semak sijil dalam {formData.isEther ? "ETHEREUM" : "AlgoScan"}
+                </a>
+              </div>
+            </div>
+            <div className="viewPdf">
+              {/* <ErrorBoundary>
+                  {isMobile ? (
+                    <>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        href={fileUrl}
+                        target="_blank"
+                        //download="sijil.pdf"  // Force download if it's on a mobile device
+                        rel="noreferrer noopener"
+                      >
+                        Download Sijil
+                      </Button>
+                    </>
+                  ) : (
+                    <PDFViewer width="100%" height="100%">
+                      <Certificate
+                        {...formData}
+                        templateSrc={templateSrc}
+                        qrCodeImage={qrCodeDataUrl}
+                      />
+                    </PDFViewer>
+                  )}
+                </ErrorBoundary> */}
             </div>
           </div>
-          <div className="viewPdf">
-            {/* <ErrorBoundary>
-              {isMobile ? (
-                <>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    href={fileUrl}
-                    target="_blank"
-                    //download="sijil.pdf"  // Force download if it's on a mobile device
-                    rel="noreferrer noopener"
-                  >
-                    Download Sijil
-                  </Button>
-                </>
-              ) : (
-                <PDFViewer width="100%" height="100%">
-                  <Certificate
-                    {...formData}
-                    templateSrc={templateSrc}
-                    qrCodeImage={qrCodeDataUrl}
-                  />
-                </PDFViewer>
-              )}
-            </ErrorBoundary> */}
-          </div>
-        </div>
-      </div>
+        </div>)
+      }
     </>
   );
 }
