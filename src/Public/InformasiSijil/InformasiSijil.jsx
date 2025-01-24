@@ -39,34 +39,39 @@ function InformasiSijil() {
     async function fetchData() {
       const info = await checkTransactionAndFetchData(transId.transId);
       let data;
-      if (info.isEther) {
-        const {
-          courseTitle,
-          recipientName,
-          recipientIC,
-          startDate,
-          endDate,
-          isValid,
-          contractAddress,
-        } = info;
-        data = {
-          participantName: recipientName ? recipientName : "PESERTA NAMA",
-          participantMykad: recipientIC ? recipientIC : "PESERTA NO. MYKAD",
-          courseName: courseTitle ? courseTitle : "NAMA PROGRAM",
-          courseDate:
-            startDate && endDate
-              ? `${formatDate(startDate)} hingga ${formatDate(endDate)}`
-              : "TARIKH PROGRAM",
-          appId: contractAddress ? contractAddress : "APP ID",
-          //    explorer: `http://172.26.112.1:4000/#/blockchain/transactionList/transactionDetail/${transId.transId}`,
-          explorer: `https://bchainexplorer.azurewebsites.net/#/blockchain/transactionList/transactionDetail/${transId.transId}`,
-          isEther: true,
-        };
-      } else {
-        data = await fetchformDataFromBlockchain();
+      try{
+        if (info.isEther) {
+          const {
+            courseTitle,
+            recipientName,
+            recipientIC,
+            startDate,
+            endDate,
+            isValid,
+            contractAddress,
+          } = info;
+          data = {
+            participantName: recipientName ? recipientName : "PESERTA NAMA",
+            participantMykad: recipientIC ? recipientIC : "PESERTA NO. MYKAD",
+            courseName: courseTitle ? courseTitle : "NAMA PROGRAM",
+            courseDate:
+              startDate && endDate
+                ? `${formatDate(startDate)} hingga ${formatDate(endDate)}`
+                : "TARIKH PROGRAM",
+            appId: contractAddress ? contractAddress : "APP ID",
+            //    explorer: `http://172.26.112.1:4000/#/blockchain/transactionList/transactionDetail/${transId.transId}`,
+            explorer: `https://bchainexplorer.azurewebsites.net/#/blockchain/transactionList/transactionDetail/${transId.transId}`,
+            isEther: true,
+          };
+        } else {
+          data = await fetchformDataFromBlockchain();
+        }
+        setFormData(data);
+        generateQRCode(transId.transId, data);
+      } catch (err) {
+        alert('System hit error: ', err);
+        console.error('System hit error: ', err);
       }
-      setFormData(data);
-      generateQRCode(transId.transId, data);
     }
     // Function to generate the QR code
     async function generateQRCode(transactionId, data) {
@@ -82,12 +87,13 @@ function InformasiSijil() {
           />
         ).toBlob();
         setFileUrl(URL.createObjectURL(blob));
+        alert('QR code generated successfully');
       } catch (err) {
         console.error('Failed to generate QR code', err);
       }
     }
     fetchData();
-  }, [transId.transId, formData]);
+  }, [transId.transId]);
 
   async function fetchformDataFromBlockchain() {
     //  using indexerClient to look up the transaction details by validating with the provided transaction id
