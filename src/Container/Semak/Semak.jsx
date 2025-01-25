@@ -53,7 +53,7 @@ const Semak = () => {
   //Delete the cert at firestore
   const deleteCert = async (deleteId, appId) => {
     //delete the sijil at sijil section in firebase
-    const sijilDoc = doc(db, "Sijil", appId.toString());
+    const sijilDoc = doc(db, "Sijil", appId.toString().toLowerCase());
     await deleteDoc(sijilDoc);
     //set the txnid at program section to delete transaction id
     //set the peserta of the person to dipadam
@@ -101,7 +101,7 @@ const Semak = () => {
   function formatDate(dateString) {
     // Split the original date string
     const [year, month, day] = dateString.split('-');
-    
+
     // Reassemble in dd-mm-yyyy format
     return `${day}-${month}-${year}`;
   }
@@ -123,7 +123,7 @@ const Semak = () => {
   };
 
   let { programID } = useParams();
-  const fetchPesertaData = async (pesertaList,programData,pesertaNama) => {
+  const fetchPesertaData = async (pesertaList, programData, pesertaNama) => {
     const rows = pesertaList.map((mykad, index) => {
       return {
         id: index + 1,  // Or use a unique identifier for the row
@@ -150,7 +150,7 @@ const Semak = () => {
         // Assume the programData contains a 'pesertaList' (array) and 'pesertaNama' (object) fields
         const pesertaList = programData.pesertaList || [];
         const pesertaNama = programData.pesertaNama || {};
-        await fetchPesertaData(pesertaList, programData,pesertaNama);
+        await fetchPesertaData(pesertaList, programData, pesertaNama);
       }
       setMula(detail.data().mula);
       setNama(detail.data().nama);
@@ -163,14 +163,14 @@ const Semak = () => {
       setPesertaNama(detail.data().pesertaNama);
       setYuran(detail.data().yuran);
     };
-    if(isOpen){
+    if (isOpen) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       getPeserta();
     }
   }, [reload, isOpen]);
   const getCurrentPageItems = () => {
-    if(programDetail.length === 0){
+    if (programDetail.length === 0) {
       return [];
     }
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -242,7 +242,7 @@ const Semak = () => {
         {/* {(programDetail.length === 0) ? 
           "Tiada peserta yang mendaftar pada program ini."
         : */}
-          <ItemTableWidget
+        <ItemTableWidget
           key={tableKey}
           itemList={getCurrentPageItems()}
           programID={programID}
@@ -250,34 +250,34 @@ const Semak = () => {
           setCurrentUser={setCurrentUser}
           setIsOpen={setIsOpen}
         />
-        
+
       </div>
       <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
-            {Array.from({ length: totalPages }, (_, index) => (
-              <button
-                key={index + 1}
-                onClick={() => setCurrentPage(index + 1)}
-                style={{
-                  margin: "0 5px",
-                  padding: "10px",
-                  borderRadius: "50%",
-                  background: index + 1 === currentPage ? "blue" : "gray",
-                  color: "white",
-                  border: "none",
-                  cursor: "pointer",
-                }}
-              >
-                {index + 1}
-              </button>
-            ))}
-          </div>
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index + 1}
+            onClick={() => setCurrentPage(index + 1)}
+            style={{
+              margin: "0 5px",
+              padding: "10px",
+              borderRadius: "50%",
+              background: index + 1 === currentPage ? "blue" : "gray",
+              color: "white",
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            {index + 1}
+          </button>
+        ))}
+      </div>
       {/* padam sijil peserta */}
       {isOpen && (
         <div className="semaksijil">
           <div className="contentdeletesijil">
-            <div className="semaksijilbox">
-              <div className="sejarahheader">
-                <h2 className="sejarahtitle">Padam</h2>
+            <div className="semaksijilboxadmin">
+              <div className="sejarahheaderadmin">
+                <h2 className="sejarahtitleadmin">Padam</h2>
                 <button
                   className="closebutton"
                   onClick={() => {
@@ -295,13 +295,15 @@ const Semak = () => {
               </div>
 
               {!alertDelete ? (
-                <div className="contentdelete">
-                  <div>
-                    <p>
-                    Adakah anda pasti untuk memadam sijil ini?
-                    </p>
+                <div>
+                  <div className="contentdelete">
+                    <div className="contentpopout">
+                      <p>
+                        Adakah anda pasti untuk memadam sijil?
+                      </p>
+                    </div>
                   </div>
-                  <div className="padamconfirmbutton">
+                  <div className="padamconfirmbuttonadmin">
                     {loading ? (
                       <div>
                         <center>
@@ -309,7 +311,7 @@ const Semak = () => {
                           <br></br>
                           <div>Sila tunggu sebentar...</div>
                           <br></br>
-                          <div>
+                          <div className="contentdeleteadmin">
                             {" "}
                             Sedang memadamkan sijil ini dalam blockchain dan pangkalan data
                             ...
@@ -317,61 +319,66 @@ const Semak = () => {
                         </center>
                       </div>
                     ) : (
-                      <Buttons
-                        title="Padam"
-                        onClick={async () => {
-                          setLoading(true);
-                          // console.log('account', account);
-                          // console.log('crntUser', currentUser);
-                          console.log("account: ", account);
-                          const userTxnId = await getUserTxn(currentUser);
-                          let deleteId;
-                          let appId;
-                          const info = await checkTransactionAndFetchData(
-                            userTxnId
-                          );
-                          if (info.isEther) {
-                            
-                            const { contractAddress } = info;
-                            appId = contractAddress;
-                            deleteId = await invalidateCertificate(contractAddress);
-                          } else {
-                            //obtain the app id for the particular user cert in the program
+                        <div className="buttonrekod">
+                          <div className="comfirmya">
+                            <button className="option" onClick={async () => {
+                              setLoading(true);
+                              // console.log('account', account);
+                              // console.log('crntUser', currentUser);
+                              console.log("account: ", account);
+                              const userTxnId = await getUserTxn(currentUser);
+                              let deleteId;
+                              let appId;
+                              const info = await checkTransactionAndFetchData(
+                                userTxnId
+                              );
+                              if (info.isEther) {
 
-                            // console.log("TxnID" , userTxnId);
-                            const info = await indexerClient
-                              .lookupTransactionByID(userTxnId)
-                              .do();
-                            appId = await info.transaction[
-                              "application-transaction"
-                            ]["application-id"];
-                            // console.log('appID', appId);
+                                const { contractAddress } = info;
+                                appId = contractAddress;
+                                deleteId = await invalidateCertificate(contractAddress);
+                              } else {
+                                //obtain the app id for the particular user cert in the program
 
-                            //delete the cert at algorand blockchain
-                            deleteId = await deleteProductAction(
-                              appId,
-                              account
-                            );
-                            // console.log(deleteId);
-                          }
+                                // console.log("TxnID" , userTxnId);
+                                const info = await indexerClient
+                                  .lookupTransactionByID(userTxnId)
+                                  .do();
+                                appId = await info.transaction[
+                                  "application-transaction"
+                                ]["application-id"];
+                                // console.log('appID', appId);
 
-                          //delete the cert in firebase
-                          deleteCert(deleteId, appId);
+                                //delete the cert at algorand blockchain
+                                deleteId = await deleteProductAction(
+                                  appId,
+                                  account
+                                );
+                                // console.log(deleteId);
+                              }
 
-                          // const transId=payContract(deleteId);
-                          // setDeleteAlert(true);
-                          // const transId=payContract(deleteId);
-                          // setDeleteAlert(true);
-                        }}
-                      />
+                              //delete the cert in firebase
+                              deleteCert(deleteId, appId);
+                            }}>Ya</button>
+                          </div>
+                          <div className="comfirmno">
+                            <button className="option" onClick={() => {
+                              setIsOpen(false);
+                              setDeleteAlert(false);
+                              setLoading(false);
+                            }}>
+                              Tidak
+                            </button>
+                          </div>
+                        </div>
                     )}
                   </div>
                 </div>
               ) : (
-                <div className="contentdelete">
+                <div className="contentdeleteadmin">
                   <div>
                     <p>
-                    Sijil ini berjaya dipadamkan dalam rangkaian blockchain.!
+                      Sijil ini berjaya dipadamkan dalam rangkaian blockchain.!
                     </p>
                   </div>
                 </div>

@@ -42,7 +42,7 @@ const PesertaSemak = () => {
   //Delete the cert at firestore
   const deleteCert = async (deleteId, appId) => {
     //delete the sijil at sijil section in firebase
-    const sijilDoc = doc(db, "Sijil", appId.toString());
+    const sijilDoc = doc(db, "Sijil", appId.toString().toLowerCase());
     await deleteDoc(sijilDoc);
     //set the txnid at program section to delete transaction id
     //set the peserta of the person to dipadam
@@ -121,7 +121,7 @@ const PesertaSemak = () => {
         data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
       ); //read 3
     };
-    if(isOpen){
+    if (isOpen) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       getPesertaProgram();
@@ -130,7 +130,7 @@ const PesertaSemak = () => {
     //getPesertaProgram();
     // console.log(pesertaInfo);
     // console.log(pesertaPrograms);
-  }, [reload,isOpen]);
+  }, [reload, isOpen]);
 
   return (
     <div className="app_box">
@@ -149,7 +149,7 @@ const PesertaSemak = () => {
             </div>
           </div>
         </button>
-        <h1 className="semakdaftaradmin" style={{marginLeft:'16px'}}>{pesertaInfo.nama}</h1>
+        <h1 className="semakdaftaradmin" style={{ marginLeft: '16px' }}>{pesertaInfo.nama}</h1>
       </div>
       {/* Peserta Information */}
       <div className="informasibox">
@@ -183,9 +183,9 @@ const PesertaSemak = () => {
       {isOpen && (
         <div className="semaksijil">
           <div className="contentdeletesijil">
-            <div className="semaksijilbox">
-              <div className="sejarahheader">
-                <h2 className="sejarahtitle">Padam</h2>
+            <div className="semaksijilboxadmin">
+              <div className="sejarahheaderadmin">
+                <p className="sejarahtitleadmin">Padam</p>
                 <button
                   className="closebutton"
                   onClick={() => {
@@ -202,13 +202,15 @@ const PesertaSemak = () => {
                 </button>
               </div>
               {!alertDelete ? (
-                <div className="contentdelete">
-                  <div>
-                    <p>
-                    Adakah anda pasti untuk memadam sijil? 
-                    </p>
+                <div>
+                  <div className="contentdelete">
+                    <div className="contentpopout">
+                      <p>
+                        Adakah anda pasti untuk memadam sijil?
+                      </p>
+                    </div>
                   </div>
-                  <div className="padamconfirmbutton">
+                  <div className="padamconfirmbuttonadmin">
                     {loading ? (
                       <div>
                         <center>
@@ -216,7 +218,7 @@ const PesertaSemak = () => {
                           <br></br>
                           <div>Sila tunggu sebentar...</div>
                           <br></br>
-                          <div>
+                          <div className="contentdeleteadmin">
                             {" "}
                             Sedang memadamkan sijil ini dalam blockchain dan pangkalan data
                             ...
@@ -224,62 +226,66 @@ const PesertaSemak = () => {
                         </center>
                       </div>
                     ) : (
-                      <Buttons
-                        title="Padam"
-                        onClick={async () => {
-                          setLoading(true);
-                          console.log("account: ", account);
-                          const userTxnId = await getUserTxn(currentProgram);
-                          let deleteId;
-                          let appId;
-                          const info = await checkTransactionAndFetchData(
-                            userTxnId
-                          );
-                          if (info.isEther) {
-                            
-                            const { contractAddress } = info;
-                            appId = contractAddress;
-                            deleteId = await invalidateCertificate(contractAddress);
-                          } else {
-                            //obtain the app id for the particular user cert in the program
-
-                            // console.log("TxnID" , userTxnId);
-                            const info = await indexerClient
-                              .lookupTransactionByID(userTxnId)
-                              .do();
-                            appId = await info.transaction[
-                              "application-transaction"
-                            ]["application-id"];
-                            // console.log('appID', appId);
-
-                            //delete the cert at algorand blockchain
-                            deleteId = await deleteProductAction(
-                              appId,
-                              account
-                            );
-                            // console.log(deleteId);
-                          }
-
-                          //delete the cert in firebase
-                          deleteCert(deleteId, appId);
-
-                          // const transId=payContract(deleteId);
-                          setDeleteAlert(true);
-                        }}
-                      />
+                        <div className="buttonrekod">
+                          <div className="comfirmya">
+                            <button className="option" onClick={async () => {
+                              setLoading(true);
+                              console.log("account: ", account);
+                              const userTxnId = await getUserTxn(currentProgram);
+                              let deleteId;
+                              let appId;
+                              const info = await checkTransactionAndFetchData(
+                                userTxnId
+                              );
+                              if (info.isEther) {
+                                const { contractAddress } = info;
+                                appId = contractAddress;
+                                deleteId = await invalidateCertificate(contractAddress);
+                              } else {
+                                //obtain the app id for the particular user cert in the program
+                                // console.log("TxnID" , userTxnId);
+                                const info = await indexerClient
+                                  .lookupTransactionByID(userTxnId)
+                                  .do();
+                                appId = await info.transaction[
+                                  "application-transaction"
+                                ]["application-id"];
+                                // console.log('appID', appId);
+                                //delete the cert at algorand blockchain
+                                deleteId = await deleteProductAction(
+                                  appId,
+                                  account
+                                );
+                                // console.log(deleteId);
+                              }
+                              //delete the cert in firebase
+                              deleteCert(deleteId, appId);
+                              // const transId=payContract(deleteId);
+                              setDeleteAlert(true);
+                            }}>Ya</button>
+                          </div>
+                          <div className="comfirmno">
+                            <button className="option" onClick={() => {
+                              setIsOpen(false);
+                              setDeleteAlert(false);
+                              setLoading(false);
+                            }}>
+                              Tidak
+                            </button>
+                          </div>
+                        </div>
                     )}
                   </div>
                 </div>
               ) : (
-                <div className="contentdelete">
+                <div className="contentdeleteadmin">
                   <div>
                     <p>
-                    Sijil ini berjaya dipadamkan dalam rangkaian blockchain.
+                      Sijil ini berjaya dipadamkan dalam rangkaian blockchain.
                     </p>
                   </div>
                 </div>
               )}
-              <div className="contentdelete"></div>
             </div>
           </div>
         </div>

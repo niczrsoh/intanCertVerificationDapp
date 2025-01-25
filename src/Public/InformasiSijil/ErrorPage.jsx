@@ -12,7 +12,7 @@ const InformasiErrorPage = () => {
     <h1 className='errorh1'>Oops!</h1>
     <h2>😓</h2>
     <br></br>
-    <p className='errorp'>Sijil Id, {appid['appid']} {location.state.message}</p>
+    <p className='errorp'>Sijil ID, {appid['appid']} {location.state.message}</p>
     <a href="/semaksijil" className="button">Kembali ke halaman semak sijil</a>
   </div>
   );

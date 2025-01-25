@@ -36,7 +36,6 @@ const ProgramHome = () => {
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is 0-based
     const year = date.getFullYear();
-    console.log(`${day}-${month}-${year}`);
     return `${day}-${month}-${year}`;
   };
 
@@ -203,20 +202,27 @@ const ProgramHome = () => {
           </div>
     {/* Padam program */}
     {isOpen && (
-        <div className='semaksijil'>
-           <div className='contentdeletesijil'>
-            <div className='semaksijilbox'>
-              <div className='sejarahheader'>
-              <h2 className='sejarahtitle'>Padam</h2>
+        <div className='Rekod-modal-admin'>
+           <div className='confirmation-message'>
+              <div className="row-admin">
+              <div className="headpopoutadmin">
+                <p>Padam</p>
+              </div>
               <button className='closebutton' onClick={() => setIsOpen(false)}><img src={closeicon} alt="This is a close icon." className='closeicon'/></button>
               </div>
-              <div className='contentdelete'>
-              <div><p>
-              Adakah anda pasti untuk memadam program?
-                </p></div>
-                <div className='padamconfirmbutton'><Buttons title="Padam" onClick={() => deleteProg()}/></div>
-              </div>
-            </div>
+                <div className="contentpopout">
+                  <p>
+                    Adakah anda pasti untuk memadam program?
+                  </p>
+                </div>
+                <div className="buttonrekod">
+                    <div className="comfirmya">
+                        <button className="option" onClick={deleteProg}>Ya</button>
+                    </div>
+                    <div className="comfirmno">
+                        <button className="option" onClick={() => setIsOpen(false)}>Tidak</button>
+                    </div>
+                </div>
             </div>
         </div>
         )}
