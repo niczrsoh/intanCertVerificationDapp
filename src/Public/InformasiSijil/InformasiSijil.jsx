@@ -76,7 +76,7 @@ function InformasiSijil() {
     // Function to generate the QR code
     async function generateQRCode(transactionId, data) {
       try {
-        const url = `https://intan-cert-verification-dapp.azurewebsites.net/informasi-sijil/${transactionId}`;
+        const url = `https://bchainexplorer.azurewebsites.net/#/blockchain/transactionList/transactionDetail/${transactionId}`;
         const qrDataUrl = await QRCode.toDataURL(url);
         setQrCodeDataUrl(qrDataUrl);
         const blob = await pdf(
@@ -87,7 +87,6 @@ function InformasiSijil() {
           />
         ).toBlob();
         setFileUrl(URL.createObjectURL(blob));
-        alert('QR code generated successfully');
       } catch (err) {
         console.error('Failed to generate QR code', err);
       }
@@ -255,7 +254,7 @@ function InformasiSijil() {
               </div>
             </div>
             <div className="viewPdf">
-              {/* <ErrorBoundary>
+              <ErrorBoundary>
                   {isMobile ? (
                     <>
                       <Button
@@ -278,7 +277,7 @@ function InformasiSijil() {
                       />
                     </PDFViewer>
                   )}
-                </ErrorBoundary> */}
+                </ErrorBoundary>
             </div>
           </div>
         </div>)
