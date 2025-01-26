@@ -117,7 +117,7 @@ function SenaraiProgramSediaAda() {
         transactionId: newTran,
         jumlahPeserta: newJumlahPesertaString,
       }).then(() => {
-        alert("Pemohonan program anda telah berjaya.");
+        alert("Permohonan program anda telah berjaya.");
         navigate(-1);
       })
     } else {
