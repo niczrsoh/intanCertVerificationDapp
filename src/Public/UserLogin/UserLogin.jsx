@@ -61,7 +61,7 @@ function UserLogin() {
             <button className='login' type='Submit'>Masuk</button>
             <div className='otherLinks'>
               <NavLink className='otherlink' to='/register'>Tidak mempunyai akaun? Daftar akaun</NavLink>
-              <NavLink className='otherlink' to='/admin-login'>Log masuk sebagai Admin</NavLink>
+              <NavLink className='otherlink' to='/admin-login'>Log masuk sebagai admin</NavLink>
             </div>
 
           </form>
