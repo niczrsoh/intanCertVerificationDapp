@@ -28,7 +28,7 @@ const AdminPesertaDetailTableWidget = ({
     {
       field: "id",
       headerName: "Tarikh",
-      flex: 1,
+      flex: 1.5,
       headerClassName: "super-app-theme--header",
       renderCell: (params) => {
         // Get the row index, and add 1 to start from 1
@@ -60,7 +60,7 @@ const AdminPesertaDetailTableWidget = ({
     {
       field: "sijil",
       headerName: "Sijil",
-      flex: 3,
+      flex: 2,
       headerClassName: "super-app-theme--header",
       renderCell: (params) => {
         const mykad = params.row.mykad;
