@@ -20,7 +20,7 @@ const AdminProgramDetailTableWidget = ({
     {
       field: "id",
       headerName: "Bil",
-      flex: 1,
+      flex: 0.5,
       headerClassName: "super-app-theme--header",
       renderCell: (params) => {
         // Get the row index, and add 1 to start from 1
@@ -31,7 +31,7 @@ const AdminProgramDetailTableWidget = ({
     {
       field: "mykad",
       headerName: "No. MyKad",
-      flex: 2,
+      flex: 1,
       headerClassName: "super-app-theme--header",
       renderCell: (params) => {
         return <p>{params.row.mykad}</p>; // Display the first item in the array, adjust as needed
@@ -40,7 +40,7 @@ const AdminProgramDetailTableWidget = ({
     {
       field: "pesertaNama",
       headerName: "Nama Peserta",
-      flex: 1,
+      flex: 2,
       headerClassName: "super-app-theme--header",
       renderCell: (params) => {
         // Get the 'mykad' for the current row
