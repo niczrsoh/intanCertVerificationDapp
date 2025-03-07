@@ -6,12 +6,12 @@ import AppContext from "../../Context/AppContext";
 //function to return the menu item
 function NavItem(props) {
   return (
-    <li>
-      <NavLink className={props.cn} to={props.path} onClick={props.close}>
-        <i className={props.icon} />
-        {props.name}
-      </NavLink>
-    </li>
+<li>
+  <NavLink className={`${props.cn}`} to={props.path} onClick={props.close}>
+    <i className={props.icon} />
+    {props.name}
+  </NavLink>
+</li>
   );
 }
 

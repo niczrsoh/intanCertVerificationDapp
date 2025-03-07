@@ -80,6 +80,8 @@
     z-index: 999; 
     opacity: 0;
     height: 0;
+    width: 200px; 
+    min-width: max-content;
 }
 
 .nav-menu li:hover ul.sub-menu {
@@ -183,6 +185,8 @@
         text-align: left;
         background-color: #3F51B5 !important;
         height: auto !important;
+        width: 200px; 
+        min-width: max-content;
     }
 
     .sub-menu.active{

@@ -60,7 +60,7 @@ function InformasiSijil() {
                 : "TARIKH PROGRAM",
             appId: contractAddress ? contractAddress : "APP ID",
             //    explorer: `http://172.26.112.1:4000/#/blockchain/transactionList/transactionDetail/${transId.transId}`,
-            explorer: `https://bchainexplorer.azurewebsites.net/#/blockchain/transactionList/transactionDetail/${transId.transId}`,
+            explorer: `http://10.10.21.143/#/blockchain/transactionList/transactionDetail/${transId.transId}`,
             isEther: true,
           };
         } else {
@@ -76,7 +76,7 @@ function InformasiSijil() {
     // Function to generate the QR code
     async function generateQRCode(transactionId, data) {
       try {
-        const url = `https://bchainexplorer.azurewebsites.net/#/blockchain/transactionList/transactionDetail/${transactionId}`;
+        const url = `http://10.10.21.143/#/blockchain/transactionList/transactionDetail/${transactionId}`;
         const qrDataUrl = await QRCode.toDataURL(url);
         setQrCodeDataUrl(qrDataUrl);
         const blob = await pdf(
@@ -147,7 +147,7 @@ function InformasiSijil() {
         appId: dappID ? dappID : "APP ID",
         //  isEther: false,
         // qrCodeImage: getQrCodeDataUrl(
-        //  `https://intan-cert-verification-dapp.azurewebsites.net/informasi-sijil/${transId.transId}`
+        //  `http://10.10.21.143/informasi-sijil/${transId.transId}`
         // )
       };
       /*
@@ -155,7 +155,7 @@ function InformasiSijil() {
             change the QRcode to become the URL of the transaction
             */
       const newQrCodeDataUrl = await getQrCodeDataUrl(
-        `https://intan-cert-verification-dapp.azurewebsites.net/informasi-sijil/${transId.transId}`
+        `http://10.10.21.143/informasi-sijil/${transId.transId}`
       );
       setQrCodeDataUrl(newQrCodeDataUrl);
 

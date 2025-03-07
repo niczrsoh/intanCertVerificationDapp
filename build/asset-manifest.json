@@ -1,20 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.e836da2c.css",
-    "main.js": "/static/js/main.1898f8dc.js",
-    "static/js/787.1513c8d1.chunk.js": "/static/js/787.1513c8d1.chunk.js",
-    "static/media/Certificate.png": "/static/media/Certificate.c421dc34005890fb113b.png",
-    "static/media/intan.png": "/static/media/intan.4e7ff3ba64bda49d1752.png",
-    "static/media/background.jpg": "/static/media/background.70289bddee19df5e9f6a.jpg",
-    "static/media/error-image.jpg": "/static/media/error-image.3360167ff1faa0e6d3c7.jpg",
-    "static/media/filter.png": "/static/media/filter.1ed63101ff618bada7e7.png",
-    "index.html": "/index.html",
-    "main.e836da2c.css.map": "/static/css/main.e836da2c.css.map",
-    "main.1898f8dc.js.map": "/static/js/main.1898f8dc.js.map",
-    "787.1513c8d1.chunk.js.map": "/static/js/787.1513c8d1.chunk.js.map"
+    "main.css": "/certdapp/static/css/main.da5e8ea0.css",
+    "main.js": "/certdapp/static/js/main.bf5ecd2d.js",
+    "static/js/27.da63cb99.chunk.js": "/certdapp/static/js/27.da63cb99.chunk.js",
+    "static/media/Certificate.png": "/certdapp/static/media/Certificate.e5c4d4eb1ec240b4ead7.png",
+    "static/media/intan.png": "/certdapp/static/media/intan.4e7ff3ba64bda49d1752.png",
+    "static/media/background.jpg": "/certdapp/static/media/background.70289bddee19df5e9f6a.jpg",
+    "static/media/method1.png": "/certdapp/static/media/method1.35f46309e3d0784306e8.png",
+    "static/media/method2.png": "/certdapp/static/media/method2.c6e357a0b7b2ffa2f580.png",
+    "static/media/error-image.jpg": "/certdapp/static/media/error-image.3360167ff1faa0e6d3c7.jpg",
+    "static/media/filter.png": "/certdapp/static/media/filter.1ed63101ff618bada7e7.png",
+    "index.html": "/certdapp/index.html"
   },
   "entrypoints": [
-    "static/css/main.e836da2c.css",
-    "static/js/main.1898f8dc.js"
+    "static/css/main.da5e8ea0.css",
+    "static/js/main.bf5ecd2d.js"
   ]
 }

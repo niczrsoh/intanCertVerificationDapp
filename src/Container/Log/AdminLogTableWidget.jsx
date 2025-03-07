@@ -63,7 +63,7 @@ const AdminLogTableWidget = ({
       renderCell: (params) => {
         return (
           <div>
-            <a href={`https://bchainexplorer.azurewebsites.net/#/blockchain/transactionList/transactionDetail/${params.row.transactionId}`} target="_blank">{params.row.transactionId}</a>
+            <a href={`http://10.10.21.143/#/blockchain/transactionList/transactionDetail/${params.row.transactionId}`} target="_blank">{params.row.transactionId}</a>
           </div>
         );
       },

@@ -2,6 +2,7 @@
   "name": "intan",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/certdapp",
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
@@ -19,7 +20,6 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "algosdk": "^2.2.0",
-    "caniuse-lite": "^1.0.30001633",
     "ethers": "^6.12.0",
     "firebase": "^9.20.0",
     "js-base64-file": "^2.0.3",
@@ -48,8 +48,8 @@
     "web3": "^4.8.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "PORT=5001 react-scripts start",
+    "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
