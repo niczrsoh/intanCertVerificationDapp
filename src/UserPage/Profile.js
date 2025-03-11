@@ -1,0 +1,479 @@
+import React, { useEffect, useState } from "react";
+import "./styles/profile.css";
+import { db, storage } from '../Backend/firebase/firebase-config'
+import { getDoc, doc, updateDoc } from 'firebase/firestore'
+import { ref, uploadBytes, listAll, getDownloadURL, deleteObject } from 'firebase/storage';
+import { v4 } from 'uuid';
+import Avatar from "react-avatar-edit";
+import { Buttons } from "../Component";
+
+//function for updating and showing the Informasi personal
+const ImgUpload = ({ onChange, src }) => (
+  <div className="upload-file">
+    <label htmlFor="photo-upload" >
+      <span className="upload-icon">
+        <i class="fa-solid fa-upload fa-xl" style={{ color: "#ffffff" }}></i>
+
+      </span>
+    </label>
+    <div className="img-wrap img-upload">
+      <img for="photo-upload" src={src} alt="profile" className="profile-pic" />
+    </div>
+    <input id="photo-upload" type="file" onChange={onChange} />
+  </div>
+);
+
+const Nama = ({ onChange, value }) => (
+  <div className="text">
+    <label htmlFor="name">NAMA:</label>
+    <input
+      className="profileinput"
+      id="name"
+      type="text"
+      onChange={onChange}
+      maxLength="25"
+      required
+      value={value}
+    />
+  </div>
+);
+
+const MyKad = ({ onChange, value }) => (
+  <div className="text">
+    <label htmlFor="myKad">NO.MYKAD:</label>
+    <input
+      className="profileinput"
+      id="mykad"
+      type="text"
+      onChange={onChange}
+      maxLength="14"
+      minLength="14"
+      value={value}
+      required
+      disabled={true}
+    />
+  </div>
+);
+
+const Emelperibadi = ({ onChange, value }) => (
+  <div className="text">
+    <label htmlFor="emelperibadi">ALAMAT EMEL PERIBADI:</label>
+    <input
+      id="emelperibadi"
+      type="email"
+      onChange={onChange}
+      value={value}
+      required
+      className="profileinput"
+    />
+  </div>
+);
+
+const Jawatan = ({ onChange, value }) => (
+  <div className="text">
+    <label htmlFor="jawatan">JAWATAN:</label>
+    <input
+      id="jawatan"
+      type="text"
+      onChange={onChange}
+      value={value}
+      required
+      className="profileinput"
+    />
+  </div>
+);
+
+const TelefonPeribadi = ({ onChange, value }) => (
+  <div className="text">
+    <label htmlFor="telefon">TELEFON PERIBADI:</label>
+    <input
+      id='telefon'
+      type='tel'
+      onChange={onChange}
+      value={value}
+      pattern="[0-9]{3}-[0-9]{7,8}"
+      inputMode='numeric'
+      placeholder='012-3456789'
+      required
+      maxLength={12}
+      minLength={11}
+      className="profileinput"
+    />
+  </div>
+);
+
+const Alamat = ({ onChange, value }) => (
+  <div className="text">
+    <label htmlFor="Alamat">ALAMAT:</label>
+    <input
+      id="alamat"
+      type="text"
+      onChange={onChange}
+      value={value}
+      required
+      className="profileinput"
+    />
+  </div>
+);
+
+//A function that will show the user's Informasi personal after the user clicks the 'Save' button
+
+const Profile = ({
+  onSubmit,
+  src,
+  nama,
+  myKad,
+  emelperibadi,
+  jawatan,
+  telefonperibadi,
+  alamat,
+}) => (
+  <div className="card">
+    <form onSubmit={onSubmit} className="profileform">
+      <div className="leftSide">
+        <div className="img-wrap">
+          <img for="photo-upload" src={src} alt="profile" className="profile-pic" />
+        </div>
+        <div className='submitBtn'><Buttons title="KEMASKINI PROFIL" onClick={onSubmit} /></div>
+        {/* <button type="submit" className="editbutton">
+          KEMASKINI PROFIL{" "}
+        </button> */}
+      </div>
+      <div className="frame">
+        <div className="headerProfileU">
+          <p>BUTIRAN PERIBADI</p>
+        </div>
+        <div className="rightSide">
+          <div className="formleft">
+            <div className="name text">
+              NAMA: <div className="textinput">{nama}</div>
+            </div>
+            <div className="myKad text">
+              NO.MYKAD: <div className="textinput">{myKad}</div>
+            </div>
+            <div className="emelperibadi text">
+              ALAMAT EMEL PERIBADI:<div className="textinput" >{emelperibadi}</div>
+            </div>
+          </div>
+          <div className="formright">
+            <div className="jawatan text">
+              JAWATAN:<div className="textinput">{jawatan}</div>
+            </div>
+            <div className="telefon text">
+              TELEFON PERIBADI:<div className="textinput">{telefonperibadi}</div>
+            </div>
+            <div className="alamat text">
+              ALAMAT: <div className="textinput">{alamat}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+);
+
+
+
+export default class profile extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      file: "",
+      imagePreviewUrl:
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+      imageOriginalUrl: "",
+      imageUrl:
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+      src: null,
+      preview: null,
+      nama: "teoh",
+      myKad: "ic",
+      oriMyKad: "",
+      emelperibadi: "",
+      jawatan: "",
+      telefonperibadi: "",
+      alamat: "",
+      active: "profile",
+    };
+
+    const getProfile = async () => {
+      const userID = sessionStorage.getItem("userID");
+      //get the user profile info
+      const docRef = doc(db, "User", userID);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        this.setState({
+          nama: docSnap.data().nama,
+          myKad: docSnap.data().ic,
+          oriMyKad: docSnap.data().ic,
+          emelperibadi: docSnap.data().emelPeribadi,
+          jawatan: docSnap.data().jawatan,
+          telefonperibadi: docSnap.data().telefonPeribadi,
+          alamat: docSnap.data().alamat,
+          imageOriginalUrl: docSnap.data().imageUrl,
+          imageUrl: docSnap.data().imageUrl,
+        });
+      } else {
+        //translate to malay
+        alert("Ralat sistem berlaku, sila cuba lagi nanti.");
+      }
+    }
+    getProfile();
+  }
+
+  onClose = () => {
+    this.setState({ preview: null })
+  }
+
+  onCrop = (preview) => {
+    this.setState({
+      preview,
+      file: preview,
+      imageUrl: preview,
+    })
+
+
+  }
+
+
+
+  //File upload handler that uses FileReader to read a selected file and display a preview of the image
+  photoUpload = (e) => {
+    e.preventDefault();
+    const reader = new FileReader();
+    const image = new Image();
+    const file = e.target.files[0];
+    reader.onloadend = () => {
+      image.src = reader.result;
+      console.log(`image width=>${image.width}\nimage height=>${image.height}`);
+      if (image.width > 200 || image.height > 200) {
+        alert("Saiz imej perlu rendah dari 200 x 200 pixel.");
+        return;
+      } else {
+        this.setState({
+          file: file,
+          imageUrl: reader.result,
+        });
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
+
+  // function that is triggered when there is a change in a form input element
+  editNama = (e) => {
+    const nama = e.target.value;
+    this.setState({
+      nama,
+    });
+  };
+
+  editmyKad = (e) => {
+    const myKad = e.target.value
+    this.setState({
+      myKad: myKad,
+    });
+  };
+
+  editemelperibadi = (e) => {
+    const emelperibadi = e.target.value;
+    this.setState({
+      emelperibadi: emelperibadi,
+    });
+  };
+
+  editjawatan = (e) => {
+    const jawatan = e.target.value;
+    this.setState({
+      jawatan: jawatan,
+    });
+  };
+
+  edittelefonperibadi = (e) => {
+    const telefonperibadi = e;
+    this.setState({
+      telefonperibadi: telefonperibadi,
+    });
+  };
+
+  handlePhoneChange = (event) => {
+    let value = event.target.value.replace(/[^0-9]/g, '').replace(/(\d{3})(\d+)/, '$1-$2');
+    this.edittelefonperibadi(value);
+  };
+
+  editalamat = (e) => {
+    const alamat = e.target.value;
+    this.setState({
+      alamat: alamat,
+    });
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const phoneRegex = /^[0-9]{3}-[0-9]{7,8}$/;
+    const telefonperibadi = this.state.telefonperibadi;
+    if (!phoneRegex.test(telefonperibadi)) {
+      alert('Sila masukkan IC dengan format "012-34567890".');
+      return;
+    }
+    let activeP = this.state.active === "edit" ? "profile" : "edit";
+    this.setState({
+      active: activeP,
+    });
+    this.updateProfile();
+  };
+
+  // When the user clicks the "Save" button, the information will be submitted and displayed.
+  // When the user clicks the "Edit Profile" button, the form becomes editable, allowing the user to update their Informasi personal.
+  async updateProfile() {
+    const regex = /[0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]/;
+    const mykad = this.state.myKad;
+    if (!regex.test(mykad)) {
+      alert('Sila masukkan IC dengan format "123456-12-1234".');
+      return;
+    }
+    if (this.state.active == "edit") {
+      let activeP = this.state.active === "edit" ? "loading" : "edit";
+      this.setState({
+        active: activeP,
+      });
+      console.log(this.state.nama);
+      const userID = sessionStorage.getItem("userID");
+      const docRef = doc(db, "User", userID);
+      if (this.state.file === "") {
+        //update the user profile info with the new personal info
+        await updateDoc(docRef, {
+          nama: this.state.nama,
+          ic: this.state.myKad,
+          emelPeribadi: this.state.emelperibadi,
+          jawatan: this.state.jawatan,
+          telefonPeribadi: this.state.telefonperibadi,
+          alamat: this.state.alamat,
+        }).then(() => {
+          let activeP = this.state.active === "loading" ? "profile" : "loading";
+          this.setState({
+            active: activeP,
+          });
+          alert("Profil berjaya dikemaskini.");
+        });
+      } else {
+        if (this.state.imageOriginalUrl != "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png") {
+          let text = this.state.imageOriginalUrl;
+          let myArray = text.split("images%2F");
+          let text2 = myArray[1];
+          let myArray2 = text2.split("?alt");
+          let imageName = myArray2[0];
+          const desertRef = ref(storage, `images/${imageName}`);
+          //delete the previous uploaded profile picture
+          deleteObject(desertRef).catch((error) => {
+            console.log(error);
+          });
+        }
+        const imageRef = ref(storage, `images/${this.state.file.name + v4()}`);
+        await uploadBytes(imageRef, this.state.file).then(async (snapshot) => {
+          await getDownloadURL(snapshot.ref).then(async (url) => {
+            //update the new personal info and also the new uploaded profile pic
+            await updateDoc(docRef, {
+              nama: this.state.nama,
+              ic: this.state.myKad,
+              emelPeribadi: this.state.emelperibadi,
+              jawatan: this.state.jawatan,
+              telefonPeribadi: this.state.telefonperibadi,
+              alamat: this.state.alamat,
+              imageUrl: url,
+            }).then(() => {
+              let activeP = this.state.active === "loading" ? "profile" : "loading";
+              this.setState({
+                active: activeP,
+              });
+              alert("Profil telah berjaya dikemaskini.");
+            });
+          });
+        });
+
+      }
+    }
+  }
+
+  render() {
+    const {
+      imageUrl,
+      nama,
+      myKad,
+      emelperibadi,
+      jawatan,
+      telefonperibadi,
+      alamat,
+      active,
+      src,
+      preview
+    } = this.state;
+    return (
+      <div>
+        {active === "edit" ? (
+          <div className="card">
+            <form onSubmit={this.handleSubmit} className="profileform">
+              <div className="leftSide">
+                {/* <Avatar
+                  width={250}
+                  height={250}
+                  onCrop={this.onCrop}
+                  onClose={this.onClose}
+                  src={src}
+                />
+
+                {preview && (
+                  <img
+                    src={preview}
+                    alt="Preview"
+                  />
+                )} */}
+                <ImgUpload onChange={this.photoUpload} src={imageUrl} />
+                <div className='submitBtn'><Buttons title="SIMPAN" onClick={this.handleSubmit} /></div>
+              </div>
+              <div className="frame">
+                <div className="headerProfileU">
+                  <p>BUTIRAN PERIBADI</p>
+                </div>
+                <div className="rightSide">
+                  <div className="formleft">
+                    <Nama onChange={this.editNama} value={nama} />
+                    <MyKad onChange={this.editmyKad} value={myKad} />
+                    <Emelperibadi
+                      onChange={this.editemelperibadi}
+                      value={emelperibadi}
+                    />
+                  </div>
+                  <div className="formright">
+                    <Jawatan onChange={this.editjawatan} value={jawatan} />
+                    <TelefonPeribadi onChange={this.handlePhoneChange} value={telefonperibadi} />
+                    <Alamat onChange={this.editalamat} value={alamat} />
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        ) : (active === "loading") ?
+          <center>
+            <div className="loading">Sedang mengemaskini profil… &#8230;</div></center>
+          : (
+            <Profile
+              onSubmit={this.handleSubmit}
+              src={imageUrl}
+              nama={nama}
+              myKad={myKad}
+              emelperibadi={emelperibadi}
+              jawatan={jawatan}
+              telefonperibadi={telefonperibadi}
+              alamat={alamat}
+            />
+          )
+        }
+
+      </div>
+
+    );
+  }
+}

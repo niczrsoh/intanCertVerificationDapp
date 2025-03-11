@@ -1,0 +1,77 @@
+import { React, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import './Penyemak.css';
+import { collection, addDoc } from 'firebase/firestore'
+import { db } from '../../Backend/firebase/firebase-config'
+import { Buttons } from '../../Component'
+export default function Penyemak() {
+  const [mykad, setMykad] = useState("");
+  const [nama, setNama] = useState("");
+  const [organisasi, setOrganisasi] = useState("");
+  const navigate = useNavigate();
+  const { transId } = useParams();
+  //restrict input only number
+
+  //navigate to semak sijil page after submit the penyemak details
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const regex = /[0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]/;
+    if (!regex.test(mykad)) {
+      alert('Sila masukkan IC dengan format "123456-12-1234".');
+      return;
+    }
+
+    //add the new penyemak info into firestore
+    const userCollectionRef = collection(db, "Penyemak")
+    await addDoc(userCollectionRef, {
+      ic: mykad,
+      nama: nama,
+      organisasi: organisasi,
+    });//create 2 end
+
+    if (transId === undefined) {
+      navigate(`/semaksijil`);
+      return;
+    }
+
+    navigate(`/semaksijil/${transId}`);
+  }
+
+  return (
+    <>
+      <div className='penyemakPage'>
+        <div className='penyemakContainer'>
+          <div className='titlePenyemak'>
+            <h1>Maklumat Penyemak</h1>
+          </div>
+          {/*penyemak information form  method need change later*/}
+          <form className='maklumatPenyemak' method='get' onSubmit={handleSubmit}>
+
+            <label htmlFor='namaPenyemak'>Nama:
+              <input id='namaPenyemak' name='namaPenyemak' type='text' placeholder='Ali bin Ahmad' onChange={(event) => {
+                setNama(event.target.value)
+              }}
+              />
+            </label>
+
+            <label htmlFor='myKadPenyemak'>No. MyKad:
+              <input id='myKadPenyemak' name='myKadPenyemak' type='text' placeholder='000000-00-0001' minLength='14' maxLength='14' onChange={(event) => {
+                setMykad(event.target.value)
+              }} />
+            </label>
+
+            <label htmlFor='organisasiPenyemak'>Nama Organisasi:
+              <input id='organisasiPenyemak' name='organisasiPenyemak' type='text' placeholder='INTAN Malaysia' onChange={(event) => {
+                setOrganisasi(event.target.value)
+              }} />
+            </label>
+            <br></br>
+            <br></br>
+          </form>
+          <div className='submitBtn'><Buttons title="Masuk" onClick={handleSubmit} /></div>
+        </div>
+
+      </div>
+    </>
+  )
+}

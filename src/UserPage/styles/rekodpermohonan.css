@@ -1,0 +1,251 @@
+.tableRekod {
+	justify-content: center;
+	text-align: left;
+	width: 95%;
+	margin: 0 auto 3rem;
+	font-family: Arial, sans-serif;
+	font-size: 17px;
+	z-index: 1;
+}
+
+.tableRekod h1 {
+	text-align: left;
+	font-weight: bold;
+	padding-top: 2rem;
+	padding-left: 2rem;
+	font-family: sans-serif, lato;
+	color: #333333;
+}
+
+.header {
+	background-color: #3f51b5;
+	color: white;
+}
+
+.Rekod {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.Rekod th,
+td {
+	height: 50px;
+	border: #dfdfdf solid 3px;
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
+.Rekod .kod {
+	width: 10%;
+}
+
+.Rekod .NameKursus {
+	width: 40%;
+}
+
+.Rekod .Tarikh {
+	width: 10%;
+}
+
+.Rekod .Status {
+	width: 10%;
+}
+
+.Rekod .Aktiviti {
+	width: 10%;
+}
+
+.Aktiviti .AktivitiContainer {
+	display: flex;
+	justify-content: space-around;
+}
+
+.Rekod-modal {
+	background: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 9999;
+}
+
+.Rekod-modal .confirmation-message {
+	text-align: center;
+	background-color: white;
+	width: 25rem;
+	padding-top: 30px;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	max-width: 600px;
+}
+
+.Rekod-modal .buttonrekod {
+	display: flex;
+	flex-direction: row;
+	height: 3rem;
+	justify-items: center;
+}
+
+.Rekod-modal .comfirmya {
+	background-color: #bad26e;
+	width: 50%;
+	margin: 0;
+	margin-right: 0;
+	padding: 0;
+	align-items: center;
+	display: flex;
+}
+
+.Rekod-modal .comfirmno {
+	background-color: #fe7065;
+	width: 50%;
+	margin: 0;
+	padding: 0;
+	align-items: center;
+	justify-items: center;
+	display: flex;
+}
+
+.Rekod-modal .confirmation-message .option {
+	margin: 0 auto;
+	background-color: transparent;
+	color: #fff;
+	border: none;
+	font-size: 18px;
+	border-radius: 5px;
+	cursor: pointer;
+	width: 100%;
+	height: 100%;
+}
+
+.Rekod-modal .confirmation-message .close {
+	background-color: transparent;
+	color: black;
+	margin-top: 1rem;
+	padding: 0;
+	border: none;
+}
+
+.Rekod-modal .confirmation-message p {
+	font-size: 17px;
+	color: black;
+	margin: 30px 10px;
+	font-family: Lato;
+}
+
+.Rekod-modal .confirmation-message button:hover {
+	background-color: rgba(0, 0, 0, 0.168);
+	color: black;
+}
+
+.Rekod-modal .close {
+	position: absolute;
+	top: 0rem;
+	right: 0.5rem;
+	cursor: pointer;
+	border: none;
+}
+
+.Rekod-modal .headpopout {
+	position: absolute;
+	top: 1.2rem;
+	left: 2.25rem;
+}
+
+.Rekod-modal .headpopout p {
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+	font-size: 23px;
+}
+
+
+.Rekod-modal .contentpopout {
+	width: 85%;
+	text-align: justify;
+	margin: 1.5rem auto;
+}
+
+.Search {
+	justify-content: right;
+	display: flex;
+	flex-direction: row;
+	padding-right: 1rem;
+	padding-bottom: 0.5rem;
+}
+
+.searchicon {
+	background-color: #fff;
+	padding: 0.5rem 0.5rem 0rem;
+	margin-left: 0.2rem;
+	border-radius: 3px;
+	height: 1.6rem;
+	width: 1rem;
+	justify-content: center;
+	align-content: center;
+}
+
+.textboxsearch {
+	height: 1rem;
+	width: 15rem;
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	color: black;
+	background-color: white;
+	border: 1px solid #f4f4f4;
+	border-radius: 3px;
+	padding: 8px;
+}
+
+.even {
+	background-color: #f4f4f4;
+}
+
+.odd {
+	background-color: #fff;
+}
+
+.Mohonbutton {
+	margin-top: 0;
+	background-color: transparent;
+	color: black;
+	font-family: inherit;
+	font-weight: normal;
+	text-decoration: underline;
+	font-size: 17px;
+	cursor: pointer;
+	letter-spacing: 0px;
+	border: none;
+}
+
+.Printbutton {
+	margin-top: 0;
+	background-color: transparent;
+	color: black;
+	font-family: inherit;
+	font-weight: normal;
+	text-decoration: underline;
+	font-size: 17px;
+	cursor: pointer;
+	letter-spacing: 0px;
+	border: none;
+	text-align: center;
+
+}
+
+.centered {
+	text-align: center;
+}
+
+.semakbutton {
+	border: none;
+	background: none;
+	font-size: 17px;
+	text-align: center;
+	cursor: pointer;
+	padding: 2.93px 10px 0 0;
+	text-decoration: underline;
+}
