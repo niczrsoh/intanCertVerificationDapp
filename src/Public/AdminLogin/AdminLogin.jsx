@@ -61,38 +61,6 @@ function AdminLogin() {
     }
   };
 
-  //after login, direct admin to admin home page (program list), set the role as ADMIN
-  const adminLogin = async (e) => {
-    e.preventDefault();
-    const regex =
-      /[0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]/;
-    if (!regex.test(mykad)) {
-      alert('Sila masukkan IC dengan format "123456-12-1234".');
-      return;
-    }
-
-    //get the admin document path and check whether the admin account exist
-    const docRef = doc(db, "Admin", mykad);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      if (docSnap.data().acc == account) {
-        sessionStorage.setItem("user", JSON.stringify({ role: "ADMIN" }));
-        sessionStorage.setItem("userID", mykad);
-        sessionStorage.setItem("adminName", docSnap.data().name);
-        sessionStorage.setItem("adminRole", docSnap.data().role);
-        sessionStorage.setItem("userNama", "");
-        navigate("/admin/home");
-        //window.location.reload();
-      } else {
-        alert("Salah wallet account, sila masukkan semula.");
-      }
-    } else {
-      // docSnap.data() will be undefined in this case
-      alert("Salah IC, sila masukkan semula.");
-    }
-  };
-
   return (
     <>
       <div className="adminLoginPage">
@@ -106,7 +74,7 @@ function AdminLogin() {
             className="adminLoginForm"
             method="post"
             action="/admin/home"
-            onSubmit={adminLogin}
+            onSubmit
           >
             <label htmlFor="LoginMykad">
               No. MyKad:

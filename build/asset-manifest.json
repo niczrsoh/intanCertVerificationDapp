@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/certdapp/static/css/main.da5e8ea0.css",
-    "main.js": "/certdapp/static/js/main.bf5ecd2d.js",
+    "main.js": "/certdapp/static/js/main.ce36b2c9.js",
     "static/js/27.da63cb99.chunk.js": "/certdapp/static/js/27.da63cb99.chunk.js",
     "static/media/Certificate.png": "/certdapp/static/media/Certificate.e5c4d4eb1ec240b4ead7.png",
     "static/media/intan.png": "/certdapp/static/media/intan.4e7ff3ba64bda49d1752.png",
@@ -14,6 +14,6 @@
   },
   "entrypoints": [
     "static/css/main.da5e8ea0.css",
-    "static/js/main.bf5ecd2d.js"
+    "static/js/main.ce36b2c9.js"
   ]
 }

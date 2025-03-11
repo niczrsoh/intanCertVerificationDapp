@@ -41,28 +41,6 @@ function InformasiSijil() {
       let data;
       try{
         if (info.isEther) {
-          const {
-            courseTitle,
-            recipientName,
-            recipientIC,
-            startDate,
-            endDate,
-            isValid,
-            contractAddress,
-          } = info;
-          data = {
-            participantName: recipientName ? recipientName : "PESERTA NAMA",
-            participantMykad: recipientIC ? recipientIC : "PESERTA NO. MYKAD",
-            courseName: courseTitle ? courseTitle : "NAMA PROGRAM",
-            courseDate:
-              startDate && endDate
-                ? `${formatDate(startDate)} hingga ${formatDate(endDate)}`
-                : "TARIKH PROGRAM",
-            appId: contractAddress ? contractAddress : "APP ID",
-            //    explorer: `http://172.26.112.1:4000/#/blockchain/transactionList/transactionDetail/${transId.transId}`,
-            explorer: `http://10.10.21.143/#/blockchain/transactionList/transactionDetail/${transId.transId}`,
-            isEther: true,
-          };
         } else {
           data = await fetchformDataFromBlockchain();
         }
