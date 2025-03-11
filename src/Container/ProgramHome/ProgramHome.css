@@ -1,0 +1,232 @@
+.app_box{
+    margin-left: 3rem;
+    margin-right: 3rem;
+    margin-bottom: 3rem;
+}
+
+.aktivitioption{
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+    border: 0;
+    text-decoration: underline;
+}
+
+.programkod{
+    width: 10%;
+}
+.penyelaras{
+    width: 10%;
+}
+.tarikh{
+    text-align: center;
+    padding: 0;
+    width: 10%;
+}
+
+.programaktiviti{
+    width: 18%;
+}
+
+.aktivititype{
+    color: black;
+    text-decoration: underline;
+    margin-right: 1rem;
+}
+
+.addbutton{
+    display: flex;
+    width: 2.5rem;
+    height: 2.5rem;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background: none;
+    background-color: #3F51B5;
+    border-radius: 100%;
+    position: fixed;
+    bottom: 6%;
+    right: 4%;
+    cursor: pointer;
+    z-index: 9999;
+}
+
+.addbutton:hover{
+    background-color: #37469d;
+}
+
+.addicon{
+    width: 40%;
+}
+
+.padambutton,.semakbutton{
+    border: none;
+    background: none;
+    font-size: 14px;
+    text-align: bottom;
+    cursor: pointer;
+    padding: 2.93px 10px 0 0;
+    text-decoration: underline;
+}
+
+
+.contentdeletesijil{
+    background-color: white;
+    width: 30%;
+    height: max-content;
+    position: relative;
+    border: 1px solid #3F51B5;
+}
+
+.contentdelete{
+    display: block;
+    padding: 0 30px 0 30px;
+    margin-top: 10px;
+}
+
+.padamconfirmbutton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.centerdata{
+    text-align: center;
+}
+
+.searchtype{
+    border:none ; 
+    background-color:transparent;
+    height: 95%;
+    width: 100%;
+    padding-left: 1rem;
+}
+
+.filter  {
+    display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.Rekod-modal-admin {
+	background: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 9999;
+}
+
+.Rekod-modal-admin .confirmation-message {
+	text-align: center;
+	background-color: white;
+	width: 25rem;
+	padding-top: 30px;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	max-width: 600px;
+}
+
+.Rekod-modal-admin .buttonrekod {
+	display: flex;
+	flex-direction: row;
+	height: 3rem;
+	justify-items: center;
+}
+
+.Rekod-modal-admin .comfirmya {
+	background-color: #bad26e;
+	width: 50%;
+	margin: 0;
+	margin-right: 0;
+	padding: 0;
+	align-items: center;
+	display: flex;
+}
+
+.Rekod-modal-admin .comfirmno {
+	background-color: #fe7065;
+	width: 50%;
+	margin: 0;
+	padding: 0;
+	align-items: center;
+	justify-items: center;
+	display: flex;
+}
+
+.Rekod-modal-admin .confirmation-message .option {
+	margin: 0 auto;
+	background-color: transparent;
+	color: #fff;
+	border: none;
+	font-size: 18px;
+	border-radius: 5px;
+	cursor: pointer;
+	width: 100%;
+	height: 100%;
+}
+
+.Rekod-modal-admin .confirmation-message .close {
+	background-color: transparent;
+	color: black;
+	margin-top: 1rem;
+	padding: 0;
+	border: none;
+}
+
+.Rekod-modal-admin .confirmation-message p {
+	font-size: 17px;
+	color: black;
+	margin: 30px 10px;
+	font-family: Lato;
+}
+
+.Rekod-modal-admin .confirmation-message button:hover {
+	background-color: rgba(0, 0, 0, 0.168);
+	color: black;
+}
+
+.Rekod-modal-admin .close {
+	position: absolute;
+	top: 0rem;
+	right: 0.5rem;
+	cursor: pointer;
+	border: none;
+}
+
+.Rekod-modal-admin .headpopoutadmin p {
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+	font-size: 23px;
+}
+
+
+.Rekod-modal-admin .contentpopout {
+	width: 85%;
+	text-align: justify;
+	margin: 1.5rem auto;
+}
+
+/* .row should be the flex container */
+.row-admin {
+    display: flex;
+    justify-content: space-between; /* Space between elements */
+    align-items: center; /* Vertically center elements */
+    width: 90%; /* Ensure it takes full width of its container */
+    padding: 0 20px; /* Add some padding */
+}
+
+.closebutton {
+    flex-shrink: 0; /* Prevent shrinking */
+
+}
+
+.closebutton {
+    margin: 0;
+}

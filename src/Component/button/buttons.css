@@ -1,0 +1,21 @@
+.daftarbutton{
+    color: white;
+    background-color: #FFC94E;
+    border: none;
+    padding: 10px 30px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.simplebutton{
+    color: white;
+    background-color: rgb(136, 142, 254);
+    border: none;
+    cursor: pointer;
+}
+
+.simplebutton:hover{
+    background-color: rgb(136, 142, 254);
+    cursor: pointer;
+}
+
