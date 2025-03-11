@@ -1,0 +1,114 @@
+.semakdaftarheader{
+    display: flex;
+    align-items: center;
+    padding: 25px 0 25px 0;
+}
+
+.backbutton{
+    display: flex;
+    width: 2rem;
+    height: 2rem;
+    align-items: center;
+    margin-left: 10px;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.backicon{
+    width: 60%;
+}
+
+.informasiprogram{
+    display: grid;
+    grid-template-columns: 175px max-content auto;
+    justify-items: left;
+}
+
+.informasiprogramtitle{
+background-color: #3F51B5;
+color: white;
+display: flex;
+padding: 20px 0 20px 50px;
+}
+
+.informasicontent{
+    margin-left: 30px;
+}
+
+.programtitle{
+    margin: 20px 0 20px 50px;
+}
+
+.smallback{
+    font-size: 10px;
+    margin-top: 15px;
+    margin-left: 30px;
+}
+
+.statussijil{
+    width: 10%;
+    text-align: center;
+}
+
+.kehadiran{
+    width: 8%;
+    text-align: center;
+}
+
+.sijilaktiviti{
+    width: 250px;
+}
+
+.subtitle{
+    font-size: 1.5rem;
+    margin: 40px 0px 20px 0px;
+}
+
+.informasibox{
+    border: 1px solid #3F51B5;
+}
+
+.semakdaftaradmin{
+    display: flex;
+    margin: 0px;
+    padding-left: 1.5rem;
+}
+
+.buttontext{
+    font-size: 14px; /* Default font size for Semak button */
+    font-weight: normal;  /* Remove bold */
+}
+
+.padamconfirmbuttonadmin{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+	width: 100%;
+}
+
+.contentdeleteadmin{
+    display: block;
+    padding: 0 30px 0 30px;
+    margin: 10px 0;
+}
+
+.semaksijilboxadmin{
+    text-align: left;
+    display: block;
+}
+
+.sejarahheaderadmin{
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+    padding:0 20px;
+}
+
+.sejarahtitleadmin{
+    margin: 0;
+	padding: 0;
+	font-weight: bold;
+	font-size: 23px;
+}

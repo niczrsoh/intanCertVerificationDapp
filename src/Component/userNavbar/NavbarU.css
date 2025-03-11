@@ -1,0 +1,40 @@
+.userNav{
+    margin: 1rem 0.5rem;
+    width: 100vw;
+    display: flex;
+    margin-left:0.5rem;
+}
+
+.userNav-container{
+    display: flex;
+    height: 2.5rem;
+    align-items: center;
+    list-style: none;
+    width: 90%;
+}
+
+.userNav-container li{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.bar{
+    border-right: 2px solid rgb(200, 200, 200);
+}
+
+.uNavMenu{
+    display: flex;
+    padding: 0 2rem;
+    align-items: center;
+    height: 100%;
+    color: black;
+}
+
+.uNavMenu:hover{
+    background-color: rgb(221, 221, 255);
+}
+
+.userNav .active{
+    color: rgb(122, 122, 255);
+}

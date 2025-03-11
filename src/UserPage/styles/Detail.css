@@ -1,0 +1,203 @@
+.titleDetail {
+	font-size: 1.8rem;
+	padding-left: 1rem;
+	text-transform: uppercase;
+	font-weight: normal;
+}
+
+.Detail {
+	margin: 2rem auto;
+	width: 90%;
+	z-index: 1;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+.Detailheader {
+	align-items: center;
+	display: flex;
+}
+
+.Detailbackicon {
+	justify-content: center;
+}
+
+.blue {
+	background-color: #3f51b5;
+	color: white;
+	height: 3rem;
+	width: 95%;
+	margin: 2rem 0 1.5rem;
+}
+
+.blue > p {
+	padding-left: 1rem;
+	padding:1rem 1rem 1rem;
+}
+
+.infoDetail {
+	display: flex;
+	flex-direction: row;
+}
+
+.infoDetail p{
+	line-height: 2.5rem;
+}
+
+
+
+.info2,
+.info3 {
+	margin-left: 4rem;
+
+	
+}
+
+.info1 {
+	margin-left: 4rem;
+
+}
+
+.sinopsis {
+	margin-left: 4rem;
+	width:85%;
+	text-align: justify;
+	
+}
+
+.sinopsis p{
+	line-height: 1.8rem;
+
+}
+
+
+.titleDetail {
+	margin-left: 2rem;
+}
+
+.daftarcenter {
+	text-align: center;
+	margin-top: 0.5rem;
+}
+
+.Daftarbutton {
+	background-color: #ffc94e;
+	border-radius: 5%;
+	font-weight: bold;
+	text-decoration: underline;
+	padding: 0.5rem 1.8rem;
+	font-size: 17px;
+	border: none;
+	color: white;
+	margin-top: 2.5rem;
+}
+
+.Detail-modal {
+	background: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 9999;
+}
+
+.Detail-modal .confirmation-message {
+	text-align: center;
+	background-color: white;
+	width: 24rem;
+	
+	padding-top: 30px;
+	
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+}
+
+.buttonrekod {
+	display: flex;
+	flex-direction: row;
+	height: 3rem;
+	justify-items: center;
+}
+
+.Detail-modal .comfirmya {
+	background-color: #bad26e;
+	width: 50%;
+	margin: 0;
+	margin-right: 0;
+	padding: 0;
+	align-items: center;
+	display: flex;
+}
+
+.Detail-modal .comfirmno {
+	background-color: #fe7065;
+	width: 50%;
+	margin: 0;
+	padding: 0;
+	align-items: center;
+	justify-items: center;
+	display: flex;
+}
+
+.Detail-modal .confirmation-message .option {
+	margin: 0 auto;
+	background-color: transparent;
+	padding: 15px 75px;
+	color: #fff;
+	border: none;
+	font-size: 18px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.Detail-modal .confirmation-message .close {
+	background-color: transparent;
+	color: black;
+	margin-top: 1rem;
+	padding: 0;
+	border:none;
+}
+
+.Detail-modal .confirmation-message p {
+	font-size: 17px;
+	color: black;
+	margin: 30px 10px;
+	font-family: Lato;
+}
+
+.Detail-modal .confirmation-message button:hover {
+	background-color: transparent;
+	color: black;
+}
+
+
+
+.Detail-modal .headpopout{
+	position:absolute;
+	top:1.2rem;
+	left:2.25rem;
+}
+
+.Detail-modal .headpopout p{
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+	font-size:23px;
+}
+
+.Detail-modal .close {
+	position: absolute;
+	top: 0rem;
+	right: 0.5rem;
+	cursor: pointer;
+}
+
+
+.Detail-modal .contentpopout{
+	width:85%;
+	text-align: justify;
+	margin:1.5rem auto;
+}

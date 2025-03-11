@@ -1,0 +1,92 @@
+.adminLoginPage{
+    width: 100%;
+    min-height: 90vh;
+    background-image: url(https://www.dtims.intan.my/theme/images/homeslider/bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.adminLoginContainer{
+    width: 90%;
+    min-height: 90vh;
+    max-width: 35rem;
+    border-style: solid;
+    margin: auto;
+    text-align: center;
+    color: white;
+    background-color: rgba(38, 52, 130, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.displayAcc{
+    margin: auto ;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    overflow:auto
+}
+
+.titleAdminLogin{
+    margin: 4rem 0;
+}
+
+.adminLoginForm label{
+    display: block;
+    text-align: left;
+    margin: 1rem;
+}
+
+.adminLoginForm{
+    width: 70%;
+    font-size: 1.2rem;
+    min-width: 15rem;
+    max-width: 25rem;
+}
+
+.adminLoginForm > label > input{
+    padding-left: 10px;
+    display: block;
+    width: 100%;
+    height: 2rem;
+    font-size: 1.2rem;
+    margin-top: 0.8rem;
+}
+
+.otherlink{
+    color: white;
+}
+
+.otherlink:hover{
+    color: rgb(4, 4, 63);
+}
+
+.adminLoginForm button{
+    display: block;
+    padding: 0.5rem;
+    background-color: rgb(136, 142, 254);
+    border-radius: 20px;
+    border: none;
+    font-size: 1.2rem;
+    color: white;
+    width: 9rem;
+}
+.adminLoginForm 
+button[type = "button"]{
+    margin: 1rem auto 1rem;
+}
+.adminLoginForm 
+button[type = "Submit"]{
+    margin: 5rem auto 4rem;
+
+}
+
+.adminLoginForm button[type = "Submit"] :hover{
+    background-color: rgb(136, 142, 254);
+    cursor: pointer;
+}
+.adminLoginForm button[type = "button"]:hover{
+    background-color: rgba(38, 52, 130, 0.8);
+    cursor: pointer;
+}
+

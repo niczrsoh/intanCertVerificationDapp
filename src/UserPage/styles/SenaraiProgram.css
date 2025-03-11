@@ -1,0 +1,97 @@
+.tableSenarai {
+	justify-content: center;
+	text-align: left;
+	width: 95%;
+	margin: 0 auto 3rem;
+	font-family: Arial, sans-serif;
+	font-size: 17px;
+}
+
+.tableSenarai h1 {
+	text-align: left;
+	font-weight: bold;
+	padding-top: 2rem;
+	padding-left: 2rem;
+	font-family: sans-serif,lato;
+	color:#333333;
+}
+
+.header {
+	background-color: #3f51b5;
+	color: white;
+}
+
+.Senarai {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.Senarai th, .Senarai td {
+	height: 50px;
+	border: #dfdfdf solid 3px;
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
+.Senarai .Kod {
+	width: 10%;
+}
+
+.Senarai .NameKursus {
+	width: 55%;
+}
+
+.Senarai .Tarikh {
+	width: 18%;
+}
+
+.Senarai .Aktiviti {
+	width: 10%;
+}
+
+.Search {
+	justify-content: right;
+	display: flex;
+	flex-direction: row;
+	padding-right: 1rem;
+	padding-bottom: 0.5rem;
+}
+
+.tableSenarai .searchicon {
+	background-color: #fff;
+	padding: 0.5rem 0.5rem 0rem;
+	margin-left: 0.2rem;
+	border-radius: 3px;
+	height: 1.6rem;
+	width: 1rem;
+	justify-content: center;
+	align-content: center;
+}
+
+.searchicon{
+	cursor: pointer;
+}
+
+.textboxsearch {
+	height: 1rem;
+	width: 15rem;
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	color: black;
+	background-color: white;
+	border: 1px solid #f4f4f4;
+	border-radius: 3px;
+	padding: 8px;
+}
+
+.even {
+	background-color: #f4f4f4;
+}
+
+.odd {
+	background-color: #fff;
+}
+
+.Semaklink {
+	text-decoration: underline;
+}
