@@ -10,6 +10,30 @@ function UserLogin() {
   const [password, setPassword] = useState("");
 
   //after login, direct user to user home page (program list), set the role as USER
+  const userLogin = async (e) => {
+    e.preventDefault();
+    const regex = /[0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]/;
+    if (!regex.test(mykad)) {
+      alert('Sila masukkan IC dengan format "123456-12-1234".');
+      return;
+    }
+
+    //checking whether the user input ic document data is exist or not
+    const docRef = doc(db, "User", mykad);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists() && password == docSnap.data().kataLaluan) {
+      sessionStorage.setItem("user", JSON.stringify({ role: "USER" }));
+      sessionStorage.setItem("userID", mykad);
+      sessionStorage.setItem("userNama", docSnap.data().nama);
+      sessionStorage.setItem("adminName", "");
+      sessionStorage.setItem("adminRole", "");
+      navigate("/user/senarai-program-sedia-ada");
+    } else {
+      // docSnap.data() will be undefined in this case
+      alert("Salah IC atau kata laluan, sila masukkan semula.");
+    }
+  };
 
   return (
     <>
@@ -20,7 +44,7 @@ function UserLogin() {
             <p>Sebagai Pengguna</p>
           </div>
           {/*User login form */}
-          <form className='loginForm' action="senarai-program-sedia-ada" onSubmit>
+          <form className='loginForm' action="senarai-program-sedia-ada" onSubmit={userLogin}>
             <label htmlFor='LoginMyKad'>No. MyKad:
               <input id='LoginMyKad' name='LoginMyKad' type='text' placeholder='No. MyKad' minLength='14' maxLength='14' onChange={(event) => {
                 setMykad(event.target.value)

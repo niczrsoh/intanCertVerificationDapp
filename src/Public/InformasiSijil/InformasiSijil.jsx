@@ -39,8 +39,30 @@ function InformasiSijil() {
     async function fetchData() {
       const info = await checkTransactionAndFetchData(transId.transId);
       let data;
-      try{
+      try {
         if (info.isEther) {
+          const {
+            courseTitle,
+            recipientName,
+            recipientIC,
+            startDate,
+            endDate,
+            isValid,
+            contractAddress,
+          } = info;
+          data = {
+            participantName: recipientName ? recipientName : "PESERTA NAMA",
+            participantMykad: recipientIC ? recipientIC : "PESERTA NO. MYKAD",
+            courseName: courseTitle ? courseTitle : "NAMA PROGRAM",
+            courseDate:
+              startDate && endDate
+                ? `${formatDate(startDate)} hingga ${formatDate(endDate)}`
+                : "TARIKH PROGRAM",
+            appId: contractAddress ? contractAddress : "APP ID",
+            //    explorer: `http://172.26.112.1:4000/#/blockchain/transactionList/transactionDetail/${transId.transId}`,
+            explorer: `http://10.10.21.143/#/blockchain/transactionList/transactionDetail/${transId.transId}`,
+            isEther: true,
+          };
         } else {
           data = await fetchformDataFromBlockchain();
         }
@@ -233,29 +255,29 @@ function InformasiSijil() {
             </div>
             <div className="viewPdf">
               <ErrorBoundary>
-                  {isMobile ? (
-                    <>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        href={fileUrl}
-                        target="_blank"
-                        //download="sijil.pdf"  // Force download if it's on a mobile device
-                        rel="noreferrer noopener"
-                      >
-                        Download Sijil
-                      </Button>
-                    </>
-                  ) : (
-                    <PDFViewer width="100%" height="100%">
-                      <Certificate
-                        {...formData}
-                        templateSrc={templateSrc}
-                        qrCodeImage={qrCodeDataUrl}
-                      />
-                    </PDFViewer>
-                  )}
-                </ErrorBoundary>
+                {isMobile ? (
+                  <>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      href={fileUrl}
+                      target="_blank"
+                      //download="sijil.pdf"  // Force download if it's on a mobile device
+                      rel="noreferrer noopener"
+                    >
+                      Download Sijil
+                    </Button>
+                  </>
+                ) : (
+                  <PDFViewer width="100%" height="100%">
+                    <Certificate
+                      {...formData}
+                      templateSrc={templateSrc}
+                      qrCodeImage={qrCodeDataUrl}
+                    />
+                  </PDFViewer>
+                )}
+              </ErrorBoundary>
             </div>
           </div>
         </div>)
