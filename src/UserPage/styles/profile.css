@@ -32,6 +32,7 @@
 	justify-content: center;
 	flex-wrap: wrap;
 	height: auto;
+	padding-bottom: 32px;
 }
 
 .frame {
@@ -144,4 +145,11 @@ img.profile-pic{
 
 #emelperibadi{
 	wordWrap: break-word;
+}
+
+.alamat.text .textinput {
+	word-wrap: break-word; /* Ensures long words will break and wrap to the next line */
+	overflow-wrap: break-word; /* Another way to ensure long words break */
+	white-space: normal; /* Ensures the text can wrap normally */
+	word-break: break-word; /* Helps breaking long unbreakable words */
 }

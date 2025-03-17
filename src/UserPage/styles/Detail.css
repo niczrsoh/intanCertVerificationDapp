@@ -61,7 +61,9 @@
 	margin-left: 4rem;
 	width:85%;
 	text-align: justify;
-	
+	word-wrap: break-word; /* This ensures long words will break and wrap to the next line */
+    overflow-wrap: break-word; /* This is another property that works the same way */
+    white-space: normal; /* Ensures the text can wrap normally */
 }
 
 .sinopsis p{
