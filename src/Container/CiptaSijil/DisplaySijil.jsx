@@ -11,6 +11,7 @@ const DisplaySijil = () => {
   const [tamat, setTarikhTamat] = useState("");
   const [nama, setNama] = useState("");
   const [courseAction, setCourseAction] = useState("");
+  const [description, setDescription] = useState("");
 
   //console.log(transId.transId);
   useEffect(() => {
@@ -28,12 +29,14 @@ const DisplaySijil = () => {
           startDate,
           endDate,
           isValid,
+          description,
         } = info;
 
         setTajukSijil(courseTitle);
         setTarikhMula(startDate);
         setTarikhTamat(endDate);
         setNama(recipientName);
+        setDescription(description);
         setCourseAction(isValid ? "Created" : "Invalidated");
       } else {
         //Using indexerClient here to query and search the transaction data in the blockchain using transaction id
@@ -63,7 +66,13 @@ const DisplaySijil = () => {
               "application-args"
             ][3]
           );
-          //to know whether the current transaction is created/updated/deleted, use onComplete data in the transaction
+          const dDescription = window.atob(
+            transInfo.transaction["application-transaction"][
+              "application-args"
+            ][4]
+          );
+          //to know whether the current trans
+          // action is created/updated/deleted, use onComplete data in the transaction
           const onComplete =
             transInfo.transaction["application-transaction"]["on-completion"];
           //after decode the string, change it to a string format from JSON object
@@ -71,11 +80,13 @@ const DisplaySijil = () => {
           const mula = Object.values(JSON.parse(dMula))[0];
           const tamat = Object.values(JSON.parse(dTamat))[0];
           const nama = Object.values(JSON.parse(dNama))[0];
+          const desc = Object.values(JSON.parse(dDescription))[0];
           setTajukSijil(tajuk);
           setTarikhMula(mula);
           setTarikhTamat(tamat);
           setNama(nama);
           setCourseAction(onComplete);
+          setDescription(desc);
         });
       }
     }
@@ -94,6 +105,7 @@ const DisplaySijil = () => {
         <p>Tarikh Tamat: {tamat.replaceAll('"', "")}</p>
         <p>Nama: {nama.replaceAll('"', "")}</p>
         <p>Course Action: {courseAction.replaceAll('"', "")}</p>
+        <p>Description: {description.replaceAll('"', "")}</p>
       </div>
     </div>
   );

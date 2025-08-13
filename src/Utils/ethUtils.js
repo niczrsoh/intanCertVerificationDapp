@@ -1,5 +1,5 @@
 import { ethers } from 'ethers';
-import certificate from '../Constant/certificate.json';
+import certificate from '../Constant/mycert.json';
 import moment from 'moment/moment';
 const { abi, bytecode } = certificate;
 
@@ -92,7 +92,7 @@ export const loadContract = async (address) => {
 }
 
 export const deployContract = async (args) => {
-    const { tajukSijil, nama, NRIC, tarikhMula, tarikhTamat } = args;
+    const { tajukSijil, nama, NRIC, tarikhMula, tarikhTamat, description } = args;
     try {
         const signer = await requestAccount();
         const provider = signer.provider;
@@ -104,14 +104,15 @@ export const deployContract = async (args) => {
         const recipientIC = NRIC;
         const startDate = tarikhMula;
         const endDate = tarikhTamat;
+        const desc = description;
 
-        console.log("Deploying contract with arguments:", courseTitle, recipientName, recipientIC, startDate, endDate);
+        console.log("Deploying contract with arguments:", courseTitle, recipientName, recipientIC, startDate, endDate, desc);
 
         const factory = new ethers.ContractFactory(abi, bytecode, signer);
 
 
         // Deploy the contract with the provided arguments
-        const contract = await factory.deploy(courseTitle, recipientName, recipientIC, startDate, endDate);
+        const contract = await factory.deploy(courseTitle, recipientName, recipientIC, startDate, endDate, desc);
 
         console.log("Contract deployed to:", contract);
         await contract.waitForDeployment();
@@ -181,7 +182,8 @@ export const readCertificate = async (contractAddress) => {
             recipientIC: data.recipientIC,
             startDate: data.startDate,
             endDate: data.endDate,
-            isValid: data.isValid
+            isValid: data.isValid,
+            description: data.description,
         };
     } catch (error) {
         console.error("Failed to read certificate data:", error);
