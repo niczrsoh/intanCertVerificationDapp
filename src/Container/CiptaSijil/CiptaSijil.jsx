@@ -18,7 +18,7 @@ const CiptaSijil = ({ backpage }) => {
   const navigate = useNavigate();
   let { programId, key } = useParams();
   const [tajukSijil, setTajukSijil] = useState("");
-  const [description, setDescription] = useState("");
+  const [pengajar, setPengajar] = useState("");
   const [tarikhMula, setTarikhMula] = useState("");
   const [tarikhTamat, setTarikhTamat] = useState("");
   const [nama, setNama] = useState("");
@@ -129,15 +129,15 @@ const CiptaSijil = ({ backpage }) => {
             </div>
           </div>
                 <div className="maklumat">
-            <label className="kik">DESCRIPTION</label>
+            <label className="kik">PENGAJAR</label>
             <div className="textarea">
               <p className="kik">:</p>
               <input
                 type="text"
                 className="inputtext"
-                id="description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                id="pengajar"
+                value={pengajar}
+                onChange={(e) => setPengajar(e.target.value)}
               />
             </div>
           </div>
@@ -224,7 +224,7 @@ const CiptaSijil = ({ backpage }) => {
                 tarikhTamat,
                 nama,
                 NRIC,
-                description,
+                pengajar,
               })
                 .then((response) => {
                   const { contractAddress, transactionId, accountAddr } =
