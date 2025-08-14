@@ -19,6 +19,7 @@ const CiptaSijil = ({ backpage }) => {
   let { programId, key } = useParams();
   const [tajukSijil, setTajukSijil] = useState("");
   const [penceramah, setPenceramah] = useState("");
+  const [description, setDescription] = useState("");
   const [tarikhMula, setTarikhMula] = useState("");
   const [tarikhTamat, setTarikhTamat] = useState("");
   const [nama, setNama] = useState("");
@@ -138,6 +139,19 @@ const CiptaSijil = ({ backpage }) => {
                 id="penceramah"
                 value={penceramah}
                 onChange={(e) => setPenceramah(e.target.value)}
+              />
+            </div>
+          </div>
+                <div className="maklumat">
+            <label className="kik">DESKRIPSI</label>
+            <div className="textarea">
+              <p className="kik">:</p>
+              <input
+                type="text"
+                className="inputtext"
+                id="description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
               />
             </div>
           </div>
