@@ -40,13 +40,13 @@ function InformasiSijil() {
           endDate,
           isValid,
           contractAddress,
-          pengajar,
+          penceramah,
         } = info;
         data = {
           participantName: recipientName ? recipientName : "PESERTA NAMA",
           participantMykad: recipientIC ? recipientIC : "PESERTA NO. MYKAD",
           courseName: courseTitle ? courseTitle : "NAMA PROGRAM",
-          pengajar: pengajar ? pengajar : "PENGAJAR",
+          penceramah: penceramah ? penceramah : "penceramah",
           courseDate:
             startDate && endDate
               ? `${formatDate(startDate)} hingga ${formatDate(endDate)}`
@@ -107,9 +107,9 @@ function InformasiSijil() {
       const dNRIC = window.atob(
         transInfo.transaction["application-transaction"]["application-args"][4]
       );
-     const dPengajar =
+     const dpenceramah =
         transInfo.transaction["application-transaction"]["application-args"][5];
-      console.log("test:"+dPengajar);
+      console.log("test:"+dpenceramah);
       const dappID =
         transInfo.transaction["application-transaction"]["application-id"];
 
@@ -120,7 +120,7 @@ function InformasiSijil() {
       const tamat = Object.values(JSON.parse(dTamat))[0];
       const nama = Object.values(JSON.parse(dNama))[0];
       const mykad = Object.values(JSON.parse(dNRIC))[0];
-      const ajar = Object.values(JSON.parse(dPengajar))[0];
+      const ajar = Object.values(JSON.parse(dpenceramah))[0];
       console.log("Contract address in informasi sijil:"+dappID);
 
       //  Assign all the data into a constant variable named data
@@ -131,7 +131,7 @@ function InformasiSijil() {
         courseDate: mula && tamat ? `${formatDate(mula)} hingga ${formatDate(tamat)}` : "TARIKH PROGRAM",
        // explorer: `https://testnet.algoscan.app/tx/${transId.transId}`,
         appId: dappID ? dappID : "APP ID",
-        pengajar: ajar ? ajar : "PENGAJAR",
+        penceramah: ajar ? ajar : "penceramah",
       //  isEther: false,
         // qrCodeImage: getQrCodeDataUrl(
         //  `https://intan-cert-verification-dapp.azurewebsites.net/informasi-sijil/${transId.transId}`
@@ -223,9 +223,9 @@ function InformasiSijil() {
               <div className="data">{formData.courseDate}</div>
             </div>
             <div className="info">
-              <span className="label">PENGAJAR</span>
+              <span className="label">PENCERAMAH</span>
               <span>:</span>
-              <div className="data">{formData.pengajar}</div>
+              <div className="data">{formData.penceramah}</div>
             </div>
             <div className="info">
               <span className="label">
